@@ -1,0 +1,33 @@
+//:root {
+//  --basket-icon-color: white;
+//  --basket-icon-font-size: 5px;
+//  --badge-background-color: beige;
+//  --badge-fill-color: white;
+//}
+
+.svg {
+  --htnWd: 35px;
+  background-color: var(--badge-background-color);
+  padding: 10px;
+  position: relative;
+  bottom: 10px;
+  overflow: hidden;
+
+
+  .label {
+    position: absolute;
+    font-family: Tahoma;
+    font-size: var(--basket-icon-font-size);
+    top: calc(15px - 7px);
+    right: 3px;
+    color: var(--basket-icon-color);
+    background-color: var(--badge-background-color);
+  }
+}
+svg {
+  fill: var(--badge-fill-color);
+}
+
+svg:hover {
+  fill:  (blue);
+}

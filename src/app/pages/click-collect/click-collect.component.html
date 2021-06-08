@@ -1,0 +1,79 @@
+<div class="cc-container">
+
+  <div class="cc-list-wrapper" id="ccListWrapper">
+
+    <!--      Top categories ribbon-->
+
+    <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>
+
+
+    <ng-container *ngFor="let prod of prods$| async">
+
+      <div class="category-header"
+
+           style="text-transform: capitalize">
+        <div [id]="prod[0]"
+             style="position: relative;
+                      transform: translateY(-128px);
+                      display: block;
+                      "></div>
+        {{prod[0]}}
+      </div>
+      <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
+
+    </ng-container>
+    <div class="spacer" style="background-color: rosybrown">
+    </div>
+
+  </div>
+</div>
+<!--
+*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+
+                        TEMPLATES
+
+*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+-->
+
+
+<!-- TEMPLATE:      Horizontal Sliderbar -->
+
+
+<ng-template #CategoriesRibbonTmpl let-prods=prods>
+  <div class="horizontal-slidebar">
+    <a
+      (click)="scrollToId(prod[0])"
+      class="span-item"
+      *ngFor="let prod of prods">{{prod[0] }}</a>
+  </div>
+</ng-template>
+
+
+<!-- TEMPLATE:      Product Item Card -->
+
+
+<ng-template #cardTmpl let-prods=prods>
+
+  <div class="card-layout mat-elevation-z5"
+
+       (click)="onChooseProduct(prod)"
+       *ngFor="let prod of prods">
+
+    <p class="product-name">{{prod.name}}</p>
+
+
+    <p class="product-description">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolore neque quia repellendus. Adipisci animi
+      {{prod.description}} </p>
+
+
+    <div class="product-price">
+      {{prod.lowestPrice() | currency: "GBP"}}
+    </div>
+    <div class="product-image" id="product-image" [appCustomImg]>
+
+      <img [src]="prod.thumbImg._url">
+    </div>
+
+  </div>
+</ng-template>

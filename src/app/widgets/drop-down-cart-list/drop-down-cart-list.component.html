@@ -1,0 +1,50 @@
+<button
+  style="margin-bottom: 10px; margin-right: 10px"
+  type="button" [matMenuTriggerFor]="settingsMenu" mat-icon-button>
+  <mat-icon>
+    <svg viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+         stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+      <path fill="none" d="M0 0h43.856v43.753H0z"></path>
+      <circle cx="34" cy="40" r="1.5" fill="none" [attr.stroke]="this.fillColor" stroke-width="2"
+              transform="translate(-5.072 -8.52)"></circle>
+      <circle cx="23" cy="40" r="1.5" fill="none" [attr.stroke]="this.fillColor" stroke-width="2"
+              transform="translate(-5.072 -8.52)"></circle>
+      <path d="M15.5 21.5H19l4 17h11" fill="none" [attr.stroke]="this.fillColor" stroke-width="2"
+            transform="translate(-5.072 -8.52)"></path>
+      <path d="M22.5 36.5h13l3-9H20.4" fill="none" [attr.stroke]="this.fillColor" stroke-width="2"
+            transform="translate(-5.072 -8.52)"></path>
+    </svg>
+  </mat-icon>
+</button>
+<mat-menu #settingsMenu
+          style="
+          margin: 6px;
+          background-color: var(--background-color1);
+          ">
+  <app-shop-cart2></app-shop-cart2>
+
+  <div style="width: 100%; height: 100%;
+              display: grid;
+              grid-row-gap: 5px;
+              padding: 5px;
+               background-color: var(--background-color1);
+              grid-template-columns: repeat(12,1fr)">
+
+    <button mat-flat-button color="primary"
+            style="grid-column: 2 /6;
+            font-size: 10px"
+            (click)="BasketClickedEmitter.emit('nav to Cart');
+      this.router.navigate(['shop-cart']);" class="action-button">GO TO CART
+    </button>
+
+    <button mat-flat-button color="accent"
+            style="grid-column: 7 /11;
+            padding:0;
+            font-size: 10px"
+            (click)="BasketClickedEmitter.emit('nav to Cart');
+      this.router.navigate(['shipping-information']);" class="action-button">CHECKOUT
+    </button>
+  </div>
+
+</mat-menu>
+

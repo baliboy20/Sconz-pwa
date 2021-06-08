@@ -1,0 +1,116 @@
+//@use "src/_styles/components";
+@import "src/_styles/components";
+
+.picture {
+  width: 300px;
+  object-fit: contain;
+}
+
+.flex-container {
+  font-size: calc(var(--font-size-regular));
+  display: flex;
+  flex-flow: row wrap;
+  //background-color: red;
+  //width: 50%;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.top-row {
+  position: fixed;
+  top: 50px;
+  flex: 1 1 100%;
+  height: 30px;
+  font-size: var(--font-size-larger);
+  //background-color: lightblue;
+}
+
+.left-col {
+  flex: 1 1 47%;
+}
+
+.right-col {
+  flex: 1 1 47%;
+  display: block;
+  height: 100vh;
+  //background-color: red;
+  //overflow-x: hidden;
+  //overflow-y: visible;
+}
+
+.title {
+  padding: 40px 0 0px 0;
+  text-align: start;
+  // @include mat-typography-level-to-styles($custom-typography, title);
+  font-weight: 300;
+}
+
+.price {
+  color: var(--subdued-grey);
+  @include ContentStyles(sub-heading);
+  //@include components.ContentStyles(sub-heading);
+}
+
+.purchase-type {
+  padding-bottom: 22px;
+
+  mat-radio-group {
+    display: flex;
+    flex-flow: column;
+
+    mat-radio-button {
+      margin: 5px;
+    }
+  }
+}
+
+.orderform {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 0 70px;
+}
+
+mat-expansion-panel {
+  @include cappuMatExpansionPanel ;
+  //@include components.cappuMatExpansionPanel ;
+  //@include cappuMatExpansionPanel;
+}
+
+mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.mat-expansion-panel-header-title {
+  font-size: 13px;
+
+  &:first-letter {
+    //color: red!important;
+  }
+}
+
+.addToCartBtn {
+  @include cappuNativeButton;
+  //@include components.cappuNativeButton;
+}
+
+.quantity-component {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.prodInfo {
+  margin: 20px 0;
+  font-weight: 100;
+}
+
+@media (max-width: 500px) {
+  .prodInfo {
+    margin-bottom: 240px;
+  }
+}
+
+//       Styles
+

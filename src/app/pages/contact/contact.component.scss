@@ -1,0 +1,49 @@
+.main {
+  img {
+    width: 100vw;
+  }
+}
+
+input[matInput], textarea[matInput] {
+  font-weight: 200;
+}
+
+div[fg] {
+  font-weight: 100;
+  font-size: 12px;
+  margin: 20px;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-areas: "h h h h" "n n e e" "t t t t" "  b b b b";
+> .mat-form-field-infix {
+  border-radius: 0;
+}
+}
+
+.header {
+  grid-area: h;
+  text-align: center;
+}
+
+.name {
+  grid-area: n;
+}
+
+.email {
+  grid-area: e;
+}
+
+.message {
+  grid-area: t;
+
+}
+.button {
+  grid-area: b;
+  background-color: var(--component-background-color2);
+  color: floralwhite;
+ font-weight: 200;
+  font-size: 12px;
+  border-radius: 0;
+
+
+}

@@ -1,0 +1,22 @@
+//@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300&family=Marcellus&display=swap');
+.page-container {
+  width: 100vw;
+  margin: 40px 10vw;
+
+}
+li {
+  font: var(--font);
+  color: var(--font-body-color);
+  font-size: .8rem;
+  letter-spacing: .06em;
+
+  &:first-letter {
+    font-size: .89rem;
+    //color: black;
+    //letter-spacing: .06em;
+  }
+}
+
+img {
+  width: 80vw;
+}

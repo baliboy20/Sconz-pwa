@@ -1,0 +1,18 @@
+.outlined-label-wrapper{
+  //padding: 8px;
+  border: 1px solid var(--grey-10);
+  //background-color: dodgerblue;
+  //color: white;
+  border-radius: 5px;
+  //display: inline-block;
+
+  label {
+
+    position : relative;
+    padding: 0 5px;
+
+    z-index: 100;
+    background-color: transparent;
+
+  }
+}

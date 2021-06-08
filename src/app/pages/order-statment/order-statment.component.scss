@@ -1,0 +1,42 @@
+.order-statement-container {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 1000%;
+  height: calc(100vh - 50px);
+  padding: 20px;
+  border: 1px solid crimson;
+  //background-color: lightcyan;
+}
+
+.shipping-details {
+  //display: none;
+  display: flex;
+  flex-flow: row wrap;
+  //width: calc(100% - 40px);
+  //background-color: lightcoral;
+}
+
+.order-details {
+
+}
+.field-label{
+  flex: 0 1 29%;
+}
+.field-value {
+  flex: 1 0 auto;
+}
+.flex-row-2 {
+  display: flex;
+  flex-flow: row wrap;
+flex: 1 1 100%;
+  //background-color: orange;
+}
+
+.order-table {
+  border: 1px solid silver;
+border-collapse: collapse;
+   td {
+    border: 1px solid silver;
+     padding: 5px;
+  }
+}

@@ -1,0 +1,99 @@
+<div class="shop-cart-container">
+  <div class="shipping">Cart Page</div>
+  <div class="strapline">You are eligable for free shipping</div>
+  <div class="table-grid">
+    <ng-container *ngFor="let itm of
+                          this.baskService.basketItems as cart;
+                          let idx = index">
+      <div class="product-cell"
+           [style.grid-row]
+             ="idx + 2">
+        <ng-container *ngTemplateOutlet="productItmCard; context{itm: itm, idx: idx}"></ng-container>
+      </div>
+    </ng-container>
+
+
+  </div>
+
+
+</div>
+<mat-toolbar
+  style="background-color: var(--component-background-color2); position: fixed; bottom: 0;z-index: 100">
+  <div class="grand-total">
+    Total: £{{basket?.total}}
+  </div>
+  <button class="checkout-button"
+          [routerLink]="['/','shipping-information']"
+          mat-stroked-button color="accent">ORDER NOW <mat-icon>{{rightArrow}}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!--
+Templates
+-->
+<ng-template #productItmCard let-itm=itm let-idx=idx>
+  <div class="product-card">
+    <div class="img-wrapper" (click)="this.router.navigate(this.getProductUrl(itm))">
+      <img id="img1" [src]="itm.thumbUrl">
+    </div>
+    <app-outlined-label class="description"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Description"
+    >
+      <div style="text-align:left;
+                  display: block">
+        {{itm.description}}
+      </div>
+    </app-outlined-label>
+
+    <app-outlined-label class="size"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Units"
+    >
+      <div style="text-align:left; display: block">{{itm.size}}</div>
+    </app-outlined-label>
+
+    <app-outlined-label class="price"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="£"
+    >
+      <div style="text-align:left; display: block">{{itm.price}}</div>
+    </app-outlined-label>
+    <app-outlined-label class="grind-type"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Grind Type"
+    >
+      <div style="text-align:left; display: block;padding:0; margin: 0;">{{getGrindType(itm)}}</div>
+    </app-outlined-label>
+    <app-outlined-label class="variant"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Variation"
+    >
+      <div style="text-align:left; display: block">{{getGrindType(itm)}}</div>
+    </app-outlined-label>
+
+    <app-outlined-label class="qty"
+                        [styleConfigLabel]="styleConfigLabelForNumtor"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Qty"
+    >
+      <app-numeric-incrementer class="qty"
+                               (ngModelChange)='onQtyProperyChanged($event, idx)'
+                               (removeItmClicked)="removeItm(idx)"
+                               [ngModel]="itm.qty"></app-numeric-incrementer>
+    </app-outlined-label>
+    <app-outlined-label class="amount"
+                        [styleConfigLabel]="styleConfigLabel"
+                        [styleConfigWrapper]="styleConfigWrapper"
+                        labelText="Amount £">
+      <div class="value-format"> {{(itm.price * itm.qty).toFixed(2)}}</div>
+    </app-outlined-label>
+
+  </div>
+
+</ng-template>

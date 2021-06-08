@@ -1,0 +1,204 @@
+@use "src/_styles/components";
+// Create a config with the default typography levels.
+@import '~@angular/material/theming';
+
+$config: mat-typography-config();
+
+@mixin layout2cols() {
+  grid-column: 1 / span 9;
+  display: flex;
+  flex-flow: row nowrap;
+  mat-form-field {
+    flex: 1 1 49%;
+
+    &:nth-child(2) {
+      margin-left: 15px;
+    }
+  }
+  @media (max-width: 500px) {
+    flex-flow: row wrap;
+    mat-form-field:nth-child(2) {
+      margin-left: 0;
+    }
+  }
+}
+
+@mixin layout1cols() {
+  grid-column: 1 / span 9;
+
+  display: flex;
+
+  mat-form-field {
+    flex: 1 1 auto;
+    overflow-y: hidden;
+  }
+}
+
+
+input[matInput] {
+  color: var(--grey-70);
+  font-size: 15px;
+  font-family: arial, "Helvetica Neue", sans-serif;
+  font-weight: 200;
+}
+
+
+.si-container-form {
+  //max-height: calc(100vh + 100px);
+  //width: 100vw;
+  align-items: start;
+  align-content: start;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: 50px 30px 120px 75px 120px 75px repeat(5, 75px);
+  @media (max-width: 500px) {
+    grid-template-rows:  50px 30px 120px 75px 120px  130px 70px repeat(2, 70px) 140px 70px;
+
+  }
+  grid-auto-rows: 75px 200px;
+  display: grid;
+  overflow-y: scroll;
+  padding: 3% 10%;
+}
+
+#company-title {
+  grid-row: 1;
+  grid-column: 2 / span 6;
+  font-size: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--grey-70);
+}
+
+#form-breadcrumb {
+  grid-row: 2;
+  grid-column: auto / span 6;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+}
+
+// styles
+#shipping-address, #contact-info {
+  text-align: left;
+  padding: 28px 0;
+  font-weight: 300;
+  @include components.ContentStyles(sub-heading);
+  grid-column: 1 / span 9;
+  //border: 1px solid red;
+}
+
+#contact-info {
+  grid-row: auto;
+
+}
+
+#email {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+#shipping-address {
+  grid-row: auto;
+}
+
+#first-last-names {
+  grid-row: auto;
+  //grid-column: 1 / span 9;
+  //display: flex;
+  //flex-flow: row nowrap;
+  @include layout2cols;
+
+}
+
+#address {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+#apartment {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+#city {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+#country_postcode {
+  grid-row: auto;
+  @include layout2cols;
+}
+
+#save_information {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+#action_bar {
+  grid-row: auto;
+  display: inline-block;
+  grid-column: 1 / span 9;
+  justify-items: center;
+
+  :nth-child(2) {
+    //border: red solid 1px;
+    margin: 0 auto;
+  }
+
+}
+
+#footer {
+  grid-row: auto;
+  @include layout1cols();
+}
+
+
+.si-footer {
+  position: absolute;
+  bottom: 50px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+#si-action-bar1, #si-action-bar {
+//width: 100vw;
+ grid-column: 1 / span 9;
+  position: relative;
+  left: 0;
+  padding: 3%;
+  grid-row: auto;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+
+  & a {
+    text-decoration: none;
+
+    color: var(--grey-70);
+    font-size: 14px;
+    @include mat-typography-level-to-styles($config, body-1);
+    align-items: center;
+    justify-items: center;
+    margin-top: 20px;
+
+    &:hover {
+      color: var(--grey-90);
+    }
+  }
+
+}
+#si-action-bar {
+  margin-bottom: 100px;
+}
+
+.si-table {
+  //display: none;
+  width: 100%;
+
+}

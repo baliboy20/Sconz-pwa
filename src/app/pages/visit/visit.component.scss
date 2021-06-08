@@ -1,0 +1,19 @@
+
+.visit-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-flow: column;
+
+}
+.visit-img-banner{
+  overflow-x: scroll;
+object-fit: cover;
+  height: 60vw;
+}
+
+.zz {
+  margin: 20px;
+  font: var(--font);
+  color: var(--font-body-color);
+}

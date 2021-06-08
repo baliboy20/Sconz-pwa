@@ -1,0 +1,106 @@
+<div class="order-statement-container">
+  <h2 style="justify-self: center; font-weight: 800">Statement of Purchase</h2>
+  <h5 style="font-weight: 800; justify-self: center">{{itemDate()}}</h5>
+  <h2>Shiping Information:</h2>
+  <ng-container *ngTemplateOutlet="shippingTmpl; context: {shippi: item?.shipping_info}"></ng-container>
+  <h2>Items Purchased</h2>
+  <ng-container *ngTemplateOutlet="orderTmpl; context: {order: item?.order}"></ng-container>
+  <h2>Payment</h2>
+  <ng-container *ngTemplateOutlet="paymentTmpl; context: {payment: item?.payment}"></ng-container>
+</div>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+
+
+                          TEMPLATES
+
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+
+-->
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Shipping Information
+-->
+<ng-template #flexrowTmpl let-fldname='fldname' let-labelname='labelname' let-shippi='shippi'>
+  <div class="flex-row-2">
+    <div class="field-label">{{labelname}}</div>
+    <div class="field-value" ><div style="height: auto">{{shippi[fldname]}}</div></div>
+
+  </div>
+</ng-template>
+<ng-template #shippingTmpl let-shippi='shippi'>
+  <div class="shipping-details">
+    <ng-container
+      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'firstName', labelname: 'First name:'}"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'lastName', labelname: 'Last name:'}"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'computedAddress', labelname: 'Adress:'}"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'email', labelname: 'Email:'}"></ng-container>
+  </div>
+  <div class="payment-details">
+  </div>
+</ng-template>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                           Basket (items table)
+-->
+<ng-template #orderTableTmpl let-order="order">
+  <!--  {{cart|json}}-->
+  <table class="order-table">
+
+    <thead>
+    <tr>
+      <td>Description</td>
+      <td>Qty</td>
+      <td>Price</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let itm of order.cart; let idx=index">
+      <td><div>{{[itm.description, itm.variant, itm.size].join(', ')}}</div></td>
+      <td>{{itm.qty}}</td>
+      <td>{{itm.price}}</td>
+
+      <td>{{((itm.price * itm.qty * 1000) / 1000).toFixed(2)}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <td></td>
+    <td></td>
+    <td>Total</td>
+    <td>{{order.total}}</td>
+    </tfoot>
+  </table>
+</ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                           Basket
+-->
+<ng-template #orderTmpl let-order='order'>
+  <ng-container *ngTemplateOutlet="orderTableTmpl; context:{order: order}"></ng-container>
+
+</ng-template>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                           Payment
+-->
+<ng-template #paymentTmpl let-payment='payment'>
+  <div>
+    <div>Status:&nbsp;{{payment.payment_status}}</div>
+    <div>ref:&nbsp;{{payment.id}}</div>
+  </div>
+
+</ng-template>
+
+// http://localhost:4200/#/order-statement/Eo8ay2KrWM

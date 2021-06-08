@@ -1,0 +1,131 @@
+<!--<mat-bottom-sheet-container>-->
+<div class="ccbs-container" [formGroup]="this.formGroup">
+
+  <!--  Banner Image-->
+
+  <div class="ccbs-img-container">
+    <img imgSize='medium' [appCustomImg]="prod.thumbImg._url">
+  </div>
+
+  <!--  Name, Description, Increment template-->
+
+  <ng-container *ngTemplateOutlet="incrementTmpl"></ng-container>
+
+
+  <!--  Product Selection-->
+
+  <ng-container *ngTemplateOutlet="productSelectionTmp"></ng-container>
+
+  <!--  Product Choices-->
+
+  <div class="ccbs-choices">
+
+    <ng-container *ngTemplateOutlet="ProductOptionsTmpl"></ng-container>
+    <ng-container *ngTemplateOutlet="OrderInstructionsTmpl"></ng-container>
+  </div>
+  <div class="list-spacer" style="width: 100px; height: 200px"></div>
+  <ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
+
+
+</div>
+<!--
+   *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+
+                           TEMPLATES
+
+   *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+   -->
+
+
+<!-- TEMPLATE:      Product Options (ancillary soya etc.)-->
+
+
+<ng-template #ProductOptionsTmpl>
+  <ng-container [formGroup]="formGroup">
+    <mat-selection-list formControlName="options">
+      <mat-list-option *ngFor="let ch of data.options"
+                       [value]="ch"
+                       style="font-size: 10px">
+        <div style="display: flex; justify-content: space-between">
+          <span style="font-size: 14px"> {{ch.name}}</span>
+          <span>{{ch.price}}</span>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </ng-container>
+
+</ng-template>
+
+
+<!-- TEMPLATE:      Product Choices  (variation of product size, flavour, color etc)-->
+<ng-template #productSelectionTmp>
+  <p class="ccbs-product-choose-label"><span>Choose </span></p>
+
+  <div class="ccbs-product-choose"
+       [formGroup]="formGroup">
+    <mat-radio-group aria-label="Select an option"
+                     formControlName="choice">
+      <mat-radio-button *ngFor="let ch of data.choices"
+                        [value]="ch">
+        <span style="max-width: 25ch"> {{ch.name}}</span>
+      </mat-radio-button>
+
+    </mat-radio-group>
+  </div>
+
+</ng-template>
+
+<!-- TEMPLATE:     Bottom actionbar -->
+<ng-template #BottomActionbarTmpl let-total='total'>
+
+  <div class="ccbs-action-bar" [formGroup]="formGroup">
+    <ng-container *ngTemplateOutlet="SaveBtnTmpl"></ng-container>
+    <button mat-fab style="background-color: white" (click)="dismiss()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+
+</ng-template>
+
+<!-- TEMPLATE:     Name description and Qty tmpl -->
+
+<ng-template #incrementTmpl>
+  <div [formGroup]="formGroup">
+    <app-numeric-incrementer
+      [showRemoveButton]="true"
+      styleClass="Lrg"
+      formControlName="qty">
+    </app-numeric-incrementer>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput readonly [value]="data.name">
+      <!--  <p>{{this.prod.description}}</p>-->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput [value]="data.description"></textarea>
+      <!--  <p>{{this.prod.description}}</p>-->
+    </mat-form-field>
+
+  </div>
+</ng-template>
+
+
+<!-- TEMPLATE:     Special Instuctions tmpl -->
+
+<ng-template #OrderInstructionsTmpl>
+  <ng-container [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Special Instructions, Other..</mat-label>
+      <textarea matInput formControlName="instructions"></textarea>
+      <!--  <p>{{this.prod.description}}</p>-->
+    </mat-form-field>
+  </ng-container>
+</ng-template>
+<!-- TEMPLATE:     Add to Order button -->
+<ng-template #SaveBtnTmpl>
+  <button (click)="dimissAndSave()"
+          style="border-radius: 30px; padding: 8px 18px"
+          mat-raised-button>Add to order {{total}} </button>
+</ng-template>

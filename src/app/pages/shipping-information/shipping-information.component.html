@@ -1,0 +1,260 @@
+<ng-container #portalOutlet [cdkPortalOutlet]="activeTemplateRef"></ng-container>
+<!--<div class="si-container-form" [formGroup]="formGroup">-->
+
+
+<!--
+          TEMPLATES
+-->
+
+
+<!--
+~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-
+
+
+SHIPPING INFORMATION EDIT FORM
+
+
+~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-
+-->
+
+<ng-template #shippingInfoForm>
+  <div class="si-container-form" [formGroup]="formGroup">
+
+    <!--    title-->
+    <div id="company-title"></div>
+
+    <div id="form-breadcrumb">
+      <p>Cart > Information > Shipping > Payment</p>
+    </div>
+    <div id="contact-info">
+      <p>Contact Information</p>
+    </div>
+
+    <!--  Email -->
+
+    <div id="email">
+      <mat-form-field appearance="outline">
+
+        <input
+          placeholder="Email"
+          matInput formControlName="email">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+    <div id="shipping-address">
+      <p>Shipping Address</p>
+    </div>
+
+    <!--  Fist/last names-->
+
+    <div id="first-last-names">
+      <mat-form-field appearance="outline">
+        <input matInput
+               placeholder="First name (optional)"
+               formControlName="firstName">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput
+               placeholder="Last name"
+               formControlName="lastName">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--   Address-->
+
+    <div id="address">
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Address"
+          matInput formControlName="address">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--  Apartment-->
+
+    <div id="apartment">
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="Apartment, suite etc (optional)"
+          matInput formControlName="apartment">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--  City-->
+
+    <div id="city">
+      <mat-form-field appearance="outline">
+        <input
+          placeholder="City"
+          matInput formControlName="city">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--  City/ Postcode-->
+
+    <div id="country_postcode">
+      <mat-form-field appearance="outline">
+        <input matInput
+               placeholder="Country"
+               formControlName="country">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput
+               placeholder="Postcode"
+               formControlName="postCode">
+        <mat-error> *required field</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div id="save_information">
+      <mat-checkbox>Save information for next time</mat-checkbox>
+    </div>
+
+    <div id="si-action-bar1">
+      <button mat-stroked-button
+              (click)="router.navigate(['shop-cart'])">
+        <mat-icon>{{backArrow}}</mat-icon>
+      </button>
+      <button mat-flat-button
+              color="accent"
+              (click)="toShippingSummary()">
+        ORDER SUMMARY
+        <mat-icon>{{this.appIcons.right_arrow}}</mat-icon>
+      </button>
+
+    </div>
+    <div id="footer">
+      <a>Refund policy</a>
+      <a>Shipping policy</a>
+      <a>Privacy policy</a>
+    </div>
+  </div>
+</ng-template>
+
+<!--
+~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-
+
+
+SHIPPING SUMMARY TEMPLATE
+
+
+~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-~`_-
+-->
+<ng-template #shippingSummary>
+  <style>
+    .info-block {
+      font-size: 14px;
+      border: 1px solid var(--grey-30);
+      border-radius: 5px;
+      padding: 19px;
+
+    }
+
+    .info-block > .si-col-3 {
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .info-block > .si-col-3 > .sis-label {
+      color: var(--grey-40);
+      font-size: 14px;
+
+    }
+
+    .sis-label > a {
+      font-size: 11px;
+      color: var(--grey-30);
+      padding: 0 5px;
+    }
+
+    .sis-info-content {
+      width: 100%;
+      color: var(--grey-80);
+      font-size: 15px;
+      padding: 0px 8px;
+      /*justify-content: flex-start;*/
+      /* align-items: flex-start;*/
+      /* justify-items: flex-start;*/
+    }
+
+    #si-summary-form-grid {
+      display: grid;
+      grid-auto-rows: auto;
+      overflow-y: scroll;
+    }
+
+    #cart-summary-grid {
+      display: grid;
+
+      grid-template-areas: "prod prod sp sp sp" "prod prod tx tx tx" "prod prod  . . ." "prod prod tl tl tl";
+    }
+
+    #prod {
+      grid-area: prod;
+    }
+
+    #tl {
+      grid-area: tl;
+      padding-bottom: 300px;
+    }
+
+    #tx {
+      grid-area: tx;
+    }
+
+    #sp {
+      grid-area: sp;
+    }
+
+  </style>
+
+  <div id="si-summary-form-grid" style="padding: 3% 5%">
+    <div class="info-block">
+      <div class="si-col-3">
+        <div class="sis-label">Contact</div>
+        <div class="sis-info-content">{{this.formGroup.get('email')?.value}}</div>
+        <div class="sis-label">
+          <a (click)="toShippingInfoForm()">Change</a>
+        </div>
+      </div>
+      <div class="si-col-1">
+        <hr>
+      </div>
+      <div class="si-col-3">
+        <div class="sis-label">Ship to</div>
+        <div class="sis-info-content">{{this.formGroup.get('computedAddress')?.value}}</div>
+        <div class="sis-label">
+          <a (click)="toShippingInfoForm()">Change</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cart-summary-grid" class="info-block" style="margin: 3% 5%">
+    <div id="prod">
+      <p>Items</p>
+      <p>{{this.service.descriptionListDelimited()}}</p>
+    </div>
+    <div id="tl">£{{this.service.getBasketTotal().total.toFixed(2)}}</div>
+    <div id="tx">inclusive of Tax</div>
+    <div id="sp">Shipping £0.00</div>
+  </div>
+  <div id="si-action-bar">
+
+    <button mat-stroked-button
+            (click)="toShippingInfoForm()">
+      <mat-icon>{{backArrow}}</mat-icon>
+    </button>
+    <button mat-flat-button color="accent" (click)="this.doCheckout()">PAY NOW</button>
+
+
+  </div>
+
+</ng-template>

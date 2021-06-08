@@ -1,0 +1,164 @@
+@mixin tableListFromat {
+  color: var(--subdued-grey);
+  font-weight: 300;
+  font-size: 9px;
+  &:first-letter {
+    font-size: 12px;
+    font-weight: 200;
+  }
+}
+
+
+@mixin buttonBar {
+
+}
+
+
+@mixin cappuMatExpansionPanel {
+  box-shadow: none !important;
+  background-color: var(--background-color1) !important;
+}
+
+// Button
+@mixin cappuNativeButton {
+  background-color: var(--component-background-color2);
+  box-sizing: content-box;
+  color: var(--background-color1);
+  outline: 1px solid transparent;
+  //border: 1px solid var(--component-background-color2); //var(--component-background-color2);
+  height: 35px;
+  width: 100%;
+  font-size: 11px;
+  transition: outline-color 500ms;
+
+  &:first-letter {
+    letter-spacing: .04rem;
+  }
+  //&:hover {
+  //  outline: 2px solid dodgerblue;
+  //  //outline: 2px solid var(--component-background-color2);
+  //  transition: outline-color 1500ms;
+  //}
+  //&.mouseDown {
+  //  outline: 1px solid #f60749;
+  //  //outline: 2px solid var(--component-background-color2);
+  //  transition: outline-color 500ms;
+  //}
+}
+
+@mixin cappuTextArea {
+  background-color: var(--background-color1);
+  border-color: var(--divider-grey-1);
+  color: var(--subdued-grey);
+  outline: var(--subdued-grey);
+  //font-weight: 300;
+  font-family: var(--font-family);
+  font-weight: 300;
+  font-size: 9px;
+  line-height: 20px;
+  &:first-letter {
+    font-size: 12px;
+    font-weight: 200;
+  }
+  padding: 5px;
+}
+
+//<-- Store Table Styles --> //
+
+@mixin TableStyles($component) {
+  @if $component == column-header-label {
+    color: var(--subdued-grey);
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 21px;
+    &:first-letter {
+      font-size: 12px;
+      font-weight: 200;
+    }
+  } @else if $component == Table-header-h2 {
+    font-size: 18px;
+    line-height: 48px;
+    font-weight: 300;
+  } @else if $component == Table-header-h3 {
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 200;
+  } @else if $component == product-description {
+     color: var(--caption-grey-1);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    &:first-letter {
+      font-size: 13px;
+      font-weight: 500;
+    }
+  } @else if $component == variant {
+    color: var(--caption-grey-1);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 20px;
+    &:first-letter {
+      font-size: 12px;
+      font-weight: 2400;
+    }
+  } @else if $component == price {
+    color: var(--subdued-grey);
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 20px;
+    &:first-letter {
+      font-size: 12px;
+      font-weight: 2400;
+    }
+  }
+}
+
+// Styles for content pages.
+
+@mixin ContentStyles($style: body) {
+
+  @if $style == body {
+    font: var(--font-regular-body);
+    color: var(--grey-80);
+    &:first-letter {
+      //font-size: 12px;
+      font-weight: 200;
+    }
+    @media screen and (max-width: 500px) {
+      font: var(--font-larger-body);
+
+      //@include ContentStyles(body);
+
+    }
+
+
+  } @else if $style == page-heading {
+    //(14px, 28px, 200)
+    color: var(--grey-70);
+    color: var(--grey-70);
+    //font-family: var(--font-family);
+    line-height: 34px;
+    &:first-letter { }
+
+    // Sub-heading
+  } @else if $style == sub-heading {
+    font: var(--font-regular-sub-heading);
+    //color: red;
+    color: var(--grey-80);
+    &:first-letter {
+      font-size: var(--font-size-sub-heading-regular-first-letter);
+    }
+    @media screen and (max-width: 500px) {
+      font: var(--font-larger-sub-heading);
+      &:first-letter {
+        font-size: var(--font-size-sub-heading-larger-first-letter);
+        color: var(--grey-90);
+      }
+
+    }
+  } @else if $style == li {
+
+  } @else if $style == li {
+
+  }
+}

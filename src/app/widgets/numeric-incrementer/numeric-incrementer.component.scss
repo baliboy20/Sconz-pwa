@@ -1,0 +1,131 @@
+@use "src/_styles/components";
+
+$config: mat-typography-config();
+
+$radius: 24px;
+
+
+.incrementor-grid {
+display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+
+  .numeric__input {
+    width: 23px;
+    border: 1px dotted var(--grey-10);
+    border-radius: 3px;
+    padding: 3px;
+    height: 18px;
+    color: var(--subdued-grey);
+    background-color: transparent;
+  }
+
+
+  .minus__bn, .remove__bn {
+
+    .mat-icon {
+      font-size: 18px;
+      width: 12px;
+      color: var(--subdued-grey);
+    }
+
+    text-align: center;
+    //border: 1px dotted red;
+    font-family: var(--font-family);
+    background-color: transparent;
+
+    :hover {
+      border: 1px dotted var(--subdued-grey)
+    }
+  }
+
+  .remove__bn {
+    //grid-column: 2;
+    //grid-row: 1;
+    border: none;
+    color: maroon;
+    padding: 2px;
+    //max-width: 25px;
+    margin: 2px;
+    @media (max-width: 550px) {
+      font-size: 10px;
+
+
+    }
+  }
+
+
+}
+
+.incrementor-grid-larger {
+  display: flex;
+
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  .numeric__input {
+    width: 10ch;
+    border: 1px dotted var(--grey-10);
+    border-radius: 33px;
+    padding: 3px;
+    height:36px;
+    margin: 10px;
+    color: var(--subdued-grey);
+    background-color: transparent;
+    font: var(--font-regular-sub-heading16-inconsalata);
+
+  }
+
+  //.numeric__input_larger {
+  //  width: 23px;
+  //  border: 1px dotted var(--grey-10);
+  //  border-radius: 3px;
+  //  padding: 3px;
+  //  height: 18px;
+  //  color: var(--subdued-grey);
+  //  background-color: red;
+  //
+  //}
+
+  .minus__bn, .remove__bn {
+
+
+    text-align: center;
+    font-family: var(--font-family);
+    background-color: transparent;
+
+
+    :hover {
+      border: 1px dotted var(--subdued-grey)
+    }
+  }
+
+  .remove__bn {
+    //grid-column: 2;
+    //grid-row: 1;
+    border: none;
+    color: maroon;
+    padding: 2px;
+    //max-width: 25px;
+    margin: 2px;
+    @media (max-width: 550px) {
+      font-size: 10px;
+
+
+    }
+  }
+
+  button[mat-fab] {
+    background-color: rgba(246, 206, 97, 0.76);
+  }
+
+}
+
+
+
+
+

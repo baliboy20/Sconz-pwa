@@ -1,0 +1,31 @@
+<div class="coffee-layout">
+  <div class="title">
+    Coffee for home
+  </div>
+  <section class="top-para">
+    We believe certain coffees fit better with certain drinks and so we have taken the time to search out the best
+    coffees for how you like to drink yours.
+  </section>
+  <div class="carousel-container">
+
+    <mat-spinner [diameter]="80" *ngIf="showSpinner"
+    >
+    </mat-spinner>
+    <div class="product-tile"
+         *ngFor="let product of this.stockProducts">
+
+
+        <div class="img-container" mat-ripple
+             (click)="doNavigate(product.productId)"
+             (tap)="doNavigate(product.productId)">
+          <img [src]="product.thumbImg._url" loading="eager">
+        </div>
+
+<!--      <img [src]="zzFile">-->
+      <div class="item-title">{{product.name}}</div>
+      <div class="item-price mat-body-2">From £{{product.lowestPrice() }}</div>
+
+  </div>
+</div>
+
+</div>

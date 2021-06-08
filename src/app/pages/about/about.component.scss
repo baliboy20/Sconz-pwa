@@ -1,0 +1,32 @@
+@import "./src/_styles/components";
+
+.about-img-container {
+height: 50vh;
+  overflow-x: scroll;
+  object-fit: cover;
+}
+
+iframe {
+  width: 100%;
+  border: none;
+  overflow-y: visible;
+}
+
+
+.content-page{
+  padding: 0 10%;
+
+  @include ContentStyles(body);
+ >.sub-heading {
+
+     @include ContentStyles(sub-heading);
+  }
+
+  >p {
+    @include ContentStyles(body);
+  }
+
+}
+
+
+

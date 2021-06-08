@@ -1,0 +1,47 @@
+
+<div class="si-container-basket">
+  <h4>Cart</h4>
+
+  <table class="si-table" *ngIf="!basket === false">
+    <tr *ngFor="let im of basket?.cart">
+<!--        [matBadge]="im.qty"-->
+      <td>
+        <div style="position: relative;
+             transform: translateY(8px);
+             width: 80px;"
+             matBadgeColor="warn"
+             matBadgeSize="small"
+             matBadgePosition="below after">
+        </div>
+        <img width="80px" [src]="im?.thumbImg">
+      </td>
+    <td style="padding-left: 6px">
+<!--      <div>{{im?.description}}</div>-->
+      <span>{{im?.name}}</span>
+    </td>
+      <td style="vertical-align: top">{{im.choice.price}}</td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <mat-divider></mat-divider>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3"></td>
+    </tr>
+    <tr>
+      <td colspan="3"
+          style="
+          padding: 15px;
+          text-align: right;
+          ">
+        Total
+        £{{basket?.total}}
+      </td>
+      <td></td>
+    </tr>
+  </table>
+
+
+</div>

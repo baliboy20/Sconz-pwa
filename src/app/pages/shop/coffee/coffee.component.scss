@@ -1,0 +1,104 @@
+@use "src/_styles/components";
+//@import "src/_styles/components";
+
+.coffee-layout {
+  --ti : ". . ti  ti ti  ti . .";
+  --tp : ". tp tp tp tp tp tp .";
+  --ca: ". ca ca ca ca ca ca .";
+  //background-color: lightcyan;
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  grid-template-rows: min-content min-content auto;
+  grid-template-areas: var(--ti) var(--tp) var(--ca);
+
+
+  position: fixed;
+  overflow-x: hidden;
+  top: 55px;
+  bottom: 0;
+  left:0;
+  right: 0;
+}
+
+.title {
+  grid-area: ti;
+  text-align: center;
+  font: var(--font-regular-sub-heading);
+  //background-color: red;
+}
+
+section.top-para {
+  grid-area: tp;
+  margin: 20px 5%;
+  text-align: center;
+  @include components.ContentStyles(body);
+}
+
+.carousel-container {
+  grid-area: ca;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex:  0 0 100vw;
+}
+
+.item-price {
+  grid-area: tp;
+  @include components.ContentStyles(body);
+  color: var(--grey-70);
+}
+
+.product-tile {
+  display: block;
+
+  .img-container{
+    display: inline-block;
+    border: 1px solid transparent;
+
+  &:hover{
+      border: 1px solid var(--grey-40)
+    }
+  }
+
+  .item-title {
+    @include components.ContentStyles(body);
+    //font-family: cursive;
+    width: 22ch;
+  }
+
+  .item-price, .item-title {
+    text-align: center;
+    flex: 1 1 100%;
+  }
+
+}
+
+@media only screen and(max-width: 500px) {
+
+  .coffee-layout {
+    display: block;
+    height: calc(100vh - 55px);
+    max-width: 500px;
+    width: auto;
+    overflow-x: hidden;
+    top: 55px;
+    //background-color: lightgray;
+  }
+
+  .item-title {
+    @include components.ContentStyles(body);
+    font-family: cursive!important;
+    width: 28ch;
+
+  }
+
+  .item-image {
+    object-fit: contain;
+    max-height: 250px;
+
+  }
+
+}

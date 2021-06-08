@@ -1,0 +1,31 @@
+<div  [class]="this.styleClass === 'Std' ? 'incrementor-grid' : 'incrementor-grid-larger'"
+
+
+     style="width: auto">
+
+  <button mat-fab
+          (click)="subtract()">
+    <mat-icon>remove</mat-icon>
+  </button>
+
+  <input (ngModelChange)="onInputConrolChanged($event)"
+         class="numeric__input"
+         style="text-align: center"
+         *ngIf="value > 0 ||  (!this.showRemoveButton)"
+         [(ngModel)]="value" >
+
+  <button class="remove__bn"
+          *ngIf="value < 1 && this.showRemoveButton"
+          (click)="onRemoveBnClicked()">
+    DELETE
+  </button>
+
+  <button mat-fab
+          (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+
+</div>
+
+<!-- [ngClass]="isInline ? 'incrementer-container-inline' : 'incrementer-container' "-->

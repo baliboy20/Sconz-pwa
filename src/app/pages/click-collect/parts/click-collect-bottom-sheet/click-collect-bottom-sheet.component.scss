@@ -1,0 +1,117 @@
+//@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;600&family=Roboto&display=swap');
+
+//@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,900;1,200;1,400&display=swap');
+
+
+//  LAYOUT
+
+//   STYLES
+.ccbs-container {
+  //--theme-font-family: 'Inconsolata', monospace;
+  //--theme-font-family: 'Source Code Pro', monospace;
+}
+
+.ccbs-choices, .mat-list-option, .mat-radio-button {
+  font: var(--font-smaller-sub-heading12) !important;
+  color: var(--grey-80);
+}
+
+.mat-radio-button {
+  margin: 10px;
+}
+p {
+  position: relative;
+  border:transparent;
+  font: var(--font-smaller-sub-heading12);
+  padding: 0;
+  margin: 0;
+  span {
+    margin: 0;
+    display: inline-block;
+    position: absolute;
+    padding: 0 5px;
+    background-color: white;
+    top: -9px;
+    left: 10px;
+    color:var(--grey-80);
+    font-size: 9px;
+  }
+}
+.ccbs-product-choose {
+
+  display: block;
+  margin: 0px 0px;
+  padding: 16px 0;
+  border: solid  var(--grey-10) .05em;
+  border-radius: 8px;
+
+  overflow-x: hidden;
+
+}
+
+
+
+.ccbs-img-container {
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  margin: 0 -16px;
+  background-color: var(--background-color1);
+  height: 250px;
+
+  img {
+    margin: 0 auto;
+    border: 24px solid var(--grey-30);
+    object-fit: scale-down;
+    //border: 24px solid var(--background-color1);
+    clip-path: circle(100px at center);
+  }
+}
+
+
+.ccbs-container {
+}
+
+.ccbs-action-bar {
+  display: flex;
+  padding: 3px;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  background-color: #eed03b;
+  box-sizing: border-box;
+  margin: 0;
+  //left: -16px;
+  //right: -160px;
+  width: 100vw;
+  //border-radius: 8px;
+  position: sticky;
+  bottom: -8px;
+  z-index: 100;
+  transform: translateX(-16px);
+  box-shadow: 0px -9px 18px -8px var(--grey-30);
+}
+
+
+//.mat-bottom-sheet-container-medium {
+//  height: 300px;
+//}
+//
+//.mat-bottom-sheet-container-large {
+//  //min-width: 512px;
+//  //max-width: calc(100vw - 256px)
+//}
+//
+//.mat-bottom-sheet-container-xlarge {
+//  //min-width: 576px;
+//  //max-width: calc(100vw - 384px)
+//}
+
+.mat-radio-button {
+  margin-left: 10px;
+}
+
+.mat-form-field {
+  width: 100%;
+  font-family: var(--font-family);
+}
