@@ -1,0 +1,8 @@
+<p>zzprogressbutton works!</p>
+<button mat-raised-button (click)="showSpinner= !showSpinner">
+  <span>Buy Now</span>
+<mat-progress-spinner
+
+  *ngIf="showSpinner"
+  mode="indeterminate" color="primary"></mat-progress-spinner>
+</button>

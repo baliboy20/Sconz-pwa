@@ -25,7 +25,7 @@ export class NumericIncrementerComponent implements OnInit, ControlValueAccessor
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewInit(): void {
     // this.showRemoveButton = this.showRemoveButton ?? true;
-    console.log('show remove button', !!this.showRemoveButton, this.showRemoveButton);
+    // console.log('show remove button', !!this.showRemoveButton, this.showRemoveButton);
   }
 
   add(): void {
@@ -52,18 +52,18 @@ export class NumericIncrementerComponent implements OnInit, ControlValueAccessor
   }
 
   writeValue(obj: any): void {
-    console.log('numerice indicator writevalue', obj);
+    // console.log('numerice indicator writevalue', obj);
     this.value = obj;
     this.changeRef.markForCheck();
   }
 
   onRemoveBnClicked(): void {
-    console.log('remove this item');
+    // console.log('remove this item');
     this.removeItmClicked.emit('remove this item');
   }
 
   onInputConrolChanged(event: any): void {
-    console.log('onInputConrolChanged', event);
+    // console.log('onInputConrolChanged', event);
     if (event > 0) {
       this.changefn(this.value);
     } else {

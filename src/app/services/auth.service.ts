@@ -6,7 +6,8 @@ import * as Parse from 'parse';
   providedIn: 'root'
 })
 export class AuthService {
-  user: Parse.User;
+  // @ts-ignore
+  user: Parse.User = undefined;
   constructor() {
   }
 

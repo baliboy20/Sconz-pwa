@@ -1,0 +1,135 @@
+//   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*        LAYOUT
+.csnv-container {
+  height: calc(100vh - 50px);
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto auto 50px;
+
+  .csnv-header {
+    margin-bottom:10px;
+  }
+
+  .csnv-footer {
+
+  }
+
+  .csnv-scrollable {
+    overflow-y: scroll;
+    margin: 10px;
+  }
+}
+
+.cart-card {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr;
+  grid-template-rows: 36px 72px 1fr 1fr;
+
+  .card-image {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: auto;
+    //background-color: orange;
+    img {
+
+    }
+  }
+
+  .card-name {
+    //background-color: blueviolet;
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+    background-color: red;
+    text-align: center;
+    max-height: 36px;
+  }
+
+  .card-choices-options {
+   max-height: 72px;
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+
+  .card-price {
+
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .card-qty {
+    grid-column: 2;
+    grid-row: 3;
+
+  }
+
+  .card-total {
+    background-color: turquoise;
+    grid-column: 1 / span 3;
+    grid-row: 4;
+
+  }
+
+  .card-divider {
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 1;
+  }
+
+}
+
+
+//   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*       STYLING
+.csnv-container {
+  //background-color: red;
+}
+
+.csnv-header {
+  //background-color: green;
+  //margin-bottom: 220px;
+}
+
+.csnv-footer {
+  //background-color: yellowgreen;
+}
+
+.csnv-scrollable {
+
+}
+
+.cart-card {
+  //& > * {
+  //  border: 1px solid red;
+  //}
+  //display: grid;
+  //grid-template-columns: 2fr 4fr;
+
+  .card-name {
+    //background-color: blueviolet;
+  }
+
+  .card-choices-options {
+    background-color: lightcyan;
+    word-break: break-all;
+  }
+
+  .card-price {
+    text-align: center;
+  }
+
+  .card-qty {
+    //background-color: black;
+
+  }
+
+  .card-total {
+    //background-color: turquoise;
+    text-align: center;
+
+  }
+
+  .card-divider {
+
+  }
+
+}
+
+

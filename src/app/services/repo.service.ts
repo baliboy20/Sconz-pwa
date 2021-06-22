@@ -121,9 +121,7 @@ export class RepoService {
       const inst = new claz();
       inst.set('name', 'postPaymentInitiatedToDb');
       inst.set('shipping_info', payload.shippingInfo);
-      console.log('shipping_info', payload);
-      console.log('shipping_info', payload.shippingInfo);
-      inst.set('order', payload.basket);
+      inst.set('order', {cart: payload.basket});
       inst.set('payment_intent', payload.payment.payment_intent);
       inst.set('payment_status', payload.payment.payment_status);
       inst.set('payment', payload.payment);
@@ -136,7 +134,11 @@ export class RepoService {
   public async postToCloudFunction(payload: { payment: { id: string; amount_total: string; mode: string; payment_intent: string; payment_status: string; }; shippingInfo: any; basket: any; }): Promise<any> {
     console.log('postToCloudFunction', payload);
     const result = await this.postToOrders(payload);
-
+    return result.id;
+  }
+  public async ggPostToCloudFunction(payload: { payment: { id: string; amount_total: string; mode: string; payment_intent: string; payment_status: string; }; shippingInfo: any; basket: any; }): Promise<any> {
+    console.log('postToCloud Functionz', payload);
+    const result = await this.postToOrders(payload);
     return result.id;
   }
 
@@ -153,11 +155,11 @@ export class RepoService {
     }
   }
 
-  public getOrder(id: string): Promise<any> {
-    const rsul = this._getOrder(id);
+  public async getOrder(id: string): Promise<Parse.Object> {
+    const rsul =  this._getOrder(id);
 
 
-    return rsul;
+    return await rsul;
   }
 }
 

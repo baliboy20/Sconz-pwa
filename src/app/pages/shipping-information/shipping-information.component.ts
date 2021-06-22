@@ -54,10 +54,8 @@ export class ShippingInformationComponent implements OnInit {
       this.cart = this.service.cartItems;
       // todo undo this deve code;
       this.computedAddress();
-
-      this.activeTemplateRef =
-        // @ts-ignore
-        new TemplatePortal(this.shippingInfoForm, this.vcr);
+      // @ts-ignore
+      this.activeTemplateRef = new TemplatePortal(this.shippingInfoForm, this.vcr) as TemplateRef<any>;
     }, 50);
 
   }
@@ -78,13 +76,13 @@ export class ShippingInformationComponent implements OnInit {
 
   toShippingInfoForm(): void {
     setTimeout(() => {
+
       // @ts-ignore
       this.activeTemplateRef = new TemplatePortal(this.shippingInfoForm, this.vcr);
     }, 50);
   }
 
   async doCheckout(): Promise<void> {
-    // const re = this.stripeService.formatLineItems(this.cart);
     const cart = {cart: this.cart, ...this.service.getBasketTotal()};
     const id = await this.stripeService.oneTimeCheckoutWithCheckoutSessionV2(this.formGroup.getRawValue(), cart);
     console.log('Checked out', id);

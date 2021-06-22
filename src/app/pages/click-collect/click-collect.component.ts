@@ -1,4 +1,16 @@
-import {AfterViewInit, Component, Directive, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Renderer2,
+  ViewChildren
+} from '@angular/core';
 // import {RepoGGService} from '../../services/repo-g-g.service';
 import {GGStockProductFacade} from '../../model/GGStockProducts.model';
 import {Observable} from 'rxjs';
@@ -46,7 +58,7 @@ export class CustomImageDirective implements AfterViewInit {
       }
       case 'medium': {
         const [srcset, sizez] = this.medAttrs();
-        console.log('size', sizez);
+        // console.log('size', sizez);
         this.rnd.setAttribute(img, 'srcset', srcset);
         // this.rnd.setAttribute(img, 'sizes', sizez);
         break;
@@ -58,7 +70,7 @@ export class CustomImageDirective implements AfterViewInit {
         break;
       }
       default : {
-        console.log('%c XXXXX', 'color: red', this.imgSize);
+        // console.log('%c XXXXX', 'color: red', this.imgSize);
       }
     }
 

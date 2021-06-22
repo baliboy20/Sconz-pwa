@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {RepoService} from '../../services/repo.service';
-import {delay, map, mergeMap, tap} from 'rxjs/operators';
-import {fromPromise} from 'rxjs/internal-compatibility';
+import {map, mergeMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {CoffeeOrder, CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
-import {CartService} from '../../services/cart.service';
+import {GGCartService} from "../../services/ggcart.service";
+import {OrderStatmentService} from "../../service/order-statment.service";
+import {fromPromise} from "rxjs/internal-compatibility";
+
 
 @Component({
   selector: 'app-order-statment',
@@ -17,28 +19,47 @@ export class OrderStatmentComponent implements OnInit {
 
   constructor(
     private repo: RepoService,
-    private cartService: CartService,
+    private cartService: GGCartService,
+    private orderService: OrderStatmentService,
     private route: ActivatedRoute) {
-    this.cartService.clear();
   }
 
   ngOnInit(): void {
     this.route.params
       .pipe(
-        map(a => a.orderId),
-        tap(a => console.log('asdfsfsf', a)),
-        mergeMap(id => (this.repo.getOrder(id)))
-      )
-      .subscribe(a => this.item = new CoffeeOrderFacade(a),
-      err => console.log('the activqted routes Errors: ', err));
+        map((a: Params) => {
+          return a.orderId;
+        }),
+        mergeMap((id, idx) => {
+          console.log('arg::', id);
 
-}
+          if (id === 'succeeded') {
+            //  this.cartService.clearout();
+            return of(this.orderService.getOrder());
+          } else if (id === 'cancelled') {
+            return of('cancelled');
+          } else if ( typeof id === 'string') {
+            return fromPromise(this.repo.getOrder(id as string))
+          }
+          else {
+            return of(this.orderService.getOrder());
+            // return of();
+          }
+
+        }),
+      )
+      .subscribe(a => {
+          console.log('%csuccess', 'color: green', a);
+        },
+        err => console.log('the activated routes Errors: ', err));
+
+  }
 
   itemDate(): string {
     try {
       // @ts-ignore
       return new Date(this.item.updatedAt).toDateString();
-    }catch (e) {
+    } catch (e) {
       return 'invalid date';
     }
   }

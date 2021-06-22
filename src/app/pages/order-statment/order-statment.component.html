@@ -3,10 +3,10 @@
   <h5 style="font-weight: 800; justify-self: center">{{itemDate()}}</h5>
   <h2>Shiping Information:</h2>
   <ng-container *ngTemplateOutlet="shippingTmpl; context: {shippi: item?.shipping_info}"></ng-container>
-  <h2>Items Purchased</h2>
+<!--  <h2>Items Purchased</h2>-->
   <ng-container *ngTemplateOutlet="orderTmpl; context: {order: item?.order}"></ng-container>
-  <h2>Payment</h2>
-  <ng-container *ngTemplateOutlet="paymentTmpl; context: {payment: item?.payment}"></ng-container>
+<!--  <h2>Payment</h2>-->
+<!--  <ng-container *ngTemplateOutlet="paymentTmpl; context: {payment: item?.payment}"></ng-container>-->
 </div>
 
 
@@ -26,10 +26,9 @@
                           Shipping Information
 -->
 <ng-template #flexrowTmpl let-fldname='fldname' let-labelname='labelname' let-shippi='shippi'>
-  <div class="flex-row-2">
+  <div class="flex-row-2" *ngIf="shippi">
     <div class="field-label">{{labelname}}</div>
-    <div class="field-value" ><div style="height: auto">{{shippi[fldname]}}</div></div>
-
+    <div class="field-value" ><div style="height: auto">{{shippi ? shippi[fldname] : ''}}</div></div>
   </div>
 </ng-template>
 <ng-template #shippingTmpl let-shippi='shippi'>
@@ -54,7 +53,7 @@
 -->
 <ng-template #orderTableTmpl let-order="order">
   <!--  {{cart|json}}-->
-  <table class="order-table">
+  <table class="order-table" *ngIf="order">
 
     <thead>
     <tr>

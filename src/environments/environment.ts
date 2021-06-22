@@ -4,6 +4,7 @@
 
 export const environment = {
   LOCAL_STORAGE_CART_ITEMS_KEY: 'CART_ITEMS',
+  LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY: 'CLICK_COLLECT_CART_ITEMS',
   LOCAL_STORAGE_CART_ITEMS_KEY_DEV: 'CART_ITEMS_DEV',
   production: false,
   informationPagesPath: 'http://localhost:4200/assets/information-pages',
@@ -12,13 +13,15 @@ export const environment = {
   PARSE_JS_KEY: 'TbOsxLryXvD6sP7GvOQ1t2HhNqMegtFaJJAPbPGt',
   PARSE_REST_API_KEY: '5BfNScDDuwnfgFXJCWJvMNFTtGHQq1C3fhNdH2XT',
   ParseServerURL: 'https://parseapi.back4app.com/',
+  DEV_ParseServerURL: 'http://localhost:3000',
   stripe_pkey: 'pk_test_gESpLAexm8oTAFcLjCNEQkOw00smIXKrfx',
   Stripe_Order_Complete: {
     success_route: '/#/orders-statement',
     cancel_route: '/#/orders-statement',
   },
-  build_version: '11.2a prod 7 Jun \'21',
+  build_version: '11.2b prod 17 Jun \'21',
   useDevCart: true,
+  enableNavToStripPayment: false,
 };
 
 /*

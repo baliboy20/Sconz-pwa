@@ -1,0 +1,117 @@
+@use "_styles/components";
+@use "to";
+@use "gcses";
+//@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300&family=Marcellus&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@100,200,300;400;500;600;700&display=swap');
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$RosyLookLike1-primary: mat-palette($mat-brown);
+$RosyLookLike1-accent: mat-palette($mat-amber, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$RosyLookLike1-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$RosyLookLike1-theme: mat-light-theme((
+  color: (
+    primary: $RosyLookLike1-primary,
+    accent: $RosyLookLike1-accent,
+    warn: $RosyLookLike1-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($RosyLookLike1-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+$background: #fffcf3;
+$color: #323131;
+
+:root {
+  --font-family: 'Quicksand', sans-serif;
+  //--font-family: Bitter;
+  --toolbar-height: 140px;
+  --toolbar-color: #fffcf3;
+  --background-color1: #fffcf3; // #fffaf0; hsla(0,15,19%); hsl(39,100,97)
+  --component-background-color2: #323131; //hsla(0,15,19%);;
+  //--background-color1 :  floralwhite; // hsla(0,15,19%);
+  --caption-grey-1: #a5a2a2;
+  --subdued-grey: var(--caption-grey-1);
+  --divider-grey-1: rgba(201, 195, 195, 0.5);
+
+  --grey-100:  rgba(50, 49, 49, 1);
+  --grey-90:  rgba(50, 49, 49, 0.9);
+  --grey-80:  rgba(50, 49, 49, 0.8);
+  --grey-70:  rgba(50, 49, 49, 0.7);
+  --grey-60:  rgba(50, 49, 49, 0.6);
+  --grey-50:  rgba(50, 49, 49, 0.5);
+  --grey-40:  rgba(50, 49, 49, 0.4);
+  --grey-30:  rgba(50, 49, 49, 0.3);
+  --grey-10:  rgba(50, 49, 49, 0.1);
+  --warning: red;
+
+  //--basket-icon-color: white;
+  //--basket-icon-font-size: 5px;
+  //--badge-background-color: beige;
+  //--badge-fill-color: white;
+}
+
+$font-colors: (
+"100" : var(--component-background-color2),
+//"200" : lighten(var(--component-background-color2, .9)),
+);
+
+$custom-typography: mat-typography-config(
+  $font-family:'Quicksand, sans-serif',
+  //$font-family: 'Bitter',
+  $headline: mat-typography-level(32px, 48px, 700), //h1
+  $body-2: mat-typography-level(12px, 24px, 300),
+  $body-1: mat-typography-level(.73rem, 19px, 300),
+  $subheading-2: mat-typography-level(14px, 28px, 200), //h3
+  $subheading-1: mat-typography-level(18px, 48px, 300), //h4
+  $title : mat-typography-level(18px, 48px, 300), // h2
+);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+//
+//
+// Overides Material Design;
+//
+//
+.mat-list-option {
+  color: $color;
+  font-size: 21px !important;
+  font-weight: 200 !important;
+}
+
+
+
+

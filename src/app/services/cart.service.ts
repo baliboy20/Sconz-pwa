@@ -17,7 +17,7 @@ export class CartService  {
   basket: Subject<Basket> = new ReplaySubject<Basket>();
 
   constructor() {
-    this._retrieveCartFromLocalStorage();
+  //  this._retrieveCartFromLocalStorage();
     if (this._cartItems.length < 1) {
       environment.useDevCart = true;
       this._cartItems.push( ...devCartData);

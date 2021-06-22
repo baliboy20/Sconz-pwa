@@ -1,0 +1,144 @@
+@use "src/_styles/components";
+// ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
+//            LAYOUT
+// ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
+.ggc-container {
+  --viewport-ht: calc(10vh - 50px);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32ch, 2fr));
+  height: calc(100vh - 50px);
+  //flex-flow: row wrap;
+  overflow-y: scroll;
+
+}
+
+.ggc-left-col, .ggc-right-col {
+  box-sizing: border-box;
+  padding: 10px;
+  //background-color: red;
+
+}
+
+.ggc-left-col {
+}
+
+.ggc-right-col {
+  //height: 180vh;
+  //background-color: sandybrown;
+}
+
+.ggc-pickup {
+
+}
+
+.ggc-contact {
+  box-sizing: border-box;
+  //background-color: #eed03b;
+  //
+  //padding: 15px;
+  //display: grid;
+  //grid-column-gap: 2px;
+  //grid-template-columns: repeat(auto-fit, minmax(15ch, 34ch));
+  //justify-content: start;
+  //justify-items: start;
+  //align-items: start;
+  //align-content: start;
+  display: flex;
+  flex-flow: row wrap;
+
+  mat-form-field {
+   &.mat-input-element{
+     background-color: red;
+   }
+    box-sizing: border-box;
+    border-radius: 8px;
+    //margin-left: 16px;
+    //font-size: 16px;
+    &:nth-child(1){
+      box-sizing: border-box;
+      flex:  1 0 100%;
+      //max-width: 14ch;
+
+
+    }
+    &:nth-child(2){
+      flex:  0 0 50%;
+    }
+      &:nth-child(3){
+        flex:  0 0 46%;
+        margin-left: 8px;
+        //background-color:var(--grey-10)
+    }
+
+    //width: calc(100% - 100px);
+    //min-width: 80px;
+  }
+
+}
+
+.save-my-information {
+}
+
+.order-summary {
+}
+
+.place-order {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  button {
+    border-radius: 35px;
+    width: 100%;
+     background-color: #002CFB;
+    color: white;
+    border : transparent 1px solid;
+    padding: 8px;
+    > span {
+    //color: red;
+
+      display: inline-block;
+      padding: 8px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+  }
+  }
+}
+
+
+
+// ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
+//            STYLING
+// ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
+.mat-card {
+  padding:  16px;
+  border-radius: 5px;
+}
+.ggc-left-col {
+  //background-color: red;
+}
+
+.ggc-right-col {
+  //background-color: orange;
+}
+
+.ggc-pickup {
+  //background-color: blue;
+}
+
+.ggc-contact {
+
+}
+
+.save-my-information {
+  font-family: var(--font-family-inconsolata);
+  font-weight: 200;
+}
+
+.order-summary {
+  background-color: aquamarine;
+}
+
+.sub-total {
+  //background-color: #eed03b;
+}

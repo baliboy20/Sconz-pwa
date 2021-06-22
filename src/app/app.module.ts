@@ -19,11 +19,11 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {DropDownCartListModule} from './widgets/drop-down-cart-list/drop-down-cart-list.module';
 import * as Parse from 'parse';
-import { OutlinedLabelComponent } from './widgets/outlined-label/outlined-label.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {GGCartService} from './services/ggcart.service';
-import { ShopCartSideNavComponent } from './shop-cart/shop-cart-side-nav/shop-cart-side-nav.component';
 import {ShopCartSideNavModule} from "./shop-cart/shop-cart-side-nav/shop-cart-side-nav.module";
+import {PortalModule} from "@angular/cdk/portal";
+import {OrderStatmentService} from "./service/order-statment.service";
+
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
 
 // @ts-ignore
@@ -32,6 +32,7 @@ Parse.serverURL = environment.ParseServerURL;
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,10 +50,12 @@ Parse.serverURL = environment.ParseServerURL;
     HammerModule,
     DropDownCartListModule,
     ShopCartSideNavModule,
-    BasketIconModule
+    BasketIconModule,
+    PortalModule,
   ],
   providers: [
     GGCartService,
+    OrderStatmentService,
     CartService,
     {
       provide: HTTP_INTERCEPTORS,

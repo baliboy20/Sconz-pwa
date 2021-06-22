@@ -17,20 +17,36 @@ export interface GGStockProductOrder {
   productId: string;
   name: string;
   id: string;
-  thumbImg: string;
+  thumbImg: { url?: string, _url?: string };
+  thumbImgUrl: string;
   choice: GGStockProductVariant;
   options: GGStockProductOption[];
-  optionsDescList: string  | undefined;
+  optionsDescList: string | undefined;
   total: number;
   qty: number;
   instructions: string;
   clone: () => GGStockProductOrder;
   nameChoice: () => string;
+
   updateTotal(): void;
 }
 
 
 export class GGStockProductOrderImpl implements GGStockProductOrder {
+  get thumbImgUrl(): string {
+    if (typeof this.thumbImg == 'string') {
+      return this.thumbImg as string;
+
+    } else if ('_url' in this.thumbImg) {
+      return this.thumbImg._url as string;
+
+    } else if ('url' in this.thumbImg) {
+      return this.thumbImg.url as string;
+    } else {
+      return '';
+    }
+  }
+
   constructor(data: GGStockProductOrder | GGStockProductOrderImpl) {
     this.instructions = data.instructions;
     this.qty = data.qty;
@@ -41,6 +57,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.name = data.name;
     this.thumbImg = data.thumbImg;
     this.options = data.options;
+    this._thumbImgUrl = (data.thumbImg._url ?? data.thumbImg._url) as string;
     this.reCompute(this as GGStockProductOrder);
   }
 
@@ -49,12 +66,24 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   name: string;
   options: GGStockProductOption[];
   productId: string;
-  thumbImg: string;
-  optionsDescList: string | undefined;
+  thumbImg: { url?: string, _url?: string };
   total: number;
   qty: number;
   instructions: string;
+  private _thumbImgUrl: string;
 
+
+  get optionsDescList(): string | undefined {
+    // return 'a spoon full of henley';
+    return !this.options || this.options.length == 0 ? '' :
+            this.options.map(this. _GbpFmt).join(', ');
+  }
+
+private _GbpFmt(it: GGStockProductOption) : string {
+    return it.price <= 0 ? it.name:  ` ${it.name} @ £${it.price.toString().padStart(2,'0')}`;
+
+  // '£' + it.toString().padStart(2, '0')
+}
   /**  */
   static totalOfOptions(options: GGStockProductOption[]): number {
     const total = options
@@ -67,7 +96,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     return new GGStockProductOrderImpl(a);
   }
 
-  private reCompute(data: GGStockProductOrder): void {
+  public reCompute(data: GGStockProductOrder): void {
     this.total = Math.round((this.choice.price * this.qty * 100) +
       GGStockProductOrderImpl.totalOfOptions(this.options) * 100) / 100;
   }
@@ -75,10 +104,11 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   nameChoice(): string {
     return `${this.name}/${this.choice.name}`;
   }
+
   public clone(): GGStockProductOrder {
     const choice = Object.assign({}, this.choice) as GGStockProductChoiceOrder;
     const options = this.options.map(a => Object.assign({}, a) as GGStockProductOptiontOrder);
-    return{...this, choice, options};
+    return new GGStockProductOrderImpl(this);
   }
 
   updateTotal(): void {

@@ -1,11 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {GGStockProductFacade, GGStockProductVariant} from '../../../../model/GGStockProducts.model';
+import {GGStockProductFacade} from '../../../../model/GGStockProducts.model';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormBuilder, Validators} from '@angular/forms';
-import {map, tap} from 'rxjs/operators';
-import {CartService} from '../../../../services/cart.service';
+import {map} from 'rxjs/operators';
 import {GGCartService} from '../../../../services/ggcart.service';
-import {GGStockProductChoiceOrder, GGStockProductOrder, GGStockProductOrderImpl} from '../../../../model/GGOrderFacade.model';
+import {GGStockProductOrderImpl} from '../../../../model/GGOrderFacade.model';
 import {of} from 'rxjs';
 
 @Component({
@@ -57,7 +56,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
 
 
   dimissAndSave(): void {
-    console.log('devoer');
+    // console.log('devoer');
     of(this.formGroup.getRawValue())
       .pipe(
         map(a => {
@@ -69,10 +68,10 @@ export class ClickCollectBottomSheetComponent implements OnInit {
         map(a => {
           return GGStockProductOrderImpl.create(a);
         }),
-        tap(b => console.log('xxxxx', b)),
+        // tap(b => console.log('xxxxx', b)),
       )
       .subscribe(a => {
-          console.log('%cForm changes', 'color: green', a);
+          // console.log('%cForm changes', 'color: green', a);
           this.cart.add(a);
           this.ref.dismiss();
         },
@@ -84,7 +83,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
   }
 
   getSrcset(_url: string): string {
-    console.log('url', _url);
+    // console.log('url', _url);
     return `${_url} 200w`;
   }
 }

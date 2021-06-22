@@ -35,7 +35,7 @@ export class BasketIconComponent implements OnInit, AfterViewInit {
   }
 
   toggle(): void{
-    console.log('toggle', this.sideNav);
+    // console.log('toggle', this.sideNav);
     this.sideNav?.toggle();
   }
 

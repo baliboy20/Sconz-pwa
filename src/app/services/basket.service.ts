@@ -127,6 +127,9 @@ export class BasketService {
 // ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
 //          BasketServiceUtils
 // ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+@Injectable({
+  providedIn: 'root'
+})
 export class BasketServiceUtils {
   static findExisting(newItm: CartItem, cart: CartItem[]): number {
     const comparator = (cartItem: CartItem) => {

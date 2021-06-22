@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   LOCAL_STORAGE_CART_ITEMS_KEY: 'CART_ITEMS',
+  LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY: 'CLICK_COLLECT_CART_ITEMS',
   informationPagesPath: 'https://test22.b4a.app/assets/information-pages',
   siteUrl: 'https://test22.b4a.app',
   PARSE_APP_ID: 'fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i',
@@ -12,8 +13,9 @@ export const environment = {
     success_route: '/#/order-statement',
     cancel_route: '/#/order-statement',
   },
-  build_version: '11.2b prod 7 Jun \'21',
+  build_version: '11.2b prod 17 Jun \'21',
   useDevCart: false,
+  enableNavToStripPayment: false,
 };
 
 //  PARSE_APP_ID: '0XEhr0Bz73m42mgbksW4he8RuK9z4N2NIpeO0tMg',

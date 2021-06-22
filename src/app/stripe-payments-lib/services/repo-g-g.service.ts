@@ -5,6 +5,8 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {map, mergeMap, reduce, take, tap, toArray} from 'rxjs/operators';
 import {GGStockProductFacade} from '../../model/GGStockProducts.model';
 import {CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
+import {OrderSent, StripePaymentDetails} from "./stripe-pay.service";
+import {GGCartService} from "../../services/ggcart.service";
 
 // import {CoffeeOrderFacade} from '';
 // import {GGStockProductFacade} from '../model/GGStockProducts.model';
@@ -15,13 +17,22 @@ const STOCK_COLLECTION_NAME: string = 'GGStockProducts';
   providedIn: 'root'
 })
 export class RepoGGService {
+  get orderInProcess(): OrderSent | undefined {
+    return this._orderInProcess ;
+  }
 
-  constructor() {
+  set orderInProcess(value: OrderSent | undefined) {
+    this._orderInProcess = value;
+  }
+
+  private _orderInProcess: OrderSent | undefined;
+
+  constructor(
+  ) {
   }
 
 
   async _findProductItems(): Promise<any> {
-    // console.log('repo inited...');
     const query = new Parse.Query(STOCK_COLLECTION_NAME);
     return await query.find();
   }
@@ -155,4 +166,28 @@ export class RepoGGService {
     // console.log('deletStockProductImage', fn);
     return fn;
   }
+
+  public async postToOrders(payload: { payment: any; shippingInfo: any; basket: any; }): Promise<any> {
+    console.log('postToCloudFunction ..2', payload);
+    try {
+      const claz = Parse.Object.extend('CoffeeOrders');
+      const inst = new claz();
+      inst.set('name', 'postPaymentInitiatedToDb');
+      inst.set('shipping_info', payload.shippingInfo);
+      inst.set('order', {cart: payload.basket});
+      inst.set('payment_intent', payload.payment.payment_intent);
+      inst.set('payment_status', payload.payment.payment_status);
+      inst.set('payment', payload.payment);
+      return await inst.save();
+    } catch (error) {
+      console.error('ERRROR', error.message);
+    }
+  }
+
+  public async ggPostToCloudFunction(payload: { payment: StripePaymentDetails; shippingInfo: any; basket: any; }): Promise<any> {
+    console.log('postToCloud Functionz', payload);
+    const result = await this.postToOrders(payload);
+    return result.id;
+  }
+
 }

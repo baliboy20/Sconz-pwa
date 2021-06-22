@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "test22"
+    },
+    "test22": {
+      "applicationId": "fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i"
+    }
+  }
+}

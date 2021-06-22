@@ -1,0 +1,9 @@
+Uploading source files
+Uploading recent changes to hosting...
+The following files will be uploaded:
+/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/404.html
+/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/825.6bef7f488c9b1b9dbf71.js
+/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/index.html
+/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/runtime.76d7e11d3700b5e525d2.js
+Finished uploading files
+New release is named v459 (using Parse JavaScript SDK v2.2.25)

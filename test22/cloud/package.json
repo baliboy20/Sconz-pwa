@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for the Stripe Payments in Practice Course",
+  "scripts": {
+    "clean": "rimraf dist",
+    "copy": "copyfiles service-accounts/*.json dist",
+    "start:local": "tsc-watch -P ./server.tsconfig.json --onSuccess \"node dist/main.js\"",
+    "start:b4a": "tsc-watch -P ./server.tsconfig.json --onSuccess \"node ../b4a/cloud/main.js\"",
+    "build": "tsc -P ./server.tsconfig.json",
+    "start": "node dist/main.js",
+    "start:debug": "node --inspect-brk dist/main.js",
+    "debug": "run-s clean build copy start:debug",
+    "server": "run-s clean copy start:local",
+    "deploy:prod": "gcloud app deploy",
+    "build-and-deploy:prod": "run-s clean build copy deploy:prod",
+    "webhooks": "stripe listen --forward-to localhost:9000/stripe-webhooks",
+    "parse:dashboard": "parse-dashboard --dev --appId fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i --clientKey xdcHhnASGBrlsGcbB205RMIcqF0cUEeQTv0NCUI9 --masterKey 7UkSTU17KQhM5NpJy7hpxdJOfpwE3FtgoHQb8PQ7 --serverURL http://localhost:1337/parse --appName test22",
+    "parse:server": "parse-server --appId fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i --clientKey xdcHhnASGBrlsGcbB205RMIcqF0cUEeQTv0NCUI9 --masterKey 7UkSTU17KQhM5NpJy7hpxdJOfpwE3FtgoHQb8PQ7 --databaseURI mongodb://localhost/my-app --cloud zzserver/app.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "dotenv-extended": "^2.9.0",
+    "stripe": "^8.137.0"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.1.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0"
+  }
+}

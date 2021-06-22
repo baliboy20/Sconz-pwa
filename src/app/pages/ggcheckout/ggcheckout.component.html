@@ -1,0 +1,91 @@
+<div class="ggc-container">
+  <div class="ggc-left-col" [formGroup]="formGroup">
+    <div class="ggc-payment-details">
+      <div class="mat-card  ggc-pickup">
+        <span>V69</span>
+        <p>8 Gresham Street, London, EC3</p>
+        <span>Instructions</span>
+        <p>
+          Please pick up your order from outside of the shop (to the side) - listen out for your name and don't hesitate
+          to ask a member of staff if you need an update.
+        </p>
+      </div>
+    </div>
+
+    <!--    Contact Info-->
+    <div class="mat-card ggc-contact">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>first name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Email address</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+    </div>
+
+    <!--  Save Info-->
+    <div class="mat-card save-my-information">
+      <mat-form-field appearance="legacy">
+        <mat-label>Save my details</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-checkbox formControlName="saveDetails">Save this infor</mat-checkbox>
+      </mat-form-field>
+
+      <!--      </mat-form-field>-->
+
+
+      <!--      <p>  Delete my saved information</p>-->
+
+
+      <!--      <p>-->
+      <!--        By saving your information and completing this order-->
+      <!--      </p>-->
+
+    </div>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="ggc-right-col">
+
+    <div class="mat-card order-summary">
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              This is the expansion title
+            </mat-panel-title>
+            <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>This is the primary content of the panel.</p>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+    <div class="place-order mat-card">
+      <div class="subtotal">Subtotal</div>
+      <div class="subtotal">£8.80</div>
+      <div class="tip">Tip</div>
+      <div class="tip-amount">£.08</div>
+      <div class="taxes">Taxes</div>
+      <div class="taxes-amount">£1.20</div>
+      <div class="order-total">Order total</div>
+      <div class="order-total-amount">£9.68</div>
+    </div>
+    <div class="mat-card place-order">
+      <button (click)="placeOrderClicked()" >Place order <span>£9.68</span></button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="csnv-container">
+  <div class="csnv-header">
+
+    <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="csnv-scrollable">
+
+    <ng-container *ngTemplateOutlet="ShopCartListTmpl"></ng-container>
+  </div>
+  <div class="csnv-footer">
+    {{basket?.total}}
+    <button
+      mat-stroked-button (click)="onCheckout()">CHECKOUT {{basket?.total}} </button>
+  </div>
+
+</div>
+
+<!--
+*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+
+                        TEMPLATES
+
+*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+-->
+
+
+<!-- TEMPLATE:                                  Cart List -->
+<ng-template #ShopCartListTmpl>
+  <ng-container *ngFor="let item of basket?.cart">
+    <div class="cart-card">
+      <div class="card-image">
+        <img width="100px" [src]="e(item).thumbImgUrl">
+      </div>
+      <div class="card-name">
+        {{e(item).name}}
+      </div>
+
+            <div class="card-choices-options">
+              variant: {{e(item).choice.name}}
+              <br>
+             {{e(item).optionsDescList}}
+            </div>
+
+            <div class="card-price">
+              {{e(item).choice.price | currency:'GBP'}}
+            </div>
+            <div class="card-qty">
+<!--              Qty-->
+<!--              {{e(item).qty}}-->
+              <app-numeric-incrementer
+                [(ngModel)]="e(item).qty"
+                [showRemoveButton]="true"></app-numeric-incrementer>
+            </div>
+            <div class="card-total">
+              {{e(item).total | currency:'GBP'}}
+            </div>
+
+    </div>
+    <mat-divider class="card-divider"></mat-divider>
+  </ng-container>
+
+</ng-template>
