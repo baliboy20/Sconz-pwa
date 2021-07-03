@@ -14,6 +14,7 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./ggcheckout.component.scss']
 })
 export class GGCheckoutComponent extends PageBase implements OnInit {
+  showSpinner = false;
   labelStyleConfig = {
     backgroundColor: 'white',
     border: 'none 1px dotted var(--grey-50)',
@@ -57,7 +58,7 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
   }
 
   async placeOrderClicked() {
-    // console.log('all for one', this.cartService.cartItems);
+    console.log('all for one', this.cartService.clone());
     const id = await this.stripeService.ggOneTimeCheckout(
       environment.enableNavToStripPayment,
       this.formGroup.getRawValue(),

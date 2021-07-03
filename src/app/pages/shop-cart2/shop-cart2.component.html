@@ -3,7 +3,7 @@
   <h4>Cart</h4>
 
   <table class="si-table" *ngIf="!basket === false">
-    <tr *ngFor="let im of basket?.cart">
+    <tr *ngFor="let im of basket?.basketItems">
 <!--        [matBadge]="im.qty"-->
       <td>
         <div style="position: relative;

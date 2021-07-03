@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {GGBasket, GGCart} from '../model/GGCart.model';
+import {GGBasket, GGBasketService} from '../model/GGCart.model';
 import {GGStockProductOrder, GGStockProductOrderImpl} from '../model/GGOrderFacade.model';
 import {Basket, BasketTotal, CartType} from '../model/types';
 import {ReplaySubject, Subject} from 'rxjs';
@@ -14,16 +14,16 @@ import {OrderSent} from "../stripe-payments-lib/services/stripe-pay.service";
 @Injectable({
   providedIn: 'root'
 })
-export class GGCartService implements GGCart {
+export class GGCartService implements GGBasketService {
   localStorageKey = environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY ?? 'ERROR_CLICK_COLLECT_CART_ITEMS';
 
-  get cartItems(): GGStockProductOrder[] {
-    return this._cartItems;
+  get basketItems(): GGStockProductOrder[] {
+    return this._basketItems;
 
   }
 
-  set cartItems(value: GGStockProductOrder[]) {
-    this._cartItems = value;
+  set basketItems(value: GGStockProductOrder[]) {
+    this._basketItems = value;
   }
 
   constructor() {
@@ -31,8 +31,8 @@ export class GGCartService implements GGCart {
   }
 
 
-  readonly Items: GGStockProductOrder[] | undefined;
-  private _cartItems: GGStockProductOrder[] = [];
+  // readonly Items: GGStockProductOrder[] | undefined;
+  private _basketItems: GGStockProductOrder[] = [];
   basketChanged: ReplaySubject<GGBasket> = new ReplaySubject();
   getTotal: string | undefined;
   objId: number | undefined;
@@ -45,10 +45,10 @@ export class GGCartService implements GGCart {
   add(itm: GGStockProductOrder | GGStockProductOrder[]): void {
     // console.log('inside basket', 'color: red', itm.);
     if (Array.isArray(itm)) {
-      this.cartItems.push(...itm.map(a => a.clone()));
+      this.basketItems.push(...itm.map(a => a.clone()));
     } else {
       console.log('%cADDD','color: purple', itm );
-      this.cartItems.push(itm.clone());
+      this.basketItems.push(itm.clone());
     }
     this.reSync();
   }
@@ -56,37 +56,43 @@ export class GGCartService implements GGCart {
   /**
    * ->>>>>> Clone of items in cart. <<<<<<<<<<
    */
-  clone(): GGStockProductOrder[] {
+  clone(): GGBasket {
     const arr = new Array(0);
-    this.cartItems
+
+    this.basketItems
       .forEach(a => {
         console.log('%cClone', 'color:red', a.clone);
        arr.push(a.clone());
       })
-    return arr;
+    const bsk: GGBasket = {
+      total: this.basket?.total ?? 0,
+      qty: this.basket?.qty ?? 0,
+      basketItems: arr
+    }
+    return bsk;
   }
   clearout(): void {
-    this.cartItems.splice(0, this.cartItems.length);
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
   descriptionListDelimited(): string {
-    return this.cartItems.map(a => (a.qty + ' x ' + a.name)).join(', ');
+    return this.basketItems.map(a => (a.qty + ' x ' + a.name)).join(', ');
   }
 
   reSync(): void {
     const fn = ToCurrencyStringFn;
-    this._cartItems = [...this._cartItems];
+    this._basketItems = [...this._basketItems];
     const initValue: BasketTotal = {total: 0, qty: 0};
     const redResFn: any = (acc: BasketTotal, val: GGStockProductOrder) => {
       acc.qty += val.qty;
       acc.total += val.total;
       return acc;
     };
-    const rs = this._cartItems.reduce(redResFn, initValue);
+    const rs = this._basketItems.reduce(redResFn, initValue);
     rs.total = Math.round(rs.total * 100) / 100;
     const b: GGBasket = {
-      cart: Object.assign([], this.cartItems),
+      basketItems: Object.assign([], this.basketItems),
       ...rs,
     };
     this.basket = b;
@@ -95,31 +101,31 @@ export class GGCartService implements GGCart {
   }
 
   removeAt(idx: number): void {
-    if (idx < 0 || this.cartItems.length <= idx) {
+    if (idx < 0 || this.basketItems.length <= idx) {
       console.log('failed to remove');
       return;
     }
-    this.cartItems.splice(idx, 1);
+    this.basketItems.splice(idx, 1);
     console.log('splicing for :', idx);
     this.reSync();
   }
 
   reset(): void {
-    this.cartItems.splice(0, this.cartItems.length);
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
   setQty(qty: number, idx: string | number): void {
     console.log('setting qty', idx, qty);
     // @ts-ignore
-    const val = this.cartItems[idx].qty;
+    const val = this.basketItems[idx].qty;
     if (!val || val === qty) {
       return;
     }
     // @ts-ignore
-    this.cartItems[idx].qty = qty;
+    this.basketItems[idx].qty = qty;
     // @ts-ignore
-    this.cartItems[idx].updateTotal();
+    this.basketItems[idx].updateTotal();
     this.reSync();
   }
 
@@ -133,13 +139,13 @@ export class GGCartService implements GGCart {
     console.log(' ::retrieveCartFromLocalStorage', arr);
 
     const bask: GGBasket = arr;
-    bask.cart
 
-    if (Array.isArray(bask.cart) && bask.cart.length > 0) {
-      const prodImpl = bask.cart.map(a => GGStockProductOrderImpl.create(a));
-      bask.cart = prodImpl;
+
+    if (Array.isArray(bask.basketItems) && bask.basketItems.length > 0) {
+      const prodImpl = bask.basketItems.map(a => GGStockProductOrderImpl.create(a));
+      bask.basketItems = prodImpl;
       console.log('Redtriedved', prodImpl);
-      this.cartItems.push(...prodImpl);
+      this.basketItems.push(...prodImpl);
       this.reSync();
     } else {
       return;
@@ -148,7 +154,7 @@ export class GGCartService implements GGCart {
   }
 
   toLocalStorage(): void {
-    if (this.cartItems && this.cartItems.length > 0) {
+    if (this.basketItems && this.basketItems.length > 0) {
       const str = JSON.stringify(this.basket ?? '');
       window.localStorage.setItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY, str);
     }

@@ -7,6 +7,10 @@ import {CoffeeOrder, CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
 import {GGCartService} from "../../services/ggcart.service";
 import {OrderStatmentService} from "../../service/order-statment.service";
 import {fromPromise} from "rxjs/internal-compatibility";
+import {OrderSent, StripePaymentDetails} from "../../stripe-payments-lib/services/stripe-pay.service";
+import {GGStockProductOrder} from "../../model/GGOrderFacade.model";
+import {GGBasket} from "../../model/GGCart.model";
+import {RepoGGService} from "../../stripe-payments-lib/services/repo-g-g.service";
 
 
 @Component({
@@ -15,10 +19,9 @@ import {fromPromise} from "rxjs/internal-compatibility";
   styleUrls: ['./order-statment.component.scss']
 })
 export class OrderStatmentComponent implements OnInit {
-  public item: CoffeeOrder | undefined;
-
+  public item: OrderSent | undefined;
   constructor(
-    private repo: RepoService,
+    private repo: RepoGGService,
     private cartService: GGCartService,
     private orderService: OrderStatmentService,
     private route: ActivatedRoute) {
@@ -27,31 +30,18 @@ export class OrderStatmentComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(
-        map((a: Params) => {
-          return a.orderId;
-        }),
-        mergeMap((id, idx) => {
-          console.log('arg::', id);
+        map((a: Params) => a.orderId),
+        mergeMap((id: string) => {
+          const aid = id === 'succeeded' || id == 'cancelled' ? this.orderService.oId : id;
+              return fromPromise(this.repo.getCartOfOrder(aid));
 
-          if (id === 'succeeded') {
-            //  this.cartService.clearout();
-            return of(this.orderService.getOrder());
-          } else if (id === 'cancelled') {
-            return of('cancelled');
-          } else if ( typeof id === 'string') {
-            return fromPromise(this.repo.getOrder(id as string))
-          }
-          else {
-            return of(this.orderService.getOrder());
-            // return of();
-          }
-
-        }),
-      )
+        }))
       .subscribe(a => {
-          console.log('%csuccess', 'color: green', a);
+          console.log('%cOrder Statement object', 'color: green', a);
+         this.item = a;
         },
-        err => console.log('the activated routes Errors: ', err));
+        err => console.log('Error accessing order: ', err.message));
+
 
   }
 
@@ -62,6 +52,22 @@ export class OrderStatmentComponent implements OnInit {
     } catch (e) {
       return 'invalid date';
     }
+  }
+
+  joinOptions(itm: GGStockProductOrder[]) {
+    return itm.length === 0 ? 'n/a' : itm.map(a => a.name).join(', ') ;
+  }
+
+  tryit(basket: any) {
+    if (!basket) {
+      return '';
+    }
+    Object.keys(basket).forEach(console.log);
+    // for ( let a of Object.keys(basket)){
+    //   console.log('keys', a);
+    // }
+    // console.log('treyit', basket.);
+    return basket.basket;
   }
 }
 

@@ -12,6 +12,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatRippleModule} from "@angular/material/core";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     MatCheckboxModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatRippleModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [BasketServiceUtils]

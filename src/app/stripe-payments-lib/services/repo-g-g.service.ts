@@ -7,6 +7,7 @@ import {GGStockProductFacade} from '../../model/GGStockProducts.model';
 import {CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
 import {OrderSent, StripePaymentDetails} from "./stripe-pay.service";
 import {GGCartService} from "../../services/ggcart.service";
+import {GGBasket} from "../../model/GGCart.model";
 
 // import {CoffeeOrderFacade} from '';
 // import {GGStockProductFacade} from '../model/GGStockProducts.model';
@@ -18,7 +19,7 @@ const STOCK_COLLECTION_NAME: string = 'GGStockProducts';
 })
 export class RepoGGService {
   get orderInProcess(): OrderSent | undefined {
-    return this._orderInProcess ;
+    return this._orderInProcess;
   }
 
   set orderInProcess(value: OrderSent | undefined) {
@@ -27,8 +28,7 @@ export class RepoGGService {
 
   private _orderInProcess: OrderSent | undefined;
 
-  constructor(
-  ) {
+  constructor() {
   }
 
 
@@ -174,7 +174,7 @@ export class RepoGGService {
       const inst = new claz();
       inst.set('name', 'postPaymentInitiatedToDb');
       inst.set('shipping_info', payload.shippingInfo);
-      inst.set('order', {cart: payload.basket});
+      inst.set('order', payload.basket);
       inst.set('payment_intent', payload.payment.payment_intent);
       inst.set('payment_status', payload.payment.payment_status);
       inst.set('payment', payload.payment);
@@ -188,6 +188,37 @@ export class RepoGGService {
     console.log('postToCloud Functionz', payload);
     const result = await this.postToOrders(payload);
     return result.id;
+  }
+
+  public async _getOrder(id: string): Promise<any> {
+
+    try {
+      const query = new Parse.Query('CoffeeOrders');
+
+      // query.equalTo('objectId', id);
+      const result = await query.get(id);
+      // console.log('%c get coffee orders', 'color: brown', result);
+      return result;
+    } catch (e) {
+      console.log('Error', e.message);
+    }
+  }
+
+  public async getOrder(id: string): Promise<Parse.Object> {
+    const rsul = this._getOrder(id);
+    return await rsul;
+  }
+
+  public async getCartOfOrder(id: string): Promise<OrderSent> {
+    const rsul: Parse.Object = await this._getOrder(id);
+    console.log('%c order retrireved', 'color: orange', rsul);
+    const a: OrderSent = {
+      basket: (rsul.get('order') as GGBasket),
+      payment: (rsul.get('payment') as StripePaymentDetails),
+      shippingInfo: rsul.get('shipping_info')
+    };
+
+    return a;
   }
 
 }

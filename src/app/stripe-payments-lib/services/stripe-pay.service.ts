@@ -12,6 +12,7 @@ import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/GGOrderF
 import {RepoGGService} from "./repo-g-g.service";
 import {OrderStatmentService} from "../../service/order-statment.service";
 import {Router} from "@angular/router";
+import {GGBasket} from "../../model/GGCart.model";
 
 declare const Stripe: new (arg0: string) => any;
 /**
@@ -62,7 +63,7 @@ export function StripeSessionResponseFactory(session: StripeSessionResponse | un
 export type OrderSent = {
   payment: StripePaymentDetails,
   shippingInfo: any,
-  basket: GGStockProductOrder[]
+  basket: GGBasket
 }
 
 const paymentStruc = (lineItems: LineItemsType[]) => {
@@ -149,9 +150,9 @@ export class StripePayService {
    * @param cartItems
    */
   public async ggOneTimeCheckout(enablePayment = false, shippingInfo: any,
-                                 cartItems: GGStockProductOrder[]): Promise<any> {
+                                 basket: GGBasket): Promise<any> {
 
-    const stripeCartItems = this.ggFormatLineItems(cartItems);
+    const stripeCartItems = this.ggFormatLineItems(basket.basketItems);
     const stripeFormatOrderDetails = paymentStruc(stripeCartItems);
     // console.log('INFO:',this.serverUrl, stripeFormatOrderDetails);
 
@@ -162,20 +163,22 @@ export class StripePayService {
       .toPromise()
       .then((session: StripeSessionResponse | any) => {
         const payment: StripePaymentDetails = StripeSessionResponseFactory(session)
+        console.log('%cBasket in pay service','color: yellow', basket);
         const payload: OrderSent = {
           payment,
           shippingInfo,
-          basket: cartItems,
+          basket,
         };
-        this.orderStatementService.order = payload;
         try {
-          console.log('ggPostToCloudFunction', session)
+
+          // Post to parse server
           this.repo.ggPostToCloudFunction(payload).then(a => {
+            console.log('ggPostToCloudFunction', a)
+            this.orderStatementService.oId = a;
             if (enablePayment) {
               this.stripe.redirectToCheckout({sessionId: session.id});
             } else {
-
-              this.router.navigate(['order-statement','succeeded'])
+              this.router.navigate(['order-statement', 'succeeded'])
             }
           });
 

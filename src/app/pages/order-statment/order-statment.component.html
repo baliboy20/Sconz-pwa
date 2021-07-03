@@ -2,22 +2,20 @@
   <h2 style="justify-self: center; font-weight: 800">Statement of Purchase</h2>
   <h5 style="font-weight: 800; justify-self: center">{{itemDate()}}</h5>
   <h2>Shiping Information:</h2>
-  <ng-container *ngTemplateOutlet="shippingTmpl; context: {shippi: item?.shipping_info}"></ng-container>
-<!--  <h2>Items Purchased</h2>-->
-  <ng-container *ngTemplateOutlet="orderTmpl; context: {order: item?.order}"></ng-container>
+  <ng-container *ngTemplateOutlet="shippingTmpl; context: {shippi: item?.shippingInfo}"></ng-container>
+  <h2>Items Purchased</h2>
+  <ng-container *ngTemplateOutlet="basketTmpl; context: {basket: item?.basket}"></ng-container>
 <!--  <h2>Payment</h2>-->
 <!--  <ng-container *ngTemplateOutlet="paymentTmpl; context: {payment: item?.payment}"></ng-container>-->
 </div>
 
 
 <!--
-~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-
+===========================================================================================================
 
                           TEMPLATES
 
-~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-
+===========================================================================================================
 -->
 
 
@@ -25,22 +23,29 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                           Shipping Information
 -->
-<ng-template #flexrowTmpl let-fldname='fldname' let-labelname='labelname' let-shippi='shippi'>
+<ng-template #flexRowTmpl let-fldname='fldname' let-labelname='labelname' let-shippi='shippi'>
   <div class="flex-row-2" *ngIf="shippi">
     <div class="field-label">{{labelname}}</div>
     <div class="field-value" ><div style="height: auto">{{shippi ? shippi[fldname] : ''}}</div></div>
   </div>
 </ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Shipping Information
+Details about the customer and shipping requirements
+-->
+
 <ng-template #shippingTmpl let-shippi='shippi'>
   <div class="shipping-details">
     <ng-container
-      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'firstName', labelname: 'First name:'}"></ng-container>
+      *ngTemplateOutlet="flexRowTmpl; context:{shippi: shippi, fldname: 'firstName', labelname: 'First name:'}"></ng-container>
     <ng-container
-      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'lastName', labelname: 'Last name:'}"></ng-container>
+      *ngTemplateOutlet="flexRowTmpl; context:{shippi: shippi, fldname: 'lastName', labelname: 'Last name:'}"></ng-container>
     <ng-container
-      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'computedAddress', labelname: 'Adress:'}"></ng-container>
+      *ngTemplateOutlet="flexRowTmpl; context:{shippi: shippi, fldname: 'computedAddress', labelname: 'Adress:'}"></ng-container>
     <ng-container
-      *ngTemplateOutlet="flexrowTmpl; context:{shippi: shippi, fldname: 'email', labelname: 'Email:'}"></ng-container>
+      *ngTemplateOutlet="flexRowTmpl; context:{shippi: shippi, fldname: 'email', labelname: 'Email:'}"></ng-container>
   </div>
   <div class="payment-details">
   </div>
@@ -51,31 +56,32 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                            Basket (items table)
 -->
-<ng-template #orderTableTmpl let-order="order">
+<ng-template #basketTableTmpl let-basket="basket">
   <!--  {{cart|json}}-->
-  <table class="order-table" *ngIf="order">
+  <table class="basket-table" *ngIf="basket">
 
     <thead>
     <tr>
       <td>Description</td>
+      <td>Options</td>
       <td>Qty</td>
       <td>Price</td>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let itm of order.cart; let idx=index">
-      <td><div>{{[itm.description, itm.variant, itm.size].join(', ')}}</div></td>
+    <tr *ngFor="let itm of basket.basketItems; let idx=index">
+      <td><div>{{[itm.name, itm.choice.name].join(', ')}}</div></td>
+      <td>{{this.joinOptions(itm.options)}}</td>
       <td>{{itm.qty}}</td>
-      <td>{{itm.price}}</td>
+      <td>{{itm.total}}</td>
 
-      <td>{{((itm.price * itm.qty * 1000) / 1000).toFixed(2)}}</td>
     </tr>
     </tbody>
     <tfoot>
     <td></td>
     <td></td>
     <td>Total</td>
-    <td>{{order.total}}</td>
+    <td>{{basket.total}}</td>
     </tfoot>
   </table>
 </ng-template>
@@ -84,8 +90,11 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                            Basket
 -->
-<ng-template #orderTmpl let-order='order'>
-  <ng-container *ngTemplateOutlet="orderTableTmpl; context:{order: order}"></ng-container>
+<ng-template #basketTmpl let-basket='basket'>
+
+
+<!--  {{tryit(basket)}}-->
+  <ng-container *ngTemplateOutlet="basketTableTmpl; context:{basket: basket}"></ng-container>
 
 </ng-template>
 

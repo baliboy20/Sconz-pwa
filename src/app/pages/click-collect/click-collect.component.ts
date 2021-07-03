@@ -144,6 +144,7 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
 
   }
 
+  isLoading = false;
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewInit(): void {
     // @ts-ignore

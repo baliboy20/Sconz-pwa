@@ -146,9 +146,10 @@ export class RepoService {
 
     try {
       const query = new Parse.Query('CoffeeOrders');
-      console.log('query parm', id);
+
       // query.equalTo('objectId', id);
       const result = await query.get(id);
+     // console.log('%c get coffee orders', 'color: brown', result);
       return result;
     } catch (e) {
       console.log('Error', e.message);

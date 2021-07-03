@@ -5,6 +5,13 @@ import {OrderSent} from "../stripe-payments-lib/services/stripe-pay.service";
   providedIn: 'root'
 })
 export class OrderStatmentService {
+  get oId(): string {
+    return this._oId ?? 'EglFd7cUn8';
+  }
+
+  set oId(value: string) {
+    this._oId = value;
+  }
 
   constructor() { }
   getOrder(): OrderSent | 'invalid' | string  | boolean{
@@ -30,4 +37,5 @@ export class OrderStatmentService {
 
   private _order: OrderSent | undefined | string;
   private _submittedAt?: Date | undefined;
+  private _oId!: string;
 }

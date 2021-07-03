@@ -1,8 +1,15 @@
-<p>zzprogressbutton works!</p>
-<button mat-raised-button (click)="showSpinner= !showSpinner">
-  <span>Buy Now</span>
-<mat-progress-spinner
-
-  *ngIf="showSpinner"
-  mode="indeterminate" color="primary"></mat-progress-spinner>
+<button
+  mat-Ripple
+   (click)="showSpinner= !showSpinner">
+<div style="display: inline-flex; justify-items: center; align-items: center">
+  <div style="padding-right: 8px">Buy Now</div>
+  <mat-spinner
+    [diameter]="18"
+    *ngIf="showSpinner; else nospinner"
+    mode="indeterminate" color="accent">
+  </mat-spinner>
+  <ng-template #nospinner>
+    <div style="display: block; width: 20px;height: 100% "></div>
+  </ng-template>
+</div>
 </button>

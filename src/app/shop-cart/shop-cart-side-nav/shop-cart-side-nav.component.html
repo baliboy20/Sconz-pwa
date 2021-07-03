@@ -29,7 +29,7 @@
 
 <!-- TEMPLATE:                                  Cart List -->
 <ng-template #ShopCartListTmpl>
-  <ng-container *ngFor="let item of basket?.cart">
+  <ng-container *ngFor="let item of basket?.basketItems">
     <div class="cart-card">
       <div class="card-image">
         <img width="100px" [src]="e(item).thumbImgUrl">

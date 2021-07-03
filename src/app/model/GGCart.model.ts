@@ -5,18 +5,18 @@ import {GGStockProductOrder} from './GGOrderFacade.model';
 import {CartItemFacade} from './CartItemFacade.model';
 
 export interface GGBasket {
-  cart: GGStockProductOrder[];
+  basketItems: GGStockProductOrder[];
   qty: number;
   total: number;
 }
 
-export interface GGCart {
+export interface GGBasketService {
   basketChanged: Subject<GGBasket>;
-  readonly Items: GGStockProductOrder[] | undefined;
+  // readonly Items: GGStockProductOrder[] | undefined;
 
   objId: number | undefined;
 
-  cartItems: GGStockProductOrder[] | undefined;
+  basketItems: GGStockProductOrder[] | undefined;
 
   add(itm: GGStockProductOrder | GGStockProductOrder[]): void;
 

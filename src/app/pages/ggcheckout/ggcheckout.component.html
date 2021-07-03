@@ -1,60 +1,56 @@
 <div class="ggc-container">
   <div class="ggc-left-col" [formGroup]="formGroup">
-    <div class="ggc-payment-details">
-      <div class="mat-card  ggc-pickup">
-        <span>V69</span>
-        <p>8 Gresham Street, London, EC3</p>
-        <span>Instructions</span>
-        <p>
-          Please pick up your order from outside of the shop (to the side) - listen out for your name and don't hesitate
-          to ask a member of staff if you need an update.
-        </p>
-      </div>
+    <div class="ggc-pickup">
+      <ng-container *ngTemplateOutlet="CollectionInstructionsTmpl"></ng-container>
     </div>
 
-    <!--    Contact Info-->
-    <div class="mat-card ggc-contact">
-
-
-      <mat-form-field appearance="outline">
-        <mat-label>first name</mat-label>
-        <input matInput formControlName="firstName">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName">
-      </mat-form-field>
-
-      <mat-form-field appearance="standard">
-        <mat-label>Email address</mat-label>
-        <input matInput formControlName="email">
-      </mat-form-field>
-    </div>
-
-    <!--  Save Info-->
-    <div class="mat-card save-my-information">
-      <mat-form-field appearance="legacy">
-        <mat-label>Save my details</mat-label>
-        <input matInput formControlName="lastName">
-        <mat-checkbox formControlName="saveDetails">Save this infor</mat-checkbox>
-      </mat-form-field>
-
-      <!--      </mat-form-field>-->
-
-
-      <!--      <p>  Delete my saved information</p>-->
-
-
-      <!--      <p>-->
-      <!--        By saving your information and completing this order-->
-      <!--      </p>-->
-
-    </div>
+    <!--    Personal Details-->
+    <div class="ggc-contact">
+    <ng-container *ngTemplateOutlet="PersonalDetailsFormTmpl,context:{formGroup:formGroup}"></ng-container>
   </div>
+  <!--  Save Info checkbox card-->
 
-  <!-- Order Summary -->
-  <div class="ggc-right-col">
+    <div class="save-my-information">
+      <ng-container *ngTemplateOutlet="SavePersonalDetailsTmpl,context:{formGroup:formGroup}"></ng-container>
+    </div>
+</div>
+
+
+<!-- Collection Instructions -->
+<div class="ggc-right-col">
+  <ng-container *ngTemplateOutlet="OrderTotalsTmpl"></ng-container>
+</div>
+</div>
+
+<!--
+===============================================================================================
+
+                          TEMPLATES
+===============================================================================================
+-->
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Basket Summary tmpl
+
+ Table of of items in the basket
+-->
+<ng-template #BasketSummaryTmpl></ng-template>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Basket Details tmpl
+-->
+<ng-template #BasketDetailsTmpl></ng-template>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Order Summary tmpl
+-->
+<ng-template #OrderTotalsTmpl>
+
 
     <div class="mat-card order-summary">
 
@@ -62,13 +58,16 @@
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              This is the expansion title
+              Basket Details
             </mat-panel-title>
             <mat-panel-description>
-              This is a summary of the content
+             side stuff
+
+
             </mat-panel-description>
           </mat-expansion-panel-header>
           <p>This is the primary content of the panel.</p>
+          <ng-container *ngTemplateOutlet="OrderDetailTableTmpl"></ng-container>
         </mat-expansion-panel>
 
       </mat-accordion>
@@ -84,8 +83,100 @@
       <div class="order-total-amount">£9.68</div>
     </div>
     <div class="mat-card place-order">
-      <button (click)="placeOrderClicked()" >Place order <span>£9.68</span></button>
+      <!--      <button (click)="placeOrderClicked()" >Place order <span>£9.68</span></button>-->
+      <ng-container *ngTemplateOutlet="buttonTmpl"></ng-container>
     </div>
 
+</ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                          Order Detail tmpl
+-->
+<ng-template #OrderDetailTableTmpl>
+
+  {{this.basket?.total}}
+</ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Place Order Button component tmpl
+-->
+<ng-template #buttonTmpl>
+  <button
+    (click)="placeOrderClicked()"
+    mat-Ripple
+    (click)="showSpinner= !showSpinner">
+    <div style="display: inline-flex; justify-items: center; align-items: center">
+      <div style="padding: 5px 8px">
+        Place order <span>£9.72</span>
+      </div>
+      <mat-spinner
+        [diameter]="18"
+        *ngIf="showSpinner; else nospinner"
+        mode="indeterminate" color="accent">
+      </mat-spinner>
+      <ng-template #nospinner>
+        <div style="display: block; width: 20px;height: 100% "></div>
+      </ng-template>
+    </div>
+  </button>
+
+
+</ng-template>
+
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Save Personsal Information Details Card
+-->
+<ng-template #SavePersonalDetailsTmpl let-formGroup="formGroup">
+  <div class="mat-card" [formGroup]="formGroup">
+    <mat-form-field appearance="legacy">
+      <mat-label>Save my details</mat-label>
+      <input matInput formControlName="lastName">
+      <mat-checkbox formControlName="saveDetails">Save this infor</mat-checkbox>
+    </mat-form-field>
+
   </div>
-</div>
+</ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         PersonsalDetails Form Card
+-->
+<ng-template #PersonalDetailsFormTmpl let-formGroup="formGroup">
+  <div class="mat-card" [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>first name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Email address</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+  </div>
+</ng-template>
+
+CollectionInstructionsTmpl
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+Collection Instructions
+-->
+<ng-template  #CollectionInstructionsTmpl>
+  <div class="mat-card">
+  <span>V69</span>
+  <p>8 Gresham Street, London, EC3</p>
+  <span>Instructions</span>
+  <p>
+    Please pick up your order from outside of the shop (to the side) - listen out for your name and don't hesitate
+    to ask a member of staff if you need an update.
+  </p>
+  </div>
+</ng-template>

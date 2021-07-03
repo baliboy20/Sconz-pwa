@@ -3,7 +3,7 @@ import {Basket, BasketTotal, CartType} from '../model/types';
 import {ToCurrencyStringFn} from '../features/utils/computes';
 import {environment} from '../../environments/environment';
 import {ReplaySubject, Subject} from 'rxjs';
-import {GGCart} from '../model/GGCart.model';
+import {GGBasketService} from '../model/GGCart.model';
 
 // import {LOCAL_STORAGE_CART_ITEMS_KEY} from '../pages/shop-cart/shop-cart.component';
 

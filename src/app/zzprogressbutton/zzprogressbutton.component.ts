@@ -11,6 +11,6 @@ export class ZzprogressbuttonComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  showSpinner = false;
+  showSpinner = true;
 
 }
