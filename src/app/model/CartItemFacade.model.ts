@@ -18,7 +18,7 @@ export interface CartItem {
     variantNotes?: string;
     // productCode?: string;
     // variantArr: StockProductVariant[];  // todo to supercede variant with Array
-    productItemUrl?: string;  // @deprecated
+    // productItemUrl?: string;  // @deprecated
 }
 
 /**

@@ -1,6 +1,7 @@
 import * as Parse from 'parse';
 import {NonPriceOption, NonPriceOptions} from './StockProducts';
 import {T} from "@angular/cdk/keycodes";
+import {isNullOrUndefined} from "util";
 
 export const NoImgPath = '../../../assets/images/NO_Image_available.jpeg';
 
@@ -60,26 +61,26 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   set options(value: GGStockProductOption[]) {
-    this.item.set('options', value);
+    this.item.set('options', value as any);
   }
 
   get choices(): GGStockProductVariant[] {
     return this.item.get('choices');
   }
   set choices(value: GGStockProductVariant[]) {
-    this.item.set('choices', value);
+    this.item.set('choices', value as any);
   }
   get categories(): string[] {
     return this.item.get('categories');
   }
 
   set categories(value: string[]) {
-    this.item.set('categories', value);
+    this.item.set('categories', value as any);
   }
 
   get thumbImg(): any {
-
-    if (this.item.get('thumbImg') === null) {
+console.log('thumbimg', this.item.get('thumbImg'));
+    if (!this.item.get('thumbImg')) {
       return {_url: `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`};
     } else {
       return this.item.get('thumbImg');
@@ -105,7 +106,7 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   set name(value: string) {
-    this.item.set('name', value);
+    this.item.set('name',value as any);
   }
 
   get description(): string {
@@ -113,7 +114,7 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   set description(value) {
-    this.item.set('description', value);
+    this.item.set('description', value as any);
     // console.log('setting desc', value, this.item);
   }
 
@@ -122,7 +123,7 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   set productId(value) {
-    this.item.set('productId', value);
+    this.item.set('productId', value as any);
   }
 
   get id(): string {
