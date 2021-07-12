@@ -38,6 +38,9 @@ export class RepoGGService {
   }
 
   listProductItems(): Observable<GGStockProductFacade[]> {
+    this._findProductItems()
+      .catch(a => console.log('EError', a.message))
+      .then(a => console.log('RESTults', a));
     return fromPromise(this._findProductItems())
       .pipe(
         take(1),
@@ -45,6 +48,7 @@ export class RepoGGService {
         // tap(a => console.log('items', a)),
         map((a: any) => (GGStockProductFacade.create(a))),
         toArray(),
+
       );
   }
 

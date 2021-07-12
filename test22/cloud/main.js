@@ -104,4 +104,22 @@ Parse.Cloud.define('deletStockProductImage', async (request) => {
   return 'I am a cloud on the server';
 })
 
+Parse.Cloud.define('deletGGStockProductImage', async (request) => {
+  const {id} = request.params;
+  console.log('req parms id', id);
+  try {
+    const query = new Parse.Query('GGStockProducts');
+    const spItm = await query.get(id);
+    const pf = spItm.get('thumbImg');
+    console.log('has image', pf)
+    await pf.destroy();
+    spItm.set('thumbImg', null);
+    spItm.save();
+    return 'thumbImg successfully deleted';
+  } catch (e) {
+    return e.message
+  }
+  return 'I am a cloud on the server';
+})
+
 // 4242424242424242 w@a.co

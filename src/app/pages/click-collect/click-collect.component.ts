@@ -3,7 +3,6 @@ import {
   Component,
   Directive,
   ElementRef,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -53,14 +52,11 @@ export class CustomImageDirective implements AfterViewInit {
       case 'thumb': {
         const [srcset, sizez] = this.thumbAttrs();
         this.rnd.setAttribute(img, 'srcset', srcset);
-        // this.rnd.setAttribute(img, 'sizes', sizez);
         break;
       }
       case 'medium': {
         const [srcset, sizez] = this.medAttrs();
-        // console.log('size', sizez);
         this.rnd.setAttribute(img, 'srcset', srcset);
-        // this.rnd.setAttribute(img, 'sizes', sizez);
         break;
       }
       case 'large': {
