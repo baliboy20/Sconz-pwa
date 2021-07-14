@@ -68,7 +68,7 @@ Parse.Cloud.define('paymentComplete', async (request) => {
   } catch (error) {
     console.log('paymentComplete()', error.message);
   }
-  return;
+
 });
 
 Parse.Cloud.define('deleteImage', async (request) => {

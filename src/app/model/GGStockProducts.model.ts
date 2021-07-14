@@ -79,7 +79,7 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   get thumbImg(): any {
-console.log('thumbimg', this.item.get('thumbImg'));
+
     if (!this.item.get('thumbImg')) {
       return {_url: `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`};
     } else {

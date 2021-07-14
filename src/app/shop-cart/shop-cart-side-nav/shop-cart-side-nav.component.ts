@@ -24,7 +24,6 @@ import {map} from "rxjs/operators";
 export class ShopCartSideNavComponent extends PageBase implements OnInit, AfterViewChecked {
   @Input('cartSideNav') sideNav: MatSidenav | undefined;
  basket: GGBasket | undefined;
-  zzqty: any = '22';
   constructor(
     public cartService: GGCartService,
     private router: Router,
@@ -48,6 +47,7 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit, AfterV
         this.ref.reattach();
         this.ref.markForCheck();
         this.ref.detectChanges();
+        console.log('basket changed subscription');
       });
   }
 
@@ -69,4 +69,12 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit, AfterV
     // console.log('ngOnChanges ..')
 }
 
+  onQtyChanged(qty: number, idx: number) {
+   console.log('qty changed', qty, idx);
+    this.cartService.setQty(qty,idx )
+  }
+
+  removeAction(idx: number) {
+    this.cartService.removeAt(idx)
+  }
 }

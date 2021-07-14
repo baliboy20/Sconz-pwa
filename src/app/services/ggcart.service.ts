@@ -81,12 +81,14 @@ export class GGCartService implements GGBasketService {
   }
 
   reSync(): void {
+  //  console.log('resyncing...?')
     const fn = ToCurrencyStringFn;
     this._basketItems = [...this._basketItems];
     const initValue: BasketTotal = {total: 0, qty: 0};
     const redResFn: any = (acc: BasketTotal, val: GGStockProductOrder) => {
       acc.qty += val.qty;
       acc.total += val.total;
+ //     console.log('computing total', acc.total, acc.qty);
       return acc;
     };
     const rs = this._basketItems.reduce(redResFn, initValue);
@@ -96,6 +98,7 @@ export class GGCartService implements GGBasketService {
       ...rs,
     };
     this.basket = b;
+    console.log('inside basket', b)
     this.basketChanged.next(b);
     this.toLocalStorage();
   }
@@ -106,7 +109,7 @@ export class GGCartService implements GGBasketService {
       return;
     }
     this.basketItems.splice(idx, 1);
-    console.log('splicing for :', idx);
+   // console.log('splicing for :', idx);
     this.reSync();
   }
 
@@ -116,16 +119,17 @@ export class GGCartService implements GGBasketService {
   }
 
   setQty(qty: number, idx: string | number): void {
-    console.log('setting qty', idx, qty);
-    // @ts-ignore
-    const val = this.basketItems[idx].qty;
-    if (!val || val === qty) {
+    // console.log('setting qty', idx, qty, this.basketItems[+idx].qty);
+
+    const val = this.basketItems[+idx].qty;
+    if (isNaN(val) || val === qty) {
+      console.log('is this the trap', !val, val, qty);
       return;
     }
+
+    this.basketItems[+idx].qty = qty;
     // @ts-ignore
-    this.basketItems[idx].qty = qty;
-    // @ts-ignore
-    this.basketItems[idx].updateTotal();
+     // this.basketItems[+idx].updateTotal();
     this.reSync();
   }
 

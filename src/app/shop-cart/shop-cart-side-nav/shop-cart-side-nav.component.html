@@ -11,9 +11,13 @@
     <ng-container *ngTemplateOutlet="ShopCartListTmpl"></ng-container>
   </div>
   <div class="csnv-footer">
-    {{basket?.total}}
-    <button
-      mat-stroked-button (click)="onCheckout()">CHECKOUT {{basket?.total}} </button>
+    <button mat-stroked-button
+            (click)="onCheckout()">
+      CHECKOUT {{basket?.total}}
+    </button>
+    <button mat-stroked-button
+            (click)="this.sideNav?.close()"
+    >CONTINUE</button>
   </div>
 
 </div>
@@ -29,19 +33,20 @@
 
 <!-- TEMPLATE:                                  Cart List -->
 <ng-template #ShopCartListTmpl>
-  <ng-container *ngFor="let item of basket?.basketItems">
+  <ng-container *ngFor="let item of basket?.basketItems, let idx = index">
     <div class="cart-card">
       <div class="card-image">
         <img width="100px" [src]="e(item).thumbImgUrl">
       </div>
       <div class="card-name">
-        {{e(item).name}}
+        {{e(item).name}} - {{e(item).choice.name}}
       </div>
 
             <div class="card-choices-options">
-              variant: {{e(item).choice.name}}
-              <br>
-             {{e(item).optionsDescList}}
+            <span>Selected extras -</span>
+             {{e(item).optionsDescList ?
+              e(item).optionsDescList : 'N/A'}}
+
             </div>
 
             <div class="card-price">
@@ -51,10 +56,13 @@
 <!--              Qty-->
 <!--              {{e(item).qty}}-->
               <app-numeric-incrementer
-                [(ngModel)]="e(item).qty"
+                (ngModelChange)="onQtyChanged($event, idx)"
+                (removeItmClicked)="removeAction(idx)"
+                [(ngModel)]="item.qty"
                 [showRemoveButton]="true"></app-numeric-incrementer>
             </div>
             <div class="card-total">
+
               {{e(item).total | currency:'GBP'}}
             </div>
 

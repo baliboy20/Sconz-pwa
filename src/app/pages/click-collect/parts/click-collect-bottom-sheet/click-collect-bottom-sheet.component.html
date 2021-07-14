@@ -68,6 +68,7 @@
       <mat-radio-button *ngFor="let ch of data.choices"
                         [value]="ch">
         <span style="max-width: 25ch"> {{ch.name}}</span>
+        <span style="white-space: pre"> @ £{{ch.price }}</span>
       </mat-radio-button>
 
     </mat-radio-group>

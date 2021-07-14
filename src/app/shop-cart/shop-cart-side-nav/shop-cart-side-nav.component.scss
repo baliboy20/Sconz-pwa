@@ -1,9 +1,10 @@
+
 //   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*        LAYOUT
 .csnv-container {
   height: calc(100vh - 50px);
   width: 100%;
   display: grid;
-  grid-template-rows: auto auto 50px;
+  grid-template-rows: 100px auto 50px;
 
   .csnv-header {
     margin-bottom:10px;
@@ -27,7 +28,7 @@
 
   .card-image {
     grid-column: 1;
-    grid-row: 1 / span 3;
+    grid-row: 2 / span 3;
     width: auto;
     //background-color: orange;
     img {
@@ -39,7 +40,7 @@
     //background-color: blueviolet;
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
-    background-color: red;
+    //background-color: red;
     text-align: center;
     max-height: 36px;
   }
@@ -59,13 +60,22 @@
   .card-qty {
     grid-column: 2;
     grid-row: 3;
+    max-width: 200px;
 
   }
 
   .card-total {
-    background-color: turquoise;
+
     grid-column: 1 / span 3;
     grid-row: 4;
+
+    //layout of contents
+    display: flex;
+    flex: 1 1 auto;
+    //justify-content: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30%;
 
   }
 
@@ -79,7 +89,7 @@
 
 //   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*       STYLING
 .csnv-container {
-  //background-color: red;
+
 }
 
 .csnv-header {
@@ -96,19 +106,25 @@
 }
 
 .cart-card {
-  //& > * {
-  //  border: 1px solid red;
-  //}
-  //display: grid;
-  //grid-template-columns: 2fr 4fr;
+  background-color: white;
 
   .card-name {
     //background-color: blueviolet;
   }
-
+.card-image {
+ & img {
+   border: 1px solid rgba(128, 128, 128, 0.56);
+   padding: 2px;
+   border-radius: 2px;
+ }
+}
   .card-choices-options {
-    background-color: lightcyan;
+    //background-color: lightcyan;
     word-break: break-all;
+    span {
+      font-weight: bolder;
+      font: var(--font-smaller-sub-heading12-inconsolata)
+    }
   }
 
   .card-price {

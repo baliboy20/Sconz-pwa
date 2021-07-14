@@ -130,7 +130,7 @@ app.post('/create-checkout-session', bodyparser.json(), async (req, res) => {
   await postDb({amount_total, mode, payment_intent, currency, payment_status})
   // await confirmPaymentDb({pi: '123erty'})
   res.json(session);
-  return;
+
 });
 
 /**
@@ -187,7 +187,7 @@ app.get('/scully', async (req, res) => {
     console.debug(result.data.results);
     // console.log('* Payment recorded *'.repeat(6), JSON.stringify(result));
     res.json(result.data.results);
-    ;
+
   } catch
     (error) {
     console.log('* qry() Error *', '\n', error);

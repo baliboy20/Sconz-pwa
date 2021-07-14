@@ -1,5 +1,5 @@
 <div class="cc-container">
-<
+
   <mat-progress-spinner
     *ngIf="isLoading"
     mode="indeterminate"
@@ -27,7 +27,7 @@
       <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
 
     </ng-container>
-    <div class="spacer" style="background-color: rosybrown">
+    <div class="spacer">
     </div>
 
   </div>
@@ -67,9 +67,8 @@
     <p class="product-name">{{prod.name}}</p>
 
 
-    <p class="product-description">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolore neque quia repellendus. Adipisci animi
-      {{prod.description}} </p>
+    <div class="product-description">
+      {{prod.description}} </div>
 
 
     <div class="product-price">

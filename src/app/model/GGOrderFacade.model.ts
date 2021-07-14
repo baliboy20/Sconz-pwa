@@ -33,6 +33,14 @@ export interface GGStockProductOrder {
 
 
 export class GGStockProductOrderImpl implements GGStockProductOrder {
+  get qty(): number {
+    return this._qty;
+  }
+
+  set qty(value: number) {
+    this._qty = value;
+    this.updateTotal();
+  }
   get thumbImgUrl(): string {
     if (typeof this.thumbImg == 'string') {
       return this.thumbImg as string;
@@ -49,7 +57,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
 
   constructor(data: GGStockProductOrder | GGStockProductOrderImpl) {
     this.instructions = data.instructions;
-    this.qty = data.qty;
+    this._qty = data.qty;
     this.choice = data.choice;
     this.id = data.id;
     this.productId = data.productId;
@@ -68,7 +76,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   productId: string;
   thumbImg: { url?: string, _url?: string };
   total: number;
-  qty: number;
+  private _qty: number;
   instructions: string;
   private _thumbImgUrl: string;
 
@@ -97,7 +105,7 @@ private _GbpFmt(it: GGStockProductOption) : string {
   }
 
   public reCompute(data: GGStockProductOrder): void {
-    this.total = Math.round((this.choice.price * this.qty * 100) +
+    this.total = Math.round((this.choice.price * this._qty * 100) +
       GGStockProductOrderImpl.totalOfOptions(this.options) * 100) / 100;
   }
 

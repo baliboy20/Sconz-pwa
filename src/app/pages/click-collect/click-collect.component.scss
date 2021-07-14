@@ -156,12 +156,11 @@
     text-align: left;
     vertical-align: top;
     display: block;
-    //white-space: nowrap;
     text-indent: 0;
     border: none;
-    text-overflow: ellipsis;
     color: var(--grey-80);
     overflow-y: hidden;
+    max-height: 200px;
     //background-color: palegoldenrod;
   }
 

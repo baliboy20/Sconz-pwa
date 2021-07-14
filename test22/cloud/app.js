@@ -118,7 +118,7 @@ async function postDb(payload) {
   } catch
     (error) {
     console.log('* qry() Error *'.repeat(6), '\n', error);
-    return;
+
   }
 }
 
@@ -172,7 +172,7 @@ app.get('/scully', async (req, res) => {
     console.debug(result.data.results);
     // console.log('* Payment recorded *'.repeat(6), JSON.stringify(result));
     res.json(result.data.results);
-    ;
+
   } catch
     (error) {
     console.log('* qry() Error *', '\n', error);
