@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import * as Parse from 'parse';
 import {from, Observable} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {map, mergeMap, reduce, take, tap, toArray} from 'rxjs/operators';
-import {GGStockProductFacade} from '../../model/GGStockProducts.model';
-import {CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
+import {map, mergeMap, reduce, take, toArray} from 'rxjs/operators';
+
 import {OrderSent, StripePaymentDetails} from "./stripe-pay.service";
-import {GGCartService} from "../../services/ggcart.service";
 import {GGBasket} from "../../model/GGCart.model";
+import {CoffeeOrderFacade} from "../../model/shared/CoffeeOrderFacade";
+import {GGStockProductFacade} from "../../model/shared/GGStockProductFacade.model";
+import {MyLogger} from "../../service/logging/myLogging";
+import {environment} from "../../../environments/environment";
 
 // import {CoffeeOrderFacade} from '';
 // import {GGStockProductFacade} from '../model/GGStockProducts.model';
@@ -38,14 +40,13 @@ export class RepoGGService {
   }
 
   listProductItems(): Observable<GGStockProductFacade[]> {
-    this._findProductItems()
-      .catch(a => console.log('EError', a.message))
-      .then(a => console.log('RESTults', a));
+    // this._findProductItems()
+    //   .catch(a => console.log('EError', a.message))
+    //   .then(a => console.log('RESTults', a));
     return fromPromise(this._findProductItems())
       .pipe(
         take(1),
         mergeMap((a: any) => from((a))),
-        // tap(a => console.log('items', a)),
         map((a: any) => (GGStockProductFacade.create(a))),
         toArray(),
 
@@ -172,7 +173,6 @@ export class RepoGGService {
   }
 
   public async postToOrders(payload: { payment: any; shippingInfo: any; basket: any; }): Promise<any> {
-    console.log('postToCloudFunction ..2', payload);
     try {
       const claz = Parse.Object.extend('CoffeeOrders');
       const inst = new claz();
@@ -182,9 +182,15 @@ export class RepoGGService {
       inst.set('payment_intent', payload.payment.payment_intent);
       inst.set('payment_status', payload.payment.payment_status);
       inst.set('payment', payload.payment);
-      return await inst.save();
+
+     const retfig1 = await Parse.Config.save({ doally: 'erty'});
+     const retfig = await Parse.Config.get()
+       MyLogger.log('++ ')('config',retfig);
+      const retval = await inst.save();
+     // console.log('retfiv', retfig);
+      return retval;
     } catch (error) {
-      console.error('ERRROR', error.message);
+      MyLogger.log('&&&&')(error.message, environment.PARSE_MASTER_KEY);
     }
   }
 

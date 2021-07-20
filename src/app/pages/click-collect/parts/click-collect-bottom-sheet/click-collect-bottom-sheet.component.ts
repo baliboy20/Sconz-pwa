@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {GGStockProductFacade} from '../../../../model/GGStockProducts.model';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormBuilder, Validators} from '@angular/forms';
 import {map} from 'rxjs/operators';
 import {GGCartService} from '../../../../services/ggcart.service';
-import {GGStockProductOrderImpl} from '../../../../model/GGOrderFacade.model';
+import {GGStockProductOrderImpl} from '../../../../model/shared/GGOrderFacade.model';
 import {of} from 'rxjs';
+import {GGStockProductFacade} from "../../../../model/shared/GGStockProductFacade.model";
 
 @Component({
   selector: 'app-click-collect-bottom-sheet',
@@ -22,7 +22,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
     options: [[]],
     instructions: [''],
   });
-  total = '£0.00';
+  total = 0;
 
   constructor(
     public fb: FormBuilder,
@@ -35,23 +35,24 @@ export class ClickCollectBottomSheetComponent implements OnInit {
 
   ngOnInit(): void {
     // @ts-ignore
-    this.formGroup.get('choice').setValue(this.data.choices[0]);
+
     this.formGroup
       .valueChanges
       .pipe(
         map(a => {
           if (!a.choice) {
-            return `£0.00`;
+            return 0;
           }
           let total = a.choice.price * a.qty;
           // @ts-inore
           const choices = (a.options).map((b: { price: any; }) => b.price).reduce((sum: any, itm: any) => (sum += itm), 0);
           total = Math.round((total + choices) * 100) / 100;
-          return `£${total}`;
+          return total;
         })
       )
       .subscribe(total => this.total = total,);
 
+    this.formGroup.get('choice')?.setValue(this.data.choices[0]);
   }
 
 

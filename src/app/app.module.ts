@@ -24,7 +24,7 @@ import {ShopCartSideNavModule} from "./shop-cart/shop-cart-side-nav/shop-cart-si
 import {PortalModule} from "@angular/cdk/portal";
 import {OrderStatmentService} from "./service/order-statment.service";
 
-Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
+Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 
 // @ts-ignore
 Parse.serverURL = environment.ParseServerURL;

@@ -1,15 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {RepoService} from '../../services/repo.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {of} from 'rxjs';
-import {CoffeeOrder, CoffeeOrderFacade} from '../../model/CoffeeOrderFacade';
 import {GGCartService} from "../../services/ggcart.service";
 import {OrderStatmentService} from "../../service/order-statment.service";
 import {fromPromise} from "rxjs/internal-compatibility";
-import {OrderSent, StripePaymentDetails} from "../../stripe-payments-lib/services/stripe-pay.service";
-import {GGStockProductOrder} from "../../model/GGOrderFacade.model";
-import {GGBasket} from "../../model/GGCart.model";
+import {OrderSent} from "../../stripe-payments-lib/services/stripe-pay.service";
+import {GGStockProductOrder} from "../../model/shared/GGOrderFacade.model";
 import {RepoGGService} from "../../stripe-payments-lib/services/repo-g-g.service";
 
 

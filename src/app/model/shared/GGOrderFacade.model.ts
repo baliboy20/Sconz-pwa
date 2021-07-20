@@ -1,14 +1,12 @@
-import {OrderItems} from './CoffeeOrderFacade';
-import {GGStockProductFacade, GGStockProductOption, GGStockProductVariant} from './GGStockProducts.model';
-import {EventEmitter} from '@angular/core';
+import {GGStockProductChoice, GGStockProductOption} from "./GGStockProducts.infc";
 
-export interface GGStockProductChoiceOrder extends GGStockProductVariant {
+export interface GGStockProductChoiceOrder extends GGStockProductChoice {
   qty: number;
   amount: number;
   total: () => number;
 }
 
-export interface GGStockProductOptiontOrder extends GGStockProductOption {
+export interface GGStockProductOptionOrder extends GGStockProductOption {
   qty: number;
   amount: number;
 }
@@ -19,7 +17,7 @@ export interface GGStockProductOrder {
   id: string;
   thumbImg: { url?: string, _url?: string };
   thumbImgUrl: string;
-  choice: GGStockProductVariant;
+  choice: GGStockProductChoice;
   options: GGStockProductOption[];
   optionsDescList: string | undefined;
   total: number;
@@ -69,7 +67,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.reCompute(this as GGStockProductOrder);
   }
 
-  choice: GGStockProductVariant;
+  choice: GGStockProductChoice;
   id: string;
   name: string;
   options: GGStockProductOption[];
@@ -115,8 +113,10 @@ private _GbpFmt(it: GGStockProductOption) : string {
 
   public clone(): GGStockProductOrder {
     const choice = Object.assign({}, this.choice) as GGStockProductChoiceOrder;
-    const options = this.options.map(a => Object.assign({}, a) as GGStockProductOptiontOrder);
-    return new GGStockProductOrderImpl(this);
+    const options = this.options.map(a => Object.assign({}, a) as GGStockProductOptionOrder);
+    const cln =  new GGStockProductOrderImpl(this);
+    cln.qty = this.qty;
+    return cln;
   }
 
   updateTotal(): void {

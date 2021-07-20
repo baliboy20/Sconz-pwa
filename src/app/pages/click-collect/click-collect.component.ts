@@ -11,12 +11,12 @@ import {
   ViewChildren
 } from '@angular/core';
 // import {RepoGGService} from '../../services/repo-g-g.service';
-import {GGStockProductFacade} from '../../model/GGStockProducts.model';
 import {Observable} from 'rxjs';
 import {BottomSheetService} from './parts/bottom-sheet.service';
 import {map, mergeMap, tap} from 'rxjs/operators';
 import {RepoGGService} from '../../stripe-payments-lib/services/repo-g-g.service';
 import {ActivatedRoute} from '@angular/router';
+import {GGStockProductFacade} from "../../model/shared/GGStockProductFacade.model";
 
 //
 //
@@ -137,7 +137,6 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
         tap((fac: GGStockProductFacade) => this.onChooseProduct(fac))
       )
         .subscribe(res => console.log('acr', res), error => console.log('Err', error.message ?? error.toString()));
-
   }
 
   isLoading = false;

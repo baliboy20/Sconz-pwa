@@ -1,12 +1,11 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {GGBasket, GGBasketService} from '../model/GGCart.model';
-import {GGStockProductOrder, GGStockProductOrderImpl} from '../model/GGOrderFacade.model';
-import {Basket, BasketTotal, CartType} from '../model/types';
-import {ReplaySubject, Subject} from 'rxjs';
+import {GGStockProductOptionOrder, GGStockProductOrder, GGStockProductOrderImpl} from '../model/shared/GGOrderFacade.model';
+import {Basket, BasketTotal} from '../model/types';
+import {ReplaySubject} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {ToCurrencyStringFn} from '../features/utils/computes';
-import {CartItem, CartItemFacade} from '../model/CartItemFacade.model';
-import {OrderSent} from "../stripe-payments-lib/services/stripe-pay.service";
+import {GGStockProductChoice, GGStockProductOption} from "../model/shared/GGStockProducts.infc";
 
 // export type GGBasketTotal = { total: number, qty: number };
 
@@ -42,12 +41,17 @@ export class GGCartService implements GGBasketService {
     return undefined;
   }
 
-  add(itm: GGStockProductOrder | GGStockProductOrder[]): void {
-    // console.log('inside basket', 'color: red', itm.);
+  add(itm: GGStockProductOrder ): void {
     if (Array.isArray(itm)) {
-      this.basketItems.push(...itm.map(a => a.clone()));
+      throw new Error('Dev error tried to add array of StockProductOrders to GGservice basket');
+    }
+
+    const idx = ItemInBasketExistsHelper.isMatched(itm, this.basketItems);
+    if (idx !== -1) {
+      this.basketItems[+idx].qty += itm.qty;
+      console.log('%c IS MATCHED', 'color: purple;  font-size: 20px', itm.qty, idx);
     } else {
-      console.log('%cADDD','color: purple', itm );
+      console.log('%c ITEM ADDED', 'color: purple; font-size: 20px', itm);
       this.basketItems.push(itm.clone());
     }
     this.reSync();
@@ -61,8 +65,8 @@ export class GGCartService implements GGBasketService {
 
     this.basketItems
       .forEach(a => {
-        console.log('%cClone', 'color:red', a.clone);
-       arr.push(a.clone());
+        // console.log('%cClone', 'color:red', a.clone);
+        arr.push(a.clone());
       })
     const bsk: GGBasket = {
       total: this.basket?.total ?? 0,
@@ -71,6 +75,7 @@ export class GGCartService implements GGBasketService {
     }
     return bsk;
   }
+
   clearout(): void {
     this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
@@ -81,14 +86,14 @@ export class GGCartService implements GGBasketService {
   }
 
   reSync(): void {
-  //  console.log('resyncing...?')
+    //  console.log('resyncing...?')
     const fn = ToCurrencyStringFn;
     this._basketItems = [...this._basketItems];
     const initValue: BasketTotal = {total: 0, qty: 0};
     const redResFn: any = (acc: BasketTotal, val: GGStockProductOrder) => {
       acc.qty += val.qty;
       acc.total += val.total;
- //     console.log('computing total', acc.total, acc.qty);
+      //     console.log('computing total', acc.total, acc.qty);
       return acc;
     };
     const rs = this._basketItems.reduce(redResFn, initValue);
@@ -98,18 +103,18 @@ export class GGCartService implements GGBasketService {
       ...rs,
     };
     this.basket = b;
-    console.log('inside basket', b)
+    // console.log('inside basket', b)
     this.basketChanged.next(b);
     this.toLocalStorage();
   }
 
   removeAt(idx: number): void {
     if (idx < 0 || this.basketItems.length <= idx) {
-      console.log('failed to remove');
+      // console.log('failed to remove');
       return;
     }
     this.basketItems.splice(idx, 1);
-   // console.log('splicing for :', idx);
+    // console.log('splicing for :', idx);
     this.reSync();
   }
 
@@ -122,6 +127,9 @@ export class GGCartService implements GGBasketService {
     // console.log('setting qty', idx, qty, this.basketItems[+idx].qty);
 
     const val = this.basketItems[+idx].qty;
+    if (isNaN(val)) {
+      this.basketItems[+idx].qty = 0;
+    }
     if (isNaN(val) || val === qty) {
       console.log('is this the trap', !val, val, qty);
       return;
@@ -129,7 +137,7 @@ export class GGCartService implements GGBasketService {
 
     this.basketItems[+idx].qty = qty;
     // @ts-ignore
-     // this.basketItems[+idx].updateTotal();
+    // this.basketItems[+idx].updateTotal();
     this.reSync();
   }
 
@@ -138,15 +146,16 @@ export class GGCartService implements GGBasketService {
     if (!lsStr) {
       return;
     }
-    const arr: any = JSON.parse(lsStr ?? '');
+    let arr: GGBasket = JSON.parse(lsStr ?? '') as GGBasket;
 
-    console.log(' ::retrieveCartFromLocalStorage', arr);
 
     const bask: GGBasket = arr;
 
 
     if (Array.isArray(bask.basketItems) && bask.basketItems.length > 0) {
-      const prodImpl = bask.basketItems.map(a => GGStockProductOrderImpl.create(a));
+      const prodImpl = bask.basketItems.map(a => {
+        return GGStockProductOrderImpl.create(a);
+      });
       bask.basketItems = prodImpl;
       console.log('Redtriedved', prodImpl);
       this.basketItems.push(...prodImpl);
@@ -159,8 +168,55 @@ export class GGCartService implements GGBasketService {
 
   toLocalStorage(): void {
     if (this.basketItems && this.basketItems.length > 0) {
-      const str = JSON.stringify(this.basket ?? '');
+      let str = JSON.stringify(this.basket ?? '');
+      const reg = /_qty/g;
+      str = str.replace(reg, 'qty');
+      console.log('to local storage', str, this.basketItems);
       window.localStorage.setItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY, str);
+    } else {
+      window.localStorage.removeItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY);
     }
   }
+}
+
+export type SelectionsType = GGStockProductChoice | GGStockProductOption;
+
+export class ItemInBasketExistsHelper {
+  static isMatched(item: GGStockProductOrder, basketItems: GGStockProductOrder[]): number {
+    const hlp = ItemInBasketExistsHelper;
+    const isEqual = hlp.selectionsAreEqual;
+  for (const idx in basketItems)
+    if (basketItems[idx].productId === item.productId
+      && basketItems[idx].choice.vId === item.choice.vId) {
+      if ( isEqual(item.options, basketItems[idx].options)){
+        return +idx;
+      }
+    }
+  return -1;
+  }
+
+  static selectionsAreEqual(item: SelectionsType[], choices: SelectionsType[]): boolean {
+    if (!item || !choices) {
+      return false;
+    }
+
+    if (item.length === 0 && choices.length === 0) {
+      return true;
+    }
+
+    const longest = item.length >= choices.length ? item.map(a => a.vId).sort() : choices.map(a => a.vId).sort();
+    const shortest = item.length < choices.length ? item.map(a => a.vId).sort() : choices.map(a => a.vId).sort();
+    console.log(shortest, longest);
+    for (const idx in longest) {
+      if (shortest.length - 1 < +idx) {
+        return false;
+      } else if (shortest[idx] !== longest[idx]) {
+        return false;
+      }
+    }
+    return true;
+
+  }
+
+
 }

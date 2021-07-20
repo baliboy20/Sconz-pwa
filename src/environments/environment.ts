@@ -12,6 +12,7 @@ export const environment = {
   PARSE_APP_ID: 'fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i',
   PARSE_JS_KEY: 'TbOsxLryXvD6sP7GvOQ1t2HhNqMegtFaJJAPbPGt',
   PARSE_REST_API_KEY: '5BfNScDDuwnfgFXJCWJvMNFTtGHQq1C3fhNdH2XT',
+  PARSE_MASTER_KEY: '7UkSTU17KQhM5NpJy7hpxdJOfpwE3FtgoHQb8PQ7',
   ParseServerURL: 'https://parseapi.back4app.com/',
   DEV_ParseServerURL: 'http://localhost:3000',
   stripe_pkey: 'pk_test_gESpLAexm8oTAFcLjCNEQkOw00smIXKrfx',
@@ -21,6 +22,7 @@ export const environment = {
   },
   build_version: '11.2b prod 17 Jun \'21',
   useDevCart: true,
+  // dev flags
   enableNavToStripPayment: false,
 };
 

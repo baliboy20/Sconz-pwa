@@ -1,0 +1,37 @@
+Using memory cache for query.cache() methods
+Using memory cache for query.cache() methods
+Using memory cache for query.cache() methods
+Using memory cache for query.cache() methods
+Using memory cache for query.cache() methods
+(node:18) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+the payload is {
+  payment_method_types: [ 'card' ],
+  line_items: [ { price_data: [Object], quantity: 1 } ],
+  mode: 'payment',
+  success_url: 'http://localhost:4200/#/order-statement/succeeded',
+  cancel_url: 'http://localhost:4200/#/order-statement/cancelled'
+}
+the payload is {
+  payment_method_types: [ 'card' ],
+  line_items: [ { price_data: [Object], quantity: 1 } ],
+  mode: 'payment',
+  success_url: 'http://localhost:4200/#/order-statement/succeeded',
+  cancel_url: 'http://localhost:4200/#/order-statement/cancelled'
+}
+the payload is {
+  payment_method_types: [ 'card' ],
+  line_items: [ { price_data: [Object], quantity: 1 } ],
+  mode: 'payment',
+  success_url: 'http://localhost:4200/#/order-statement/succeeded',
+  cancel_url: 'http://localhost:4200/#/order-statement/cancelled'
+}
+the payload is {
+  payment_method_types: [ 'card' ],
+  line_items: [
+    { price_data: [Object], quantity: 2 },
+    { price_data: [Object], quantity: 2 }
+  ],
+  mode: 'payment',
+  success_url: 'http://localhost:4200/#/order-statement/succeeded',
+  cancel_url: 'http://localhost:4200/#/order-statement/cancelled'
+}

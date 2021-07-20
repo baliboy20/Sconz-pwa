@@ -7,13 +7,11 @@
   </mat-progress-spinner>
   <div class="cc-list-wrapper" id="ccListWrapper">
 
-    <!--      Top categories ribbon-->
-
+    <!-- Categories ribbon. -->
     <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>
 
 
     <ng-container *ngFor="let prod of prods$| async">
-
       <div class="category-header"
 
            style="text-transform: capitalize">
@@ -32,18 +30,19 @@
 
   </div>
 </div>
+
 <!--
-*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+===============================================================================================
 
-                        TEMPLATES
-
-*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+                          TEMPLATES
+===============================================================================================
 -->
 
 
-<!-- TEMPLATE:      Horizontal Sliderbar -->
-
-
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Horizontal Slider bar.
+-->
 <ng-template #CategoriesRibbonTmpl let-prods=prods>
   <div class="horizontal-slidebar">
     <a
@@ -54,9 +53,10 @@
 </ng-template>
 
 
-<!-- TEMPLATE:      Product Item Card -->
-
-
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Product Item Card.
+-->
 <ng-template #cardTmpl let-prods=prods>
 
   <div class="card-layout mat-elevation-z5"
@@ -75,8 +75,7 @@
       {{prod.lowestPrice() | currency: "GBP"}}
     </div>
     <div class="product-image" id="product-image" [appCustomImg]>
-
-      <img [src]="prod.thumbImg._url">
+      <img [src]="prod.thumbImg.url">
     </div>
 
   </div>

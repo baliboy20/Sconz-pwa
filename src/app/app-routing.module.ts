@@ -75,7 +75,6 @@ const routes: Routes = [
       .then(m => m.GGCheckoutModule)
   },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'zzprogBn', loadChildren: () => import('./zzprogressbutton/zzprogressbutton.module').then(m => m.ZzprogressbuttonModule) },
 
 ];
 

@@ -8,7 +8,7 @@ import {mergeMap, tap} from 'rxjs/operators';
 import {RepoService} from '../../services/repo.service';
 import {CartType} from '../../model/types';
 import {CartItem} from '../../model/CartItemFacade.model';
-import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/GGOrderFacade.model";
+import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/shared/GGOrderFacade.model";
 import {RepoGGService} from "./repo-g-g.service";
 import {OrderStatmentService} from "../../service/order-statment.service";
 import {Router} from "@angular/router";
@@ -163,7 +163,6 @@ export class StripePayService {
       .toPromise()
       .then((session: StripeSessionResponse | any) => {
         const payment: StripePaymentDetails = StripeSessionResponseFactory(session)
-        console.log('%cBasket in pay service','color: yellow', basket);
         const payload: OrderSent = {
           payment,
           shippingInfo,
@@ -173,7 +172,7 @@ export class StripePayService {
 
           // Post to parse server
           this.repo.ggPostToCloudFunction(payload).then(a => {
-            console.log('ggPostToCloudFunction', a)
+            // console.log('ggPostToCloudFunction', a)
             this.orderStatementService.oId = a;
             if (enablePayment) {
               this.stripe.redirectToCheckout({sessionId: session.id});

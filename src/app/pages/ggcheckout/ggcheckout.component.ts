@@ -51,10 +51,11 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
     super.subscription = this.cartService.basketChanged
       .subscribe(a => {
         this.basket = a;
-        this.ref.reattach();
-        this.ref.markForCheck();
+        // this.ref.reattach();
+        // this.ref.markForCheck();
         this.ref.detectChanges();
       });
+
   }
 
   async placeOrderClicked() {

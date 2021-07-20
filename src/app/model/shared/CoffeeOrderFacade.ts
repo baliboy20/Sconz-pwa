@@ -1,65 +1,8 @@
-import * as Parse from 'parse';
+import {CoffeeOrder} from './CoffeeOrder.infc';
+import {Order} from './Order.infc.';
+import {Payment} from './Payment.infc';
+import {ShippingInfo} from './ShippingInfo.interface';
 
-export interface OrderItems {
-  size: string;
-  price: string;
-  variant: string;
-  vId: string;
-  qty: number;
-  grindType: string;
-  description: string;
-  thumbUrl: string;
-  productItemUrl: string;
-}
-
-export interface Order {
-  cart: OrderItems[];
-  qty: number;
-  total: number;
-}
-
-
-export interface ShippingInfo {
-  email: string;
-  lastName: string;
-  firstName: string;
-  address: string;
-  apartment: string;
-  city: string;
-  country: string;
-  postCode: string;
-  computedAddress: string;
-}
-
-// Payment
-
-export interface Payment {
-  amount_total_pence: number;
-  id: string;
-  mode: string;
-  payment_intent: string;
-  payment_status: string;
-}
-
-
-// from type 'CartType': img, qty, description, thumbUrl
-
-export interface Cart {
-  qty: number;
-  total_pence: number;
-  items: OrderItems;
-}
-
-export interface CoffeeOrder {
-  shipping_info: ShippingInfo;
-// @ts-ignore
-  id: string;
-  updatedAt: string;
-  order: Order;
-  payment: Payment;
-  payment_intent: string;
-  payment_status: string;
-}
 
 export class CoffeeOrderFacade implements CoffeeOrder {
   get order(): Order {
@@ -69,6 +12,7 @@ export class CoffeeOrderFacade implements CoffeeOrder {
   set order(value: Order) {
     this.item.set('order', value);
   }
+
 
   get payment(): Payment {
     return this.item.get('payment');
@@ -110,6 +54,11 @@ export class CoffeeOrderFacade implements CoffeeOrder {
     this.item.set('updatedAt', value);
   }
 
+  /**
+   * Transform reactive form raw data to Parse object struc and assign to Variant property.
+   * @param value
+   */
+
   get id(): string {
     return this.item.id;
   }
@@ -135,13 +84,8 @@ export class CoffeeOrderFacade implements CoffeeOrder {
     return inst;
   }
 
-  static create(b: Parse.Object<Parse.Attributes> | Parse.Object<Parse.Attributes>[]): CoffeeOrderFacade {
-    let retval;
-    if (Array.isArray(b)) {
-      retval = new CoffeeOrderFacade(b[0]);
-    } else {
-      retval = new CoffeeOrderFacade(b); //nearly done
-    }
+  static create(b: Parse.Object): CoffeeOrderFacade {
+    const retval = new CoffeeOrderFacade(b as Parse.Object);
     return (retval);
   }
 

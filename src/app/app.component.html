@@ -7,7 +7,7 @@
 
   <!--  Cart and Checkout drawer-->
 <mat-sidenav position="end"
-             opened="false"
+             [opened]="checkoutSidenavOpened"
              mode="over"
              #CartDrawer
              (openedStart)="openStatCart($event)"

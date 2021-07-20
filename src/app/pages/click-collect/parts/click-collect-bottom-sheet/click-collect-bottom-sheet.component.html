@@ -4,7 +4,7 @@
   <!--  Banner Image-->
 
   <div class="ccbs-img-container">
-    <img imgSize='medium' [appCustomImg]="prod.thumbImg._url">
+    <img imgSize='medium' [appCustomImg]="prod.thumbImg.url">
   </div>
 
   <!--  Name, Description, Increment template-->
@@ -59,7 +59,7 @@
 
 <!-- TEMPLATE:      Product Choices  (variation of product size, flavour, color etc)-->
 <ng-template #productSelectionTmp>
-  <p class="ccbs-product-choose-label"><span>Choose </span></p>
+  <p class="ccbs-product-choose-label"><span>Choices </span></p>
 
   <div class="ccbs-product-choose"
        [formGroup]="formGroup">
@@ -128,5 +128,5 @@
 <ng-template #SaveBtnTmpl>
   <button (click)="dimissAndSave()"
           style="border-radius: 30px; padding: 8px 18px"
-          mat-raised-button>Add to order {{total}} </button>
+          mat-raised-button>Add to order {{total | currency: "GBP" }} </button>
 </ng-template>

@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {PageBase} from '../page-base/page-base';
 import {CartItemFacade} from '../../model/CartItemFacade.model';
 import {GGCartService} from '../../services/ggcart.service';
-import {GGStockProductOrder, GGStockProductOrderImpl} from '../../model/GGOrderFacade.model';
+import {GGStockProductOrder, GGStockProductOrderImpl} from '../../model/shared/GGOrderFacade.model';
 import {GGBasket} from '../../model/GGCart.model';
 import {MatBadge} from "@angular/material/badge";
 import {MatButton} from "@angular/material/button";

@@ -10,7 +10,17 @@
     margin-bottom:10px;
   }
 
-  .csnv-footer {
+  .csnv-footer,  .csnv-header {
+    box-sizing: content-box;
+    background-color: yellowgreen;
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: space-between;
+    overflow-x: hidden;
+    align-items: center;
+    //width: calc(100% - 100px);
+    padding-left:  10%;
+    padding-right:  10%;
 
   }
 
@@ -98,7 +108,7 @@
 }
 
 .csnv-footer {
-  //background-color: yellowgreen;
+
 }
 
 .csnv-scrollable {

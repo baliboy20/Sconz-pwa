@@ -10,7 +10,7 @@ import {
 import {GGCartService} from "../../services/ggcart.service";
 import {PageBase} from "../../pages/page-base/page-base";
 import {GGBasket} from "../../model/GGCart.model";
-import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/GGOrderFacade.model";
+import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/shared/GGOrderFacade.model";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material/sidenav";
 import {map} from "rxjs/operators";
@@ -21,7 +21,7 @@ import {map} from "rxjs/operators";
   styleUrls: ['./shop-cart-side-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopCartSideNavComponent extends PageBase implements OnInit, AfterViewChecked {
+export class ShopCartSideNavComponent extends PageBase implements OnInit {
   @Input('cartSideNav') sideNav: MatSidenav | undefined;
  basket: GGBasket | undefined;
   constructor(
@@ -61,20 +61,18 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit, AfterV
     this.router.navigate(['/gg-checkout']);
   }
 
-  ngAfterViewChecked(): void {
-    // console.log('after view checked...')
-
-  }
-  ngOnChanges(): void{
-    // console.log('ngOnChanges ..')
-}
 
   onQtyChanged(qty: number, idx: number) {
    console.log('qty changed', qty, idx);
     this.cartService.setQty(qty,idx )
   }
 
-  removeAction(idx: number) {
+  removeAction(idx: number): void {
     this.cartService.removeAt(idx)
+  }
+
+  removeAllAction(): void {
+    this.cartService.clearout();
+    this.sideNav?.close();
   }
 }

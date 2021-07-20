@@ -1,9 +1,13 @@
 <div class="csnv-container">
   <div class="csnv-header">
-
-    <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
+    <button (click)="this.sideNav?.close()"
+            mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
+
+    <button mat-raised-button
+            (click)="removeAllAction()">
+      CLEAR ALL</button>
     <mat-divider></mat-divider>
   </div>
   <div class="csnv-scrollable">
@@ -12,13 +16,15 @@
   </div>
   <div class="csnv-footer">
     <button mat-stroked-button
-            (click)="onCheckout()">
-      CHECKOUT {{basket?.total}}
-    </button>
-    <button mat-stroked-button
+            style="color: white"
             (click)="this.sideNav?.close()"
     >CONTINUE</button>
-  </div>
+
+    <button mat-raised-button color="accent"
+            (click)="onCheckout()">
+      CHECKOUT {{basket?.total | currency: 'GBP'}}
+    </button>
+</div>
 
 </div>
 
@@ -43,9 +49,9 @@
       </div>
 
             <div class="card-choices-options">
-            <span>Selected extras -</span>
-             {{e(item).optionsDescList ?
-              e(item).optionsDescList : 'N/A'}}
+              <ng-container *ngIf="e(item).optionsDescList">
+                <span>Selection:</span>
+                {{e(item).optionsDescList}} </ng-container>
 
             </div>
 

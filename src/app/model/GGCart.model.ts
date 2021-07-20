@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
 import {Basket, BasketTotal, CartType} from './types';
 import {EventEmitter} from '@angular/core';
-import {GGStockProductOrder} from './GGOrderFacade.model';
+import {GGStockProductOrder} from './shared/GGOrderFacade.model';
 import {CartItemFacade} from './CartItemFacade.model';
 
 export interface GGBasket {

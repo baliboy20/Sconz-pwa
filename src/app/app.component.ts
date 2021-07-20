@@ -21,6 +21,7 @@ export class AppComponent {
   @ViewChild('CartDrawer', {read: MatSidenav}) public tref: MatSidenav | undefined;
   @ViewChild('NavDrawer', {read: MatSidenav}) public navDrawer: MatSidenav | undefined;
   @ViewChild('portal', {read: CdkPortalOutlet}) public portal: PortalOutlet | undefined;
+  checkoutSidenavOpened = false;
   constructor(
     private router: Router
   ) {

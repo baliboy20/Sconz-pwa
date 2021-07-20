@@ -8,8 +8,8 @@
     <div class="ggc-contact">
     <ng-container *ngTemplateOutlet="PersonalDetailsFormTmpl,context:{formGroup:formGroup}"></ng-container>
   </div>
-  <!--  Save Info checkbox card-->
 
+  <!--  Save Info checkbox card-->
     <div class="save-my-information">
       <ng-container *ngTemplateOutlet="SavePersonalDetailsTmpl,context:{formGroup:formGroup}"></ng-container>
     </div>
@@ -109,7 +109,7 @@
     (click)="showSpinner= !showSpinner">
     <div style="display: inline-flex; justify-items: center; align-items: center">
       <div style="padding: 5px 8px">
-        Place order <span>£9.72</span>
+        Place order <span>{{this.basket?.total | currency:"GBP"}}</span>
       </div>
       <mat-spinner
         [diameter]="18"
