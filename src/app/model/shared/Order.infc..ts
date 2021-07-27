@@ -1,3 +1,7 @@
+import {GGStockProductChoice, GGStockProductOption} from "./GGStockProducts.infc";
+import {GGBasket} from "./GGCart.model";
+import {GGStockProductOrder} from "./GGOrderFacade.model";
+
 export interface OrderItems {
   size: string;
   price: string;
@@ -11,8 +15,8 @@ export interface OrderItems {
 }
 
 export interface Order {
-  cart: OrderItems[];
+  basketItems: GGStockProductOrder[];
   qty: number;
   total: number;
-  orderStatus: string;  // suspended, open, closed
 }
+

@@ -45,6 +45,10 @@
 -->
 <ng-template #CategoriesRibbonTmpl let-prods=prods>
   <div class="horizontal-slidebar">
+    <mat-slide-toggle (toggleChange)="this.repo.cacheresults  = !this.repo.cacheresults">CACHE</mat-slide-toggle>
+    {{this.repo.cacheresults}}
+    {{this.repo.id}}
+    {{this.id}}
     <a
       (click)="scrollToId(prod[0])"
       class="span-item"

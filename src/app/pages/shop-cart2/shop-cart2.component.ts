@@ -3,11 +3,11 @@ import {Router} from '@angular/router';
 import {BasketService} from '../../services/basket.service';
 import {tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import {PageBase} from '../page-base/page-base';
+import {PageBase} from '../../framework/pages/page-base/page-base';
 import {CartItemFacade} from '../../model/CartItemFacade.model';
 import {GGCartService} from '../../services/ggcart.service';
 import {GGStockProductOrder, GGStockProductOrderImpl} from '../../model/shared/GGOrderFacade.model';
-import {GGBasket} from '../../model/GGCart.model';
+import {GGBasket} from '../../model/shared/GGCart.model';
 import {MatBadge} from "@angular/material/badge";
 import {MatButton} from "@angular/material/button";
 

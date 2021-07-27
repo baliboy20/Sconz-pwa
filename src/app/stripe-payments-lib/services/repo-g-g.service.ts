@@ -1,25 +1,22 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import * as Parse from 'parse';
-import {from, Observable} from 'rxjs';
+import {from, Observable, ReplaySubject} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {map, mergeMap, reduce, take, toArray} from 'rxjs/operators';
-
 import {OrderSent, StripePaymentDetails} from "./stripe-pay.service";
-import {GGBasket} from "../../model/GGCart.model";
-import {CoffeeOrderFacade} from "../../model/shared/CoffeeOrderFacade";
+import {GGBasket} from "../../model/shared/GGCart.model";
 import {GGStockProductFacade} from "../../model/shared/GGStockProductFacade.model";
 import {MyLogger} from "../../service/logging/myLogging";
-import {environment} from "../../../environments/environment";
+import {GGStockProductOrderImpl} from "../../model/shared/GGOrderFacade.model";
 
-// import {CoffeeOrderFacade} from '';
-// import {GGStockProductFacade} from '../model/GGStockProducts.model';
 
 const STOCK_COLLECTION_NAME: string = 'GGStockProducts';
+const PIN_NAME: string = 'XXW';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RepoGGService {
+export class RepoGGService implements OnDestroy {
   get orderInProcess(): OrderSent | undefined {
     return this._orderInProcess;
   }
@@ -29,14 +26,61 @@ export class RepoGGService {
   }
 
   private _orderInProcess: OrderSent | undefined;
+  public cacheresults = false;
+  public id = Math.round(Math.random() * 1000);
+  public subject: ReplaySubject<any> = new ReplaySubject<any>();
 
   constructor() {
+    // @ts-ignore
+    Parse.serverURL = 'https://v69coffee.b4a.io';
+    this._configLocalDatastore();
+    this.initWebhookListener();
   }
 
 
+  private _configLocalDatastore(): void {
+    // Parse.enableLocalDatastore();
+    window.localStorage.clear();
+
+
+  }
+
+  async initWebhookListener(): Promise<any> {
+    const qr = new Parse.Query(STOCK_COLLECTION_NAME);
+    const sub = await qr.subscribe();
+    sub.on('update', a => MyLogger.log('updates ==>')('trigger update event', a));
+    sub.on('create', a => MyLogger.log('create ==>')('trigger create event', a));
+    sub.on("enter", a => MyLogger.log('Enter ==>')('trigger Enter event', a));
+    sub.on('delete', a => {
+      a.unPin();
+     // MyLogger.log('DELETE ==>')('trigger update event', a);
+    });
+
+  }
+
   async _findProductItems(): Promise<any> {
+    MyLogger.log('')('calling _findProductItems');
+    if (!this.cacheresults) {
+      // Parse.Object.unPinAllObjectsWithName(PIN_NAME);
+
+      let query = new Parse.Query(STOCK_COLLECTION_NAME);
+      query.fromNetwork();
+      MyLogger.log('sdf')('result not cached');
+      const results = await query.find();
+    // await Parse.Object.pinAllWithName("LCUK", results);
+      // await Parse.Object.unPinAllWithName("LCUK", results);
+
+      this.cacheresults = true;
+      return results;
+    }
+    //  Parse.Object.unPinAllObjects();
     const query = new Parse.Query(STOCK_COLLECTION_NAME);
-    return await query.find();
+    MyLogger.log('+++')('querey from local datastore')
+    query.fromLocalDatastore();
+    const res = await query.find();
+    Parse.Object.unPinAllObjects();
+    return res;
+    // }
   }
 
   listProductItems(): Observable<GGStockProductFacade[]> {
@@ -49,7 +93,6 @@ export class RepoGGService {
         mergeMap((a: any) => from((a))),
         map((a: any) => (GGStockProductFacade.create(a))),
         toArray(),
-
       );
   }
 
@@ -83,7 +126,7 @@ export class RepoGGService {
     return fromPromise(this._findCoffeeOrderItems())
       .pipe(
         take(1),
-        map((a: any) => a.map((b: any) => (CoffeeOrderFacade.create(b)))),
+        map((a: any) => a.map((b: any) => (GGStockProductOrderImpl.create(b)))),
         // tap(a => console.log('items transformed', a)),
       );
   }
@@ -183,19 +226,15 @@ export class RepoGGService {
       inst.set('payment_status', payload.payment.payment_status);
       inst.set('payment', payload.payment);
 
-     const retfig1 = await Parse.Config.save({ doally: 'erty'});
-     const retfig = await Parse.Config.get()
-       MyLogger.log('++ ')('config',retfig);
       const retval = await inst.save();
-     // console.log('retfiv', retfig);
-      return retval;
+      const fn = await Parse.Cloud.run('UpdatelastCoffeeOrderDatetime');
+      return 'retval';
     } catch (error) {
-      MyLogger.log('&&&&')(error.message, environment.PARSE_MASTER_KEY);
+      MyLogger.log('&& Error &&')(error.message);
     }
   }
 
   public async ggPostToCloudFunction(payload: { payment: StripePaymentDetails; shippingInfo: any; basket: any; }): Promise<any> {
-    console.log('postToCloud Functionz', payload);
     const result = await this.postToOrders(payload);
     return result.id;
   }
@@ -210,7 +249,7 @@ export class RepoGGService {
       // console.log('%c get coffee orders', 'color: brown', result);
       return result;
     } catch (e) {
-      console.log('Error', e.message);
+      MyLogger.error()(e.message, 'orderId', id);
     }
   }
 
@@ -229,6 +268,11 @@ export class RepoGGService {
     };
 
     return a;
+  }
+
+  ngOnDestroy(): void {
+    Parse.Object.unPinAllObjects();
+    MyLogger.logCol({symbol: '±±±±', fontSize: '40px', color: 'orange'})('on destroy')
   }
 
 }

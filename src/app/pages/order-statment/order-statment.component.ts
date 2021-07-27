@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {map, mergeMap} from 'rxjs/operators';
+import {map, mergeMap, tap} from 'rxjs/operators';
 import {GGCartService} from "../../services/ggcart.service";
-import {OrderStatmentService} from "../../service/order-statment.service";
+import {ActiveOrderService} from "../../service/active-order.service";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {OrderSent} from "../../stripe-payments-lib/services/stripe-pay.service";
 import {GGStockProductOrder} from "../../model/shared/GGOrderFacade.model";
 import {RepoGGService} from "../../stripe-payments-lib/services/repo-g-g.service";
+import {MyLogger} from "../../service/logging/myLogging";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class OrderStatmentComponent implements OnInit {
   constructor(
     private repo: RepoGGService,
     private cartService: GGCartService,
-    private orderService: OrderStatmentService,
+    private orderService: ActiveOrderService,
     private route: ActivatedRoute) {
   }
 
@@ -27,16 +28,26 @@ export class OrderStatmentComponent implements OnInit {
     this.route.params
       .pipe(
         map((a: Params) => a.orderId),
+        tap(a => MyLogger.log('a')(a)),
         mergeMap((id: string) => {
-          const aid = id === 'succeeded' || id == 'cancelled' ? this.orderService.oId : id;
-              return fromPromise(this.repo.getCartOfOrder(aid));
+          // // if called by callback by Stripe payment use last order with pi as the key.
+          // let aid= '';
+          // if ( id === 'succeeded' || id == 'cancelled') {
+          //   const id =  this.orderService.lastOrder?.payment?.payment_intent;
+          // } else {
+          //
+          // }
+          MyLogger.log('id')(id);
+              return fromPromise(this.repo.getCartOfOrder(id));
 
-        }))
+        }),
+        tap(a => MyLogger.log('pi')( a.payment)))
       .subscribe(a => {
-          console.log('%cOrder Statement object', 'color: green', a);
+          MyLogger.large()('Order statment');
          this.item = a;
         },
-        err => console.log('Error accessing order: ', err.message));
+        err => console.log('Error accessing order: ', err.message)
+      );
 
 
   }

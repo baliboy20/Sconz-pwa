@@ -3,7 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { OrderStatmentComponent } from './order-statment.component';
 
-const routes: Routes = [{ path: ':orderId', component: OrderStatmentComponent }];
+const routes: Routes = [
+  { path: 'success/:orderId', component: OrderStatmentComponent },
+  { path: 'cancelled/:orderId', component: OrderStatmentComponent },
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

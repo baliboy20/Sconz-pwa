@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {NumericIncrementerModule} from '../../widgets/numeric-incrementer/numeric-incrementer.module';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 const routes: Routes = [
@@ -31,23 +32,24 @@ const routes: Routes = [
   exports: [
     CustomImageDirective,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatCardModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatListModule,
-    MatToolbarModule,
-    MatRadioModule,
-    MatIconModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatInputModule,
-    NumericIncrementerModule,
-    MatProgressSpinnerModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatCardModule,
+        MatBottomSheetModule,
+        MatButtonModule,
+        MatListModule,
+        MatToolbarModule,
+        MatRadioModule,
+        MatIconModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatInputModule,
+        NumericIncrementerModule,
+        MatProgressSpinnerModule,
+        MatSlideToggleModule,
+    ],
   providers: [BottomSheetService]
 })
 export class ClickCollectModule {

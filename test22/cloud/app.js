@@ -60,7 +60,7 @@ app.get('/handshake', (rq, rs) => {
   locale: null,
   metadata: {},
   mode: 'payment',
-  payment_intent: 'pi_1IUTKYFSRZP1GrxVbg2y2ffa',
+  paymentIntent: 'pi_1IUTKYFSRZP1GrxVbg2y2ffa',
   payment_method_types: [ 'card' ],
   payment_status: 'unpaid',
   setup_intent: null,
@@ -90,18 +90,6 @@ app.post('/create-checkout-session', bodyparser.json(), async (req, res) => {
   console.log('sending back the session', session);
   res.send(session);
 
-  //  const payment = {
-  //    amount_total: session.amount_total,
-  //    mode: session.mode,
-  //    payment_intent: session.payment_intent,
-  //    payment_status: session.payment_status
-  //  }
-  //
-  //  const argPayload = {payment, shippingInfo, basket};
-  // // console.debug('==1.0==='.repeat(10), '/create-checkout-session',  argPayload);
-  // await postDb(argPayload)
-  //  res.json(session);
-
 });
 
 async function postDb(payload) {
@@ -130,11 +118,11 @@ app.post('/webhook', bodyparser.raw({type: 'application/json'}), async (request,
   const val = request.body.toString('utf8');
   const oval = JSON.parse(val);
   //  console.log('==='.repeat(20), '\n webhook fired \n', event.type);
-  // confirmPaymentDb(oval.data.object.payment_intent)
+  // confirmPaymentDb(oval.data.object.paymentIntent)
   // Handle the event
   switch (oval.type) {
     case 'checkout.session.completed':
-      //  console.log(counter, '-- counter->?/.'.repeat(10), `\n\nEvent type ${oval.type}`, oval.data.object.payment_intent);
+      //  console.log(counter, '-- counter->?/.'.repeat(10), `\n\nEvent type ${oval.type}`, oval.data.object.paymentIntent);
       await confirmPaymentDb({pi: oval.data.object.payment_intent})
       // setTimeout(async () => {
 

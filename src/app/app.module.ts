@@ -22,7 +22,8 @@ import * as Parse from 'parse';
 import {GGCartService} from './services/ggcart.service';
 import {ShopCartSideNavModule} from "./shop-cart/shop-cart-side-nav/shop-cart-side-nav.module";
 import {PortalModule} from "@angular/cdk/portal";
-import {OrderStatmentService} from "./service/order-statment.service";
+import {ActiveOrderService} from "./service/active-order.service";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 
@@ -47,6 +48,7 @@ Parse.serverURL = environment.ParseServerURL;
     BasketIconModule,
     MatRippleModule,
     MatMenuModule,
+    MatSnackBarModule,
     HammerModule,
     DropDownCartListModule,
     ShopCartSideNavModule,
@@ -55,7 +57,7 @@ Parse.serverURL = environment.ParseServerURL;
   ],
   providers: [
     GGCartService,
-    OrderStatmentService,
+    ActiveOrderService,
     CartService,
     {
       provide: HTTP_INTERCEPTORS,

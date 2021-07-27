@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {CoffeeProductItems} from '../../../assets/mocked-data/products';
 import {map, tap} from 'rxjs/operators';
 import {environment} from "../../../environments/environment";
+import {MyLogger} from "../../service/logging/myLogging";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ itema = CoffeeProductItems;
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
      console.log('interceptors here', req.url, environment.ParseServerURL);
      if (req.url === 'https://parseapi.back4app.com/create-checkout-session') {
-       console.log('inside the intercepteor')
+       MyLogger.log('==')('inside the interceptor for req.url', req.url)
       const cln = req.clone({url: 'http://localhost:3000/create-checkout-session'});
       return next.handle(req);
       // return next.handle(cln);

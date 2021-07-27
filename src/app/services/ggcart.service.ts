@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GGBasket, GGBasketService} from '../model/GGCart.model';
+import {GGBasket, GGBasketService} from '../model/shared/GGCart.model';
 import {GGStockProductOptionOrder, GGStockProductOrder, GGStockProductOrderImpl} from '../model/shared/GGOrderFacade.model';
 import {Basket, BasketTotal} from '../model/types';
 import {ReplaySubject} from 'rxjs';

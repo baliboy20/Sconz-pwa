@@ -41,7 +41,7 @@ Parse.Cloud.define("ppitd", async (request) => {
     inst.set('payment_status', payload.payment.payment_status);
     inst.set('payment_info', payload.payment);
     const rs = await inst.save();
-    console.log('£-'.repeat(20), 'inside mainjs->postPaymentInitiatedToDb().save', rs);
+    console.log('£-'.repeat(20), 'inside mainjs->postPaymentInitiatedToDb().saveToDb', rs);
     const b4a_payments_object_id = rs.id;
     return (rs);
   } catch (error) {
@@ -120,6 +120,43 @@ Parse.Cloud.define('deletGGStockProductImage', async (request) => {
     return e.message
   }
   return 'I am a cloud on the server';
+})
+
+
+Parse.Cloud.define('UpdatelastCoffeeOrderDatetime', async (request) => {
+  const {id} = request.params;
+  console.log('req parms id', id);
+  try {
+    const retfig1 = await Parse.Config.save(
+      { WhenlastCoffeeOrder: Date.now(), OrdersLastUpdate: '44'},
+      {WhenlastCoffeeOrder: false, OrdersLastUpdate: false});
+    return retfig1;
+  } catch (e) {
+    return e.message
+  }
+})
+
+Parse.Cloud.define('RetrievelastCoffeeOrderDatetime', async (request) => {
+  console.log('req parms id', id);
+  try {
+    const retfig1 = await Parse.Config.get();
+    return retfig1; // .get('WhenlastCoffeeOrder');
+  } catch (e) {
+    return e.message
+  }
+
+})
+
+Parse.Cloud.define('WhenlastCoffeeItemChanged', async (request) => {
+
+  try {
+    const retfig1 = await Parse.Config.save(
+      { WhenlastCoffeeItemChanged: Date.now()},
+      {WhenlastCoffeeItemChanged: false});
+    return retfig1;
+  } catch (e) {
+    return e.message
+  }
 })
 
 // 4242424242424242 w@a.co

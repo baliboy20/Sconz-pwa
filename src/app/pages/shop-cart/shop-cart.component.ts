@@ -3,7 +3,7 @@ import {CartService} from '../../services/cart.service';
 import {Router} from '@angular/router';
 import {BasketService} from '../../services/basket.service';
 import {CartItemFacade} from '../../model/CartItemFacade.model';
-import {PageBase} from '../page-base/page-base';
+import {PageBase} from '../../framework/pages/page-base/page-base';
 import {Basket} from '../../model/types';
 import {tap} from 'rxjs/operators';
 import {AppIcons} from '../../../assets/setting_configs/material-icons-sets';

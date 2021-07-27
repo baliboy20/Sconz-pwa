@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormBuilder, Validators} from '@angular/forms';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {GGCartService} from '../../../../services/ggcart.service';
 import {GGStockProductOrderImpl} from '../../../../model/shared/GGOrderFacade.model';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {GGStockProductFacade} from "../../../../model/shared/GGStockProductFacade.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-click-collect-bottom-sheet',
@@ -28,6 +29,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
     public fb: FormBuilder,
     public ref: MatBottomSheetRef<ClickCollectBottomSheetComponent>,
     public cart: GGCartService,
+    private router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) public prod: any
   ) {
     this.data = prod;
@@ -56,9 +58,8 @@ export class ClickCollectBottomSheetComponent implements OnInit {
   }
 
 
-  dimissAndSave(): void {
-    // console.log('devoer');
-    of(this.formGroup.getRawValue())
+  private _saveToCart() : Observable<any> {
+    return of(this.formGroup.getRawValue())
       .pipe(
         map(a => {
           a.name = this.data.name;
@@ -69,11 +70,15 @@ export class ClickCollectBottomSheetComponent implements OnInit {
         map(a => {
           return GGStockProductOrderImpl.create(a);
         }),
-        // tap(b => console.log('xxxxx', b)),
-      )
+      tap(a =>{
+        this.cart.add(a);
+      }),
+      );
+  }
+  dimissAndSave(): void {
+    this._saveToCart()
       .subscribe(a => {
           // console.log('%cForm changes', 'color: green', a);
-          this.cart.add(a);
           this.ref.dismiss();
         },
         error => console.log('error', error.message));
@@ -86,6 +91,17 @@ export class ClickCollectBottomSheetComponent implements OnInit {
   getSrcset(_url: string): string {
     // console.log('url', _url);
     return `${_url} 200w`;
+  }
+
+  payNow(): void {
+    this._saveToCart()
+      .subscribe(a => {
+          // console.log('%cForm changes', 'color: green', a);
+          this.ref.dismiss();
+          this.router.navigate(['gg-checkout']);
+        },
+        error => console.log('error', error.message));
+
   }
 }
 

@@ -2,11 +2,14 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {GGCartService} from "../../services/ggcart.service";
 import {BasketServiceUtils} from "../../services/basket.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PageBase} from "../page-base/page-base";
-import {GGBasket} from "../../model/GGCart.model";
+import {PageBase} from "../../framework/pages/page-base/page-base";
+import {GGBasket} from "../../model/shared/GGCart.model";
 import {StripePayService} from "../../stripe-payments-lib/services/stripe-pay.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {environment} from "../../../environments/environment";
+import {ShippingInfo} from "../../model/shared/ShippingInfo.interface";
+import * as Parse from "parse";
+import {MyLogger} from "../../service/logging/myLogging";
 
 @Component({
   selector: 'app-ggcheckout',
@@ -48,25 +51,28 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
   }
 
   ngOnInit(): void {
+
     super.subscription = this.cartService.basketChanged
       .subscribe(a => {
         this.basket = a;
-        // this.ref.reattach();
-        // this.ref.markForCheck();
         this.ref.detectChanges();
       });
-
   }
 
-  async placeOrderClicked() {
-    console.log('all for one', this.cartService.clone());
-    const id = await this.stripeService.ggOneTimeCheckout(
-      environment.enableNavToStripPayment,
-      this.formGroup.getRawValue(),
-      this.cartService.clone());
+  async placeOrderClicked(payLater = false) {
+    const shipinfo: ShippingInfo =  this.formGroup.getRawValue();
+    const id = await this.stripeService
+      .ggOneTimeCheckout(
+        payLater,
+        shipinfo,
+        this.cartService.clone()
+      );
 
   }
-
+  ngOnDestroy(): void {
+    Parse.Object.unPinAllObjects();
+   // MyLogger.logCol({symbol: '±±±±', fontSize: '40px', color: 'orange'})('on destroy')
+  }
   /*
    w@c.co
    4242424242424242

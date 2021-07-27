@@ -1,4 +1,4 @@
-import {GGStockProductChoice, GGStockProductOption} from "./GGStockProducts.infc";
+import {GGStockProductChoice, GGStockProductOption} from './GGStockProducts.infc';
 
 export interface GGStockProductChoiceOrder extends GGStockProductChoice {
   qty: number;
@@ -40,7 +40,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.updateTotal();
   }
   get thumbImgUrl(): string {
-    if (typeof this.thumbImg == 'string') {
+    if (typeof this.thumbImg === 'string') {
       return this.thumbImg as string;
 
     } else if ('_url' in this.thumbImg) {
@@ -67,6 +67,13 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.reCompute(this as GGStockProductOrder);
   }
 
+
+  get optionsDescList(): string | undefined {
+    // return 'a spoon full of henley';
+    return !this.options || this.options.length === 0 ? '' :
+            this.options.map(this. _GbpFmt).join(', ');
+  }
+
   choice: GGStockProductChoice;
   id: string;
   name: string;
@@ -77,19 +84,6 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   private _qty: number;
   instructions: string;
   private _thumbImgUrl: string;
-
-
-  get optionsDescList(): string | undefined {
-    // return 'a spoon full of henley';
-    return !this.options || this.options.length == 0 ? '' :
-            this.options.map(this. _GbpFmt).join(', ');
-  }
-
-private _GbpFmt(it: GGStockProductOption) : string {
-    return it.price <= 0 ? it.name:  ` ${it.name} @ £${it.price.toString().padStart(2,'0')}`;
-
-  // '£' + it.toString().padStart(2, '0')
-}
   /**  */
   static totalOfOptions(options: GGStockProductOption[]): number {
     const total = options
@@ -101,6 +95,12 @@ private _GbpFmt(it: GGStockProductOption) : string {
   static create(a: GGStockProductOrder): GGStockProductOrder {
     return new GGStockProductOrderImpl(a);
   }
+
+private _GbpFmt(it: GGStockProductOption): string {
+    return it.price <= 0 ? it.name : ` ${it.name} @ £${it.price.toString().padStart(2, '0')}`;
+
+  // '£' + it.toString().padStart(2, '0')
+}
 
   public reCompute(data: GGStockProductOrder): void {
     this.total = Math.round((this.choice.price * this._qty * 100) +

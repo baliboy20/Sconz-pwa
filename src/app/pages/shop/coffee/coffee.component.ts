@@ -6,7 +6,7 @@ import {RepoService} from '../../../services/repo.service';
 import {StockProductFacade} from '../../../model/StockProducts';
 import {DomSanitizer} from '@angular/platform-browser';
 import {tap} from 'rxjs/operators';
-import {PageBase} from '../../page-base/page-base';
+import {PageBase} from '../../../framework/pages/page-base/page-base';
 
 @Component({
   selector: 'app-coffee',

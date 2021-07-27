@@ -129,4 +129,7 @@
   <button (click)="dimissAndSave()"
           style="border-radius: 30px; padding: 8px 18px"
           mat-raised-button>Add to order {{total | currency: "GBP" }} </button>
+  <button (click)="payNow()"
+          style="border-radius: 30px; padding: 8px 18px"
+          mat-raised-button>Pay now {{total | currency: "GBP" }} </button>
 </ng-template>

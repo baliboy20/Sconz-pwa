@@ -8,8 +8,8 @@ import {
   OnInit
 } from '@angular/core';
 import {GGCartService} from "../../services/ggcart.service";
-import {PageBase} from "../../pages/page-base/page-base";
-import {GGBasket} from "../../model/GGCart.model";
+import {PageBase} from "../../framework/pages/page-base/page-base";
+import {GGBasket} from "../../model/shared/GGCart.model";
 import {GGStockProductOrder, GGStockProductOrderImpl} from "../../model/shared/GGOrderFacade.model";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material/sidenav";
