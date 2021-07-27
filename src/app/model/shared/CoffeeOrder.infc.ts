@@ -13,6 +13,6 @@ export interface CustomerOrder {
   order: Order;
   payment?: Payment | undefined;  //Stripe payment feedback info
   paymentIntent?: string; // Stripe payment feedback info
-  paymentStatus?: string;
+  paymentStatus : 'unpaid' | 'paid';
   orderStatus: 'suspended' | 'open' | 'completed' | 'cancelled';  // suspended, open, closed
 }

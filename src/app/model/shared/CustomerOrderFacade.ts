@@ -48,11 +48,11 @@ export class CustomerOrderFacade implements CustomerOrder {
     return this.item.get('paymentIntent');
   }
 
-  get paymentStatus(): string {
-    return this.item.get('paymentStatus');
+  get paymentStatus(): 'paid' | 'unpaid' {
+    return this.item.get('paymentStatus') as 'paid' | 'unpaid';
   }
 
-  set paymentStatus(value: string) {
+  set paymentStatus(value: 'paid' | 'unpaid') {
     this.item.set('paymentStatus', value as any);
   }
 
