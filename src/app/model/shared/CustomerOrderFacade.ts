@@ -110,6 +110,10 @@ export class CustomerOrderFacade implements CustomerOrder {
     return CustomerOrderFacade.create(inst);
   }
 
+  /**
+   * Returns a new Facade wrapping the supplied Parse.object argument.
+   * @param b
+   */
   static create(b: Parse.Object): CustomerOrderFacade {
     const retval = new CustomerOrderFacade(b as Parse.Object);
     return (retval);

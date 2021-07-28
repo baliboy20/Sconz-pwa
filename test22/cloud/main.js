@@ -23,6 +23,7 @@
 // },
 // basket: { cart: [ [Object], [Object] ], total: 31.11, qty: 3 }
 
+
 Parse.Cloud.define("ppitd", async (request) => {
    // console.log('Request:::', request);
   if (request.params === undefined) {
@@ -54,16 +55,21 @@ Parse.Cloud.define("ppitd", async (request) => {
 Parse.Cloud.define('paymentComplete', async (request) => {
 
   try {
-    console.log('``PaymentComplete --``'.repeat(7), request.body);
+
     const query = new Parse.Query('CoffeeOrders');
     // const query = new Parse.Query('Payments');
     const pi = request.params.pi;
-    console.log('request params pi', pi)
-    const result = await query.equalTo('payment_intent', pi)
+    console.log('request params pi 23:', pi)
+    const result = await query.equalTo('paymentIntent', pi)
       .find();
+    console.log('``Re --``'.repeat(7), 'paymentComplete(): 23 ', result);
+
+     //console.log('``PaymentComplete --``'.repeat(7), request.body);
+     //console.log('``PaymentComplete --``'.repeat(7), request.body);
     result.forEach(async a => {
-      a.set('payment_status', 'paid');
-      await a.save();
+      a.set('paymentStatus', 'paid');
+    const resobj = await a.save();
+      console.log('``Re --``'.repeat(2), 'paymentComplete(): 23', resobj);
     });
   } catch (error) {
     console.log('paymentComplete()', error.message);
@@ -159,4 +165,4 @@ Parse.Cloud.define('WhenlastCoffeeItemChanged', async (request) => {
   }
 })
 
-// 4242424242424242 w@a.co
+// 424242424242 4242 w@a.co
