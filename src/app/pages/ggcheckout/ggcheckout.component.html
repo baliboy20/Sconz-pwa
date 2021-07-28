@@ -55,14 +55,18 @@
     <div class="mat-card order-summary">
 
       <mat-accordion>
-        <mat-expansion-panel [expanded]="true" >
+        <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Order Details
+              Basket Details
             </mat-panel-title>
             <mat-panel-description>
+             side stuff
+
+
             </mat-panel-description>
           </mat-expansion-panel-header>
+          <p>This is the primary content of the panel.</p>
           <ng-container *ngTemplateOutlet="OrderDetailTableTmpl"></ng-container>
         </mat-expansion-panel>
 
@@ -90,28 +94,7 @@
                           Order Detail tmpl
 -->
 <ng-template #OrderDetailTableTmpl>
-<table>
-  <thead>
-  <tr>
-    <td>Name</td>
-    <td>Qty</td>
-    <td>Price</td>
-    <td>Amount</td>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let itm of this.basket?.basketItems">
-    <td>
-      <div>{{asItm(itm).nameChoice}}</div>
-      <div>{{asItm(itm).optionsDescList}}</div>
-    </td>
-    <td>{{asItm(itm).qty}}</td>
-    <td>{{asItm(itm).choice.price}}</td>
-    <td>{{asItm(itm).total}}</td>
 
-  </tr>
-  </tbody>
-</table>
   {{this.basket?.total}}
 </ng-template>
 

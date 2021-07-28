@@ -160,7 +160,6 @@ export class StripePayService {
       updatedAt: Date.now().toString(),
       shippingInfo,
       orderStatus: 'open',
-      paymentStatus: 'unpaid'
     };
     let orderId = '';
 
@@ -235,7 +234,7 @@ export class StripePayService {
             images: [],
           },
         },
-        quantity: itm.qty,
+        quantity: itm.qty
       };
       lts.push(nw);
     }

@@ -10,7 +10,6 @@ import {environment} from "../../../environments/environment";
 import {ShippingInfo} from "../../model/shared/ShippingInfo.interface";
 import * as Parse from "parse";
 import {MyLogger} from "../../service/logging/myLogging";
-import {GGStockProductOrder} from "../../model/shared/GGOrderFacade.model";
 
 @Component({
   selector: 'app-ggcheckout',
@@ -56,7 +55,6 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
     super.subscription = this.cartService.basketChanged
       .subscribe(a => {
         this.basket = a;
-        MyLogger.large()('bscket', a);
         this.ref.detectChanges();
       });
   }
@@ -71,10 +69,6 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
       );
 
   }
-
-  asItm(itm:  GGStockProductOrder): GGStockProductOrder {
-    return itm;
-  }
   ngOnDestroy(): void {
     Parse.Object.unPinAllObjects();
    // MyLogger.logCol({symbol: '±±±±', fontSize: '40px', color: 'orange'})('on destroy')
@@ -84,7 +78,4 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
    4242424242424242
    */
   // }
-  asBasketItem(basketItems: GGStockProductOrder[]): GGStockProductOrder[] {
-   return basketItems;
-  }
 }

@@ -4,9 +4,9 @@
   <h2>Shiping Information:</h2>
   <ng-container *ngTemplateOutlet="shippingTmpl; context: {shippi: item?.shippingInfo}"></ng-container>
   <h2>Items Purchased</h2>
-  <ng-container *ngTemplateOutlet="basketTmpl; context: {basket: item?.order}"></ng-container>
-  <h2>Payment</h2>
-  <ng-container *ngTemplateOutlet="paymentTmpl; context: {paymentStatus: item?.paymentStatus, pint: item?.paymentIntent}"></ng-container>
+  <ng-container *ngTemplateOutlet="basketTmpl; context: {basket: item?.basket}"></ng-container>
+<!--  <h2>Payment</h2>-->
+<!--  <ng-container *ngTemplateOutlet="paymentTmpl; context: {payment: item?.payment}"></ng-container>-->
 </div>
 
 
@@ -21,7 +21,7 @@
 
 <!--
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-                          Shipping Information wrapper row
+                          Shipping Information
 -->
 <ng-template #flexRowTmpl let-fldname='fldname' let-labelname='labelname' let-shippi='shippi'>
   <div class="flex-row-2" *ngIf="shippi">
@@ -36,8 +36,7 @@
 Details about the customer and shipping requirements
 -->
 
-<ng-template #shippingTmpl let-shippi="shippi">
-
+<ng-template #shippingTmpl let-shippi='shippi'>
   <div class="shipping-details">
     <ng-container
       *ngTemplateOutlet="flexRowTmpl; context:{shippi: shippi, fldname: 'firstName', labelname: 'First name:'}"></ng-container>
@@ -62,8 +61,8 @@ Details about the customer and shipping requirements
   <table class="basket-table" *ngIf="basket">
 
     <thead>
-    <tr [class.field-label]="">
-      <td>Descriptions</td>
+    <tr>
+      <td>Description</td>
       <td>Options</td>
       <td>Qty</td>
       <td>Price</td>
@@ -73,9 +72,8 @@ Details about the customer and shipping requirements
     <tr *ngFor="let itm of basket.basketItems; let idx=index">
       <td><div>{{[itm.name, itm.choice.name].join(', ')}}</div></td>
       <td>{{this.joinOptions(itm.options)}}</td>
-      <td>{{asBasketItmQty(itm)}}</td>
-      <td style="text-align: right">{{itm.total| currency:'GBP'}}</td>
-      <td style="text-align: right">{{itm.choice.price| currency:'GBP'}}</td>
+      <td>{{itm.qty}}</td>
+      <td>{{itm.total}}</td>
 
     </tr>
     </tbody>
@@ -83,7 +81,7 @@ Details about the customer and shipping requirements
     <td></td>
     <td></td>
     <td>Total</td>
-    <td>{{basket.total | currency:'GBP'}}</td>
+    <td>{{basket.total}}</td>
     </tfoot>
   </table>
 </ng-template>
@@ -93,6 +91,7 @@ Details about the customer and shipping requirements
                            Basket
 -->
 <ng-template #basketTmpl let-basket='basket'>
+
 
 <!--  {{tryit(basket)}}-->
   <ng-container *ngTemplateOutlet="basketTableTmpl; context:{basket: basket}"></ng-container>
@@ -104,10 +103,10 @@ Details about the customer and shipping requirements
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                            Payment
 -->
-<ng-template #paymentTmpl let-paymentStatus="paymentStatus" let-pint="pint">
+<ng-template #paymentTmpl let-payment='payment'>
   <div>
-    <div>Status:&nbsp;{{ paymentStatus}}</div>
-    <div>ref:&nbsp;{{pint}}</div>
+    <div>Status:&nbsp;{{payment.payment_status}}</div>
+    <div>ref:&nbsp;{{payment.id}}</div>
   </div>
 
 </ng-template>

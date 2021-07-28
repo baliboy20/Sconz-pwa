@@ -6,7 +6,6 @@ import {ReplaySubject} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {ToCurrencyStringFn} from '../features/utils/computes';
 import {GGStockProductChoice, GGStockProductOption} from "../model/shared/GGStockProducts.infc";
-import {MyLogger} from "../service/logging/myLogging";
 
 // export type GGBasketTotal = { total: number, qty: number };
 
@@ -30,6 +29,7 @@ export class GGCartService implements GGBasketService {
     this.FromLocalStorage()
   }
 
+
   // readonly Items: GGStockProductOrder[] | undefined;
   private _basketItems: GGStockProductOrder[] = [];
   basketChanged: ReplaySubject<GGBasket> = new ReplaySubject();
@@ -51,7 +51,7 @@ export class GGCartService implements GGBasketService {
       this.basketItems[+idx].qty += itm.qty;
       console.log('%c IS MATCHED', 'color: purple;  font-size: 20px', itm.qty, idx);
     } else {
-      // console.log('%c ITEM ADDED', 'color: purple; font-size: 20px', itm);
+      console.log('%c ITEM ADDED', 'color: purple; font-size: 20px', itm);
       this.basketItems.push(itm.clone());
     }
     this.reSync();
@@ -77,8 +77,7 @@ export class GGCartService implements GGBasketService {
   }
 
   clearout(): void {
-     this.basketItems.splice(0, this.basketItems.length);
-    // MyLogger.alert()('Clear out must be reinstated');
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
@@ -119,10 +118,8 @@ export class GGCartService implements GGBasketService {
     this.reSync();
   }
 
-
   reset(): void {
-    // MyLogger.alert()('reset called but has been disabled')
-     this.basketItems.splice(0, this.basketItems.length);
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
@@ -156,9 +153,9 @@ export class GGCartService implements GGBasketService {
 
 
     if (Array.isArray(bask.basketItems) && bask.basketItems.length > 0) {
-      const prodImpl = bask.basketItems.map(a =>  GGStockProductOrderImpl.create(a));
-      //
-      // const prodImpl = bask.basketItems.map(GGStockProductOrderImpl.create)
+      const prodImpl = bask.basketItems.map(a => {
+        return GGStockProductOrderImpl.create(a);
+      });
       bask.basketItems = prodImpl;
       console.log('Redtriedved', prodImpl);
       this.basketItems.push(...prodImpl);
@@ -174,7 +171,7 @@ export class GGCartService implements GGBasketService {
       let str = JSON.stringify(this.basket ?? '');
       const reg = /_qty/g;
       str = str.replace(reg, 'qty');
-    //  console.log('to local storage', str, this.basketItems);
+      console.log('to local storage', str, this.basketItems);
       window.localStorage.setItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY, str);
     } else {
       window.localStorage.removeItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY);
@@ -184,9 +181,6 @@ export class GGCartService implements GGBasketService {
 
 export type SelectionsType = GGStockProductChoice | GGStockProductOption;
 
-/**
- * Determines whether a new product selection is added to an existing item in the cart incrementing qty or add a new element/
- */
 export class ItemInBasketExistsHelper {
   static isMatched(item: GGStockProductOrder, basketItems: GGStockProductOrder[]): number {
     const hlp = ItemInBasketExistsHelper;

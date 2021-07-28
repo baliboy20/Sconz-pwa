@@ -32,10 +32,11 @@ export class AppComponent {
   ) {
     // @ts-ignore
     Parse.serverURL = 'https://v69coffee.b4a.io';
+    MyLogger.log('=====')('HELLO');
   }
 
   async ngOnInit(): Promise<void> {
-
+    MyLogger.log('=====')('HELLO');
     await this.liveQueryInit();
   }
   // listens for new orders.

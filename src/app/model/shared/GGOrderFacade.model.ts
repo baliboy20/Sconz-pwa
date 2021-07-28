@@ -24,7 +24,7 @@ export interface GGStockProductOrder {
   qty: number;
   instructions: string;
   clone: () => GGStockProductOrder;
-  nameChoice: string;
+  nameChoice: () => string;
 
   updateTotal(): void;
 }
@@ -98,6 +98,8 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
 
 private _GbpFmt(it: GGStockProductOption): string {
     return it.price <= 0 ? it.name : ` ${it.name} @ £${it.price.toString().padStart(2, '0')}`;
+
+  // '£' + it.toString().padStart(2, '0')
 }
 
   public reCompute(data: GGStockProductOrder): void {
@@ -105,8 +107,8 @@ private _GbpFmt(it: GGStockProductOption): string {
       GGStockProductOrderImpl.totalOfOptions(this.options) * 100) / 100;
   }
 
-  get nameChoice(): string {
-    return `${this.name}/${this.choice.name === '[default]' ? '' : this.choice.name}`;
+  nameChoice(): string {
+    return `${this.name}/${this.choice.name}`;
   }
 
   public clone(): GGStockProductOrder {

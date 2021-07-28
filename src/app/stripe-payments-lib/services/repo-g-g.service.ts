@@ -8,8 +8,6 @@ import {GGBasket} from "../../model/shared/GGCart.model";
 import {GGStockProductFacade} from "../../model/shared/GGStockProductFacade.model";
 import {MyLogger} from "../../service/logging/myLogging";
 import {GGStockProductOrderImpl} from "../../model/shared/GGOrderFacade.model";
-import {CustomerOrder} from "../../model/shared/CoffeeOrder.infc";
-import {CustomerOrderFacade} from "../../model/shared/CustomerOrderFacade";
 
 
 const STOCK_COLLECTION_NAME: string = 'GGStockProducts';
@@ -42,7 +40,7 @@ export class RepoGGService implements OnDestroy {
 
   private _configLocalDatastore(): void {
     // Parse.enableLocalDatastore();
-    // window.localStorage.clear();
+    window.localStorage.clear();
 
 
   }
@@ -260,16 +258,16 @@ export class RepoGGService implements OnDestroy {
     return await rsul;
   }
 
-  public async getCartOfOrder(id: string): Promise<CustomerOrderFacade> {
+  public async getCartOfOrder(id: string): Promise<OrderSent> {
     const rsul: Parse.Object = await this._getOrder(id);
     console.log('%c order retrireved', 'color: orange', rsul);
-    // const a: OrderSent = {
-    //   basket: (rsul.get('order') as GGBasket),
-    //   payment: (rsul.get('payment') as StripePaymentDetails),
-    //   shippingInfo: rsul.get('shippingInfo')
-    // };
+    const a: OrderSent = {
+      basket: (rsul.get('order') as GGBasket),
+      payment: (rsul.get('payment') as StripePaymentDetails),
+      shippingInfo: rsul.get('shipping_info')
+    };
 
-    return  CustomerOrderFacade.create(rsul);
+    return a;
   }
 
   ngOnDestroy(): void {

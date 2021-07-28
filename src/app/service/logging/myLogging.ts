@@ -25,19 +25,15 @@ export class MyLogger {
     return console.log;
   }
 
-  static toLocalStorage(key: string, value: string) : void {
-    window.localStorage.setItem(key,value);
-     console.log('localsStorage', key, value);
+  static logOnce(arg: { symbol?: string, color?: string, fontSize?: string}): any {
+    if (!MyLogger.on) {
+      return (val: any) =>  null;
+    }
+    const {symbol, color, fontSize} = arg;
+    console.log(`%c${symbol}`, `color: ${color}; font-size:${fontSize}`);
+    const fn = console.log;
+    return fn ;
   }
-  // static logOnce(arg: { symbol?: string, color?: string, fontSize?: string}): any {
-  //   if (!MyLogger.on) {
-  //     return (val: any) =>  null;
-  //   }
-  //   const {symbol, color, fontSize} = arg;
-  //   console.log(`%c${symbol}`, `color: ${color}; font-size:${fontSize}`);
-  //   const fn = console.log;
-  //   return fn ;
-  // }
 
   static normal(): any {
     const {symbol, color, fontSize} = {symbol: '...', color: 'brown', fontSize: '12px'};
