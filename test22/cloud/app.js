@@ -87,7 +87,7 @@ app.post('/create-checkout-session', bodyparser.json(), async (req, res) => {
     return;
   }
 
-  console.log('sending back the session', session);
+  // console.log('sending back the session', session);
   res.send(session);
 
 });
@@ -111,18 +111,22 @@ async function postDb(payload) {
 }
 
 
-// Match the raw body to content type application/json
+/**
+ * Match the raw body to content type application/json
+  */
+
 app.post('/webhook', bodyparser.raw({type: 'application/json'}), async (request, response) => {
-  return;
+ // return;
   const event = request.body;
   const val = request.body.toString('utf8');
   const oval = JSON.parse(val);
-  //  console.log('==='.repeat(20), '\n webhook fired \n', event.type);
+ // console.log('==='.repeat(20), '\n WEBHOOK FIRED \n', event.type);
   // confirmPaymentDb(oval.data.object.paymentIntent)
   // Handle the event
   switch (oval.type) {
     case 'checkout.session.completed':
-      //  console.log(counter, '-- counter->?/.'.repeat(10), `\n\nEvent type ${oval.type}`, oval.data.object.paymentIntent);
+      const info = JSON.stringify(oval.data.object)
+    //  console.log(counter, '-- counter->?/.'.repeat(10), `\n\nEvent type ${oval.type}`, info);
       await confirmPaymentDb({pi: oval.data.object.payment_intent})
       // setTimeout(async () => {
 
@@ -144,6 +148,29 @@ app.post('/webhook', bodyparser.raw({type: 'application/json'}), async (request,
 
   return null;
 });
+
+
+/**
+ * Update Coffe Orders with Stripe payment status
+ *
+ */
+async function confirmPaymentDb(arg_) {
+  try {
+    const pi = arg_.pi;
+ //   console.log('00000'.repeat(5), 'inside confrimPaymentsDb() => pi', pi);
+    const headers = {
+      'X-Parse-Application-Id': 'fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i',
+      'X-Parse-REST-API-Key': '5BfNScDDuwnfgFXJCWJvMNFTtGHQq1C3fhNdH2XT',
+      'Content-Type': 'application/json'
+    };
+    const url = 'https://parseapi.back4app.com/functions/paymentComplete';
+     const result = await axios.post(url, {pi: pi}, {headers: headers});
+    // const  b4a_payments_object_id = result.body.b4a_payments_object_id;
+
+  } catch (error) {
+    console.log('* qry() Error *'.repeat(6), '\n', error.message);
+  }
+}
 
 /**
  *  Used in Development to create static pages for items products when running scully.
@@ -169,22 +196,6 @@ app.get('/scully', async (req, res) => {
 
 })
 
-// Called by the Webhook handler
-async function confirmPaymentDb(arg_) {
-  try {
-    const arg = arg_.pi;
-    console.log('00000'.repeat(5), 'inside confrimPaymentsDb()', arg);
-    const headers = {
-      'X-Parse-Application-Id': 'fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i',
-      'X-Parse-REST-API-Key': '5BfNScDDuwnfgFXJCWJvMNFTtGHQq1C3fhNdH2XT',
-      'Content-Type': 'application/json'
-    };
-    const url = 'https://parseapi.back4app.com/functions/paymentComplete';
-    const result = await axios.post(url, {pi: arg}, {headers: headers});
-    // const  b4a_payments_object_id = result.body.b4a_payments_object_id;
-    console.log('* Payment recorded *'.repeat(6), '\n', arg);
-  } catch (error) {
-    console.log('* qry() Error *'.repeat(6), '\n', error.message);
-  }
-}
 
+// 4242 4242 4242 4242
+// w@x.co

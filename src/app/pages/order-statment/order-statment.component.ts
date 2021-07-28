@@ -8,6 +8,8 @@ import {OrderSent} from "../../stripe-payments-lib/services/stripe-pay.service";
 import {GGStockProductOrder} from "../../model/shared/GGOrderFacade.model";
 import {RepoGGService} from "../../stripe-payments-lib/services/repo-g-g.service";
 import {MyLogger} from "../../service/logging/myLogging";
+import {CustomerOrderFacade} from "../../model/shared/CustomerOrderFacade";
+import {OrderItems} from "../../model/shared/Order.infc.";
 
 
 @Component({
@@ -16,12 +18,13 @@ import {MyLogger} from "../../service/logging/myLogging";
   styleUrls: ['./order-statment.component.scss']
 })
 export class OrderStatmentComponent implements OnInit {
-  public item: OrderSent | undefined;
+  public item: CustomerOrderFacade | undefined;
   constructor(
     private repo: RepoGGService,
     private cartService: GGCartService,
     private orderService: ActiveOrderService,
     private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
@@ -30,20 +33,12 @@ export class OrderStatmentComponent implements OnInit {
         map((a: Params) => a.orderId),
         tap(a => MyLogger.log('a')(a)),
         mergeMap((id: string) => {
-          // // if called by callback by Stripe payment use last order with pi as the key.
-          // let aid= '';
-          // if ( id === 'succeeded' || id == 'cancelled') {
-          //   const id =  this.orderService.lastOrder?.payment?.payment_intent;
-          // } else {
-          //
-          // }
-          MyLogger.log('id')(id);
               return fromPromise(this.repo.getCartOfOrder(id));
 
         }),
-        tap(a => MyLogger.log('pi')( a.payment)))
+      )
       .subscribe(a => {
-          MyLogger.large()('Order statment');
+        MyLogger.log('customre order')(a);
          this.item = a;
         },
         err => console.log('Error accessing order: ', err.message)
@@ -65,16 +60,16 @@ export class OrderStatmentComponent implements OnInit {
     return itm.length === 0 ? 'n/a' : itm.map(a => a.name).join(', ') ;
   }
 
-  tryit(basket: any) {
-    if (!basket) {
-      return '';
-    }
-    Object.keys(basket).forEach(console.log);
-    // for ( let a of Object.keys(basket)){
-    //   console.log('keys', a);
-    // }
-    // console.log('treyit', basket.);
-    return basket.basket;
+  // tryit(basket: any) {
+  //   if (!basket) {
+  //     return '';
+  //   }
+  //   Object.keys(basket).forEach(console.log);
+  //   return basket.basket;
+  // }
+  asBasketItmQty(itm: any): number {
+
+   return itm.qty ?? itm._qty;
   }
 }
 
