@@ -1,9 +1,34 @@
 Uploading source files
 Uploading recent changes to hosting...
 The following files will be uploaded:
-/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/404.html
-/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/825.6bef7f488c9b1b9dbf71.js
-/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/index.html
-/Users/will/WebstormProjects/Coffeeshop/RosyLookLike1/test22/public/runtime.76d7e11d3700b5e525d2.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/138.bccf0f3379817da04f70.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/173.b23620b05c06e19caf07.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/227.9fef56113715fbe84c09.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/295.14fa948547c00b89a7bd.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/299.52f65d6500dc65605c61.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/333.c2f886960d9df1758a59.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/338.d5b37c5fe7a5a0b65a43.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/392.584bab24d6c85d66ed58.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/3rdpartylicenses.txt
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/40.a1a535174da7b9f09be2.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/404.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/409.3d674be8e10299c9f31d.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/539.cbb73dac6267cdbf6c3b.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/613.4847f631b996266fefe4.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/644.d72a581f90dd7d506394.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/709.9f8a8b587035c0b2418c.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/832.6fc34d1c7a787c12f955.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/853.88585be3d6d5005a9804.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/885.88cd869739932bd54d61.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/891.ca6f7d353dc30eaa6a4b.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/955.8d8d9d5ebb17e32b3041.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/983.e2ac68a58ec9fcf1103e.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/990.16080a0d3222597b8d61.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/common.7f76b7b974fbf88bb8e8.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/main.07316b01b9f9cc86f72d.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/polyfills.fbc6709008b0e8199f4c.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/runtime.40533359cfb1c9957ff0.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/styles.2a48d525d5e6e013763d.css
 Finished uploading files
-New release is named v459 (using Parse JavaScript SDK v2.2.25)
+New release is named v481 (using Parse JavaScript SDK v2.2.25)
