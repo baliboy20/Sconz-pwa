@@ -14,6 +14,7 @@ import {CustomerOrder} from "../../model/shared/CoffeeOrder.infc";
 import {Payment} from "../../model/shared/Payment.infc";
 import {ShippingInfo} from "../../model/shared/ShippingInfo.interface";
 import {MyLogger} from "../../service/logging/myLogging";
+import {AppSettingsService} from "../../service/app-settings.service";
 
 declare const Stripe: new (arg0: string) => any;
 /**
@@ -97,6 +98,7 @@ export class StripePayService {
 
   // @Deprecate('orderStatementService')
   constructor(
+    private appSet: AppSettingsService,
     public http: HttpClient,
     private router: Router,
     private orderStatementService: ActiveOrderService,
@@ -162,14 +164,13 @@ export class StripePayService {
       orderStatus: 'open',
       paymentStatus: 'unpaid'
     };
-    let orderId = '';
 
     // SaveToDb order first to get the objectId
     try {
       cofe = CustomerOrderFacade.createFrom(cf);
-      const res = await cofe.saveToDb();
-      console.log('res', res, cofe.id)
-      orderId = res.id;
+      var {id} = await cofe.saveToDb();
+      MyLogger.large('STripe pay')('id', id);
+
     } catch (e) {
       MyLogger.error()("Customer Order Save failed", e.message);
       throw e;
@@ -178,7 +179,7 @@ export class StripePayService {
     try {
       // format Order for stripe payment
       const cartItemsStripeFormat = this.toStripeFormat(order.basketItems);
-      const stripeFormatOrderDetails = StripePayStrucFn(cartItemsStripeFormat, orderId);
+      const stripeFormatOrderDetails = StripePayStrucFn(cartItemsStripeFormat, id);
 
       // @ts-ignore
       const session: StripeSessionResponse = await this.http
@@ -190,7 +191,7 @@ export class StripePayService {
       cofe.paymentIntent = cofe.payment.payment_intent;
       cofe.saveToDb();
 
-      if (payLater) {
+      if (this.appSet.isSkipStripePaymentPageEnabled()) {
         this.router.navigate(['order-statement', 'success', cofe.id]);
       } else {
 

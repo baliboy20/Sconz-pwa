@@ -14,9 +14,10 @@ export const environment = {
     success_route: '/#/order-statement',
     cancel_route: '/#/order-statement',
   },
-  build_version: '11.2b prod 17 Jun \'21',
+  build_version: '12.23 prod 13 Aug \'21',
   useDevCart: false,
   enableNavToStripPayment: false,
+  noImageUrl:  `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`,
 };
 
 //  PARSE_APP_ID: '0XEhr0Bz73m42mgbksW4he8RuK9z4N2NIpeO0tMg',

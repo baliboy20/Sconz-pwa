@@ -17,13 +17,13 @@ import {MyLogger} from "./service/logging/myLogging";
   animations: [fadeInAnimation]
 })
 export class AppComponent {
-  title = 'RosyLookLike1';
+  // title = 'RosyLookLike1';
   version = environment.build_version;
   width = window.screen.width;
   componentPortal: ComponentPortal<ShopCartSideNavComponent> | undefined;
-  @ViewChild('CartDrawer', {read: MatSidenav}) public tref: MatSidenav | undefined;
+  @ViewChild('CartDrawer', {read: MatSidenav}) public cartDrawer: MatSidenav | undefined;
   @ViewChild('NavDrawer', {read: MatSidenav}) public navDrawer: MatSidenav | undefined;
-  @ViewChild('portal', {read: CdkPortalOutlet}) public portal: PortalOutlet | undefined;
+  // @ViewChild('portal', {read: CdkPortalOutlet}) public portal: PortalOutlet | undefined;
   checkoutSidenavOpened = false;
   sub: any;
   constructor(
@@ -63,26 +63,24 @@ export class AppComponent {
     this.router.navigate(['shop-cart']);
   }
 
-  openStatCart(event: any) {
-    this.componentPortal = this.componentPortal  ?? new ComponentPortal(ShopCartSideNavComponent);
-    if (this.componentPortal?.isAttached == false) {
-      // console.log('to be attached');
-      if(this.portal){
-        this.componentPortal.attach(this.portal);
-      }
-    }
+  // closedStatCart() {
+  //   if(!this.componentPortal || !this.componentPortal.isAttached) {
+  //     return;
+  //   }
+  //   this.componentPortal?.detach();
+  // }
+  //
+  // onAttached(event: any) {
+  //   const sc: ShopCartSideNavComponent = event.instance;
+  //   sc.sideNav = this.cartDrawer;
+  //
+  // }
+
+  openedStartNavDrawer() {
+    this.cartDrawer?.close();
   }
 
-  closedStatCart() {
-    if(!this.componentPortal || !this.componentPortal.isAttached) {
-      return;
-    }
-    this.componentPortal?.detach();
-  }
-
-  onAttached(event: any) {
-    const sc: ShopCartSideNavComponent = event.instance;
-    sc.sideNav = this.tref;
-
+  openedStartCartDrawer() {
+    this.navDrawer?.close();
   }
 }

@@ -2,32 +2,39 @@
 <ng-container *ngTemplateOutlet="mainToolbarTmpl"></ng-container>
 
 <!-- SideNav container-->
+
 <mat-sidenav-container>
 
 
   <!--  Cart and Checkout drawer-->
-<mat-sidenav position="end"
-             [opened]="checkoutSidenavOpened"
-             mode="over"
-             #CartDrawer
-             (openedStart)="openStatCart($event)"
-             (closedStart)="closedStatCart()">
 
-  <ng-template #portal [cdkPortalOutlet]="this.componentPortal" (attached)="onAttached($event)"></ng-template>
-<!--  <v69-shopcart-drawer [cartSideNav]="CartDrawer"></v69-shopcart-drawer>-->
-</mat-sidenav>
+  <mat-sidenav position="end"
+               [opened]="checkoutSidenavOpened"
+               (openedStart)="openedStartCartDrawer()"
+               mode="over"
+               #CartDrawer
+  >
 
+    <v69-shopcart-drawer [cartSideNav]="CartDrawer">
+    </v69-shopcart-drawer>
+  </mat-sidenav>
 
   <!--  Navigation drawer-->
+
+
   <mat-sidenav opened="false"
                mode="push"
+               (openedStart)="openedStartNavDrawer()"
                #NavDrawer>
-    <ng-container *ngTemplateOutlet="NavDrawerTmpl"></ng-container>
+    <div class="app-scrollable">
+      <ng-container *ngTemplateOutlet="NavDrawerTmpl"></ng-container>
+    </div>
+
   </mat-sidenav>
-<!-- -->
 
 
-<!--  SideNav Content area -->
+  <!--  SideNav Content area -->
+
   <mat-sidenav-content>
 
     <div [@routeAnimations]="prepareRoute(outlet)">
@@ -41,47 +48,44 @@
 
 
 <!--
-*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+==============================================================================
 
                         TEMPLATES
 
-*_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+==============================================================================
 -->
 
 
-<!-- TEMPLATE:                                  Click collect button -->
-
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Click collect button.
+-->
 <ng-template #ClkCltBnTmpl>
+
   <div style="background-color: transparent;
               margin-bottom: 10px;
               border:none;text-align: center">
-    <a (click)="navDrawer?.close()"
-       routerLink="click-collect">
-       <span  class="mat-elevation-z1"
-                    style="color: darkorange;
-                    box-sizing: border-box;
-                    border: .05rem double #dffa4a;
-                    border-radius: 28px;
-                    display: inline-block;
+    <button mat-raised-button
+            color="accent"
+            style="color: white; padding: 16px"
+            routerLink="click-collect"
+            (click)="navDrawer?.close()">
+      <mat-icon style="color: #8b3500">bolt</mat-icon>
+      CLICK AND COLLECT
 
-                    padding: 0px 16px;
-                    text-align: center;
-                    font: var(--font-regular-sub-heading16-inconsalata)
-                    ">CLICK & COLLECT</span>
-    </a>
+    </button>
   </div>
 </ng-template>
 
 
-
-<!-- TEMPLATE:                                     Toolbar -->
-
-
-
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Toolbar.
+-->
 <ng-template #mainToolbarTmpl>
   <mat-toolbar>
 
-    <button (click)="navDrawer?.toggle()"
+    <button (click)="this.navDrawer?.toggle()"
             mat-icon-button>
 
       <mat-icon>menu</mat-icon>
@@ -96,66 +100,70 @@
     </button>
     <span class="tx-div"></span>
 
-    <v69-basket-icon [cartSideNav]="this.tref"></v69-basket-icon>
+    <v69-basket-icon [cartSideNav]="this.cartDrawer"></v69-basket-icon>
   </mat-toolbar>
 
 </ng-template>
 
 
-
-<!-- TEMPLATE:                                     Navigation Draw Contents -->
-
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                        Navigation Draw Contents.
+-->
 <ng-template #NavDrawerTmpl>
 
-    <button (click)="navDrawer?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
-      <mat-icon>close</mat-icon>
-    </button>
-    <!--    <mat-divider></mat-divider>-->
+  <button (click)="navDrawer?.close()"
+          mat-icon-button
+          style="margin: 20px 0 20px 20px">
+    <mat-icon>close
+    </mat-icon>
+  </button>
 
-    <!--     click and collect-->
-    <ng-container *ngTemplateOutlet="ClkCltBnTmpl"></ng-container>
-    <mat-expansion-panel expanded="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Shop
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-selection-list [multiple]="false" class="expandable">
-        <mat-list-option (click)="navDrawer?.close()" routerLink="shop/coffee"> Coffee</mat-list-option>
-        <mat-list-option (click)="navDrawer?.close()" routerLink="shop/training"> Training</mat-list-option>
-        <mat-list-option (click)="navDrawer?.close()" routerLink="shop/vouchers"> Vouchers</mat-list-option>
-        <mat-list-option (click)="navDrawer?.close()" routerLink="shop/gift-subs"> Subscription</mat-list-option>
-      </mat-selection-list>
-    </mat-expansion-panel>
 
-    <mat-selection-list class="sellist" [multiple]="false">
+  <!--     click and collect-->
+  <ng-container *ngTemplateOutlet="ClkCltBnTmpl"></ng-container>
 
-      <mat-list-option (click)="navDrawer?.close()" routerLink="about">
-        About
-        <mat-divider></mat-divider>
+  <mat-expansion-panel expanded="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Shop
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list [multiple]="false" class="expandable">
+      <mat-list-option (click)="navDrawer?.close()"
+                       [routerLink]="[route[0]]"
+                       *ngFor="let route of [
+                       ['shop/coffee','Coffee'],
+                       ['shop/training', 'Training'],
+                       ['shop/vouchers','Vouchers'],
+                       ['shop/gift=subs', 'Subscriptions'],
+                       ]">  {{route[1]}}
+
       </mat-list-option>
-
-      <mat-list-option (click)="navDrawer?.close()" routerLink="brew-guides">
-        Brew
-        <mat-divider></mat-divider>
-      </mat-list-option>
-
-      <mat-list-option (click)="navDrawer?.close()" routerLink="visit">Visit
-        <mat-divider></mat-divider>
-      </mat-list-option>
-
-      <mat-list-option (click)="navDrawer?.close()" routerLink="contact">
-        Contact
-        <mat-divider></mat-divider>
-      </mat-list-option>
-
-      <mat-list-item>
-        <span style="margin: 0 auto; font-size: 13px; letter-spacing: 2px">V.{{version}}</span>
-
-      </mat-list-item>
-
-
     </mat-selection-list>
+  </mat-expansion-panel>
+
+  <mat-selection-list class="sellist" [multiple]="false">
+    <mat-list-option (click)="navDrawer?.close()"
+                     [routerLink]="[route[0]]"
+                     *ngFor="let route of [
+                     ['about', 'About'],
+                     ['brew-guides','Brew'],
+                     ['visit','Visit'],
+                     ['contact','Contact'],
+                     ['settings','Settings', 'Settings'],
+                     ]">
+
+      <mat-icon  matTooltip="Dev settings" *ngIf="route[2]">settings</mat-icon>
+      <span *ngIf="!route[2]">{{route[1]}}</span>
+
+      <mat-divider></mat-divider>
+    </mat-list-option>
+
+    <mat-list-item>
+      <span style="margin: 0 auto; font-size: 13px; letter-spacing: 2px">V.{{version}}</span>
+    </mat-list-item>
+  </mat-selection-list>
 
 
 </ng-template>

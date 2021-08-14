@@ -3,7 +3,7 @@ import {MyLogger} from "../../service/logging/myLogging";
 
 
 /**
- * Type used in the internal operations of the ParseFileFacade.
+ * Type used in the internal operations of the ThumbImageReader.
  */
 export type ParseFileFacadeCloneable = {
   parseFileOriginal?: Parse.File,
@@ -22,41 +22,42 @@ export type ParseFileFacadeCloneable = {
  */
 
 export class ParseFileFacade {
-  constructor(cloneProps?: ParseFileFacadeCloneable) {
+  constructor(cloneProps?: ParseFileFacadeCloneable, url?:  string) {
     if (cloneProps) {
       this.currParsefile = cloneProps.parseFileCurrent ?? cloneProps.parseFileOriginal;
       this.origParsefile = cloneProps.parseFileOriginal;
       this.isDirty = cloneProps.isDirty;
       this.dirtyImg = cloneProps.dirtyImg;
       this.isEmpty = !this.origParsefile;
+    } else if (url){
+      this.isDirty = false;
+      this.isEmpty = true;
+      this._url = url;
+    } else {
+      this.isDirty = false;
+      this.isEmpty = true;
+      this._url = undefined;
     }
 
-
-
-    // MyLogger.logOnce({
-    //        symbol: '~',
-    //        fontSize: '14px',
-    //        color: 'orangeRed',
-    //      })(this.isEmpty);
-    // }
-
   }
-
+   private readonly _url: string | undefined;
   /**
-   * get the url to the image. If saved on the parser server uses _url of Parse.File object.
+   * Get the url to the image. If saved on the parser server uses _url of Parse.File object.
    * If updated image is inserted uses the dirty image.
-   * If no Parse.file returns a no image jpeg;
+   * If no Parse.file returns a default no image jpeg;
    */
   get url(): string {
+    if( this._url) {
+      return this._url;
+    }
     if (this.isDirty && this.dirtyImg) {
       // because the current parse.file has not yet been saved.
       return this.dirtyImg;
     }
-    // MyLogger.normal()(this.currParsefile, this.origParsefile);
-
-    return this.origParsefile ?
+   const retval = this.origParsefile ?
       this.origParsefile._url :
       `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`;
+    return retval;
   }
 
   private readonly origParsefile: Parse.File | undefined;
@@ -149,7 +150,7 @@ export class ParseFileFacade {
     // if isdirty and current but no orig don't delete.
     // if isn't dirty and orgin return orig else return null;
     //
-    MyLogger.normal()('is dirty', this.isDirty, stockProductsId);
+    // MyLogger.normal()('is dirty', this.isDirty, stockProductsId);
     if (!this.isDirty) {
       return this.origParsefile;
     }
@@ -173,15 +174,15 @@ export class ParseFileFacade {
 
   }
 
-  saveOnly(): void {
+  async saveOnly(): Promise<Parse.File | null> {
     try {
       if (this.currParsefile) {
-        this.currParsefile.save();
+       return await this.currParsefile.save();
       }
-
     } catch (e) {
       console.log('%cError', e.message);
     }
+    return null;
   }
 }
 

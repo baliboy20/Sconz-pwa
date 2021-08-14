@@ -1,3 +1,5 @@
+
+
 <div class="cc-container">
 
   <mat-progress-spinner
@@ -45,10 +47,10 @@
 -->
 <ng-template #CategoriesRibbonTmpl let-prods=prods>
   <div class="horizontal-slidebar">
-    <mat-slide-toggle (toggleChange)="this.repo.cacheresults  = !this.repo.cacheresults">CACHE</mat-slide-toggle>
-    {{this.repo.cacheresults}}
-    {{this.repo.id}}
-    {{this.id}}
+    <!--    <mat-slide-toggle (toggleChange)="this.repo.cacheresults  = !this.repo.cacheresults">CACHE</mat-slide-toggle>-->
+    <!--    {{this.repo.cacheresults}}-->
+    <!--    {{this.repo.id}}-->
+    <!--    {{this.id}}-->
     <a
       (click)="scrollToId(prod[0])"
       class="span-item"
@@ -61,9 +63,10 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                          Product Item Card.
 -->
-<ng-template #cardTmpl let-prods=prods>
+<ng-template #cardTmpl let-prods=prods let-idx=idx>
+  <ng-template> <div class="mat-elevation-z13">jlljj</div></ng-template>
 
-  <div class="card-layout mat-elevation-z5"
+  <div class="card-layout mat-elevation-z3"
 
        (click)="onChooseProduct(prod)"
        *ngFor="let prod of prods">
@@ -74,12 +77,12 @@
     <div class="product-description">
       {{prod.description}} </div>
 
-
     <div class="product-price">
-      {{prod.lowestPrice() | currency: "GBP"}}
+      <span>{{prod.lowestPrice() | currency: "GBP"}}</span>
     </div>
-    <div class="product-image" id="product-image" [appCustomImg]>
-      <img [src]="prod.thumbImg.url">
+    <!--     [appCustomImg]-->
+    <div class="product-image" id="product-image">
+      <img [src]="prod?.thumbImg?.url" width="100%">
     </div>
 
   </div>

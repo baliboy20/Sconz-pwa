@@ -2,13 +2,13 @@ import {
   AfterViewInit,
   Component,
   Directive,
-  ElementRef,
+  ElementRef, HostListener,
   Input,
   OnDestroy,
   OnInit,
   QueryList,
   Renderer2,
-  ViewChildren
+  ViewChildren, ViewContainerRef
 } from '@angular/core';
 // import {RepoGGService} from '../../services/repo-g-g.service';
 import {Observable} from 'rxjs';
@@ -17,21 +17,46 @@ import {map, mergeMap, tap} from 'rxjs/operators';
 import {RepoGGService} from '../../stripe-payments-lib/services/repo-g-g.service';
 import {ActivatedRoute} from '@angular/router';
 import {GGStockProductFacade} from "../../model/shared/GGStockProductFacade.model";
+import {MyLogger} from "../../service/logging/myLogging";
 
-//
-//
-// Directive: manages the size of the Images
-//
-//
-//
-
+/**
+ MouseOverMouseOutDirective
+ ============================================================================================================
+ */
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  selector: '[mouseOverOut]'
+})
+export class MouseOverMouseOutDirective {
+  @HostListener('mouseover', ['$event.target']) onMouseOver(value: any) {
+    MyLogger.log('mouseover')('its over');
+    this.rnd.addClass(this.rf.nativeElement, 'CardHover');
+  }
+
+  @HostListener('mouseout', ['$event.target']) onMouseOut(value: any) {
+    MyLogger.log('mouseout')('its out', this.rf.nativeElement);
+    this.rnd.removeClass(this.rf.nativeElement,'mat-elevation-13')
+  }
+
+  constructor(private rf: ElementRef, private rnd: Renderer2) {
+    // MyLogger.log('ele ref')(rf);
+  }
+}
+
+/**
+  Directive: Manages the size of the Images.
+  ============================================================================================================
+ */
+@Directive({
+
   selector: '[appZZImg]'
 })
 export class ZzImageDirective {
 }
 
+/**
+ CustomImageDirective
+ ============================================================================================================
+ */
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[appCustomImg]'
@@ -102,7 +127,9 @@ export class CustomImageDirective implements AfterViewInit {
 }
 
 /**
- *
+ * The main component for the click collect page.
+ * ClickCollectComponent
+ ============================================================================================================
  */
 
 @Component({
@@ -113,6 +140,7 @@ export class CustomImageDirective implements AfterViewInit {
 export class ClickCollectComponent implements OnInit, OnDestroy {
   @ViewChildren(CustomImageDirective, {read: ElementRef}) imgs: QueryList<any> | undefined;
   public id = Math.round(Math.random() * 1000);
+
   constructor(
     public acr: ActivatedRoute,
     public bss: BottomSheetService,
@@ -136,10 +164,11 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
         map(obs => obs ?? new Error('Product Id not found')),
         tap((fac: GGStockProductFacade) => this.onChooseProduct(fac))
       )
-        .subscribe(res => console.log('acr', res), error => console.log('Err', error.message ?? error.toString()));
+      .subscribe(res => console.log('acr', res), error => console.log('Err', error.message ?? error.toString()));
   }
 
   isLoading = false;
+
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewInit(): void {
     // @ts-ignore
@@ -173,7 +202,35 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
 
   computeImgSize(container: string, ele: HTMLImageElement): any { //
   }
+
+  asProdFileFacade(prod: GGStockProductFacade): GGStockProductFacade {
+    return prod;
+  }
+
+  cardOvers: Set<String> = new Set()
+
+  pointerOver(e: MouseEvent, pid: any, setValue?: boolean): boolean {
+    e.stopImmediatePropagation();
+    MyLogger.log('productid')(pid, setValue)
+    if (setValue) {
+      if (!this.cardOvers.has(pid)) {
+        this.cardOvers.add(pid);
+      } else {
+        if (this.cardOvers.has(pid)) {
+          this.cardOvers.delete(pid);
+        }
+      }
+
+    }
+    return false;
+  }
+
+  isPointerOver(productId: any) {
+    return this.cardOvers.has(productId);
+  }
 }
+
+
 
 
 

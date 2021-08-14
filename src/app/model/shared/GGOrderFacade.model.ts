@@ -1,4 +1,6 @@
 import {GGStockProductChoice, GGStockProductOption} from './GGStockProducts.infc';
+import {MyLogger} from "../../service/logging/myLogging";
+import {ThumbImageReader} from "../ThumbImageReader";
 
 export interface GGStockProductChoiceOrder extends GGStockProductChoice {
   qty: number;
@@ -15,8 +17,7 @@ export interface GGStockProductOrder {
   productId: string;
   name: string;
   id: string;
-  thumbImg: { url?: string, _url?: string };
-  thumbImgUrl: string;
+  thumbImg: ThumbImageReader;
   choice: GGStockProductChoice;
   options: GGStockProductOption[];
   optionsDescList: string | undefined;
@@ -39,31 +40,25 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this._qty = value;
     this.updateTotal();
   }
-  get thumbImgUrl(): string {
-    if (typeof this.thumbImg === 'string') {
-      return this.thumbImg as string;
 
-    } else if ('_url' in this.thumbImg) {
-      return this.thumbImg._url as string;
-
-    } else if ('url' in this.thumbImg) {
-      return this.thumbImg.url as string;
-    } else {
-      return '';
-    }
+  get thumbImgUrl(): any {
+    return this.thumbImg.url;
   }
 
-  constructor(data: GGStockProductOrder | GGStockProductOrderImpl) {
-    this.instructions = data.instructions;
-    this._qty = data.qty;
-    this.choice = data.choice;
-    this.id = data.id;
-    this.productId = data.productId;
-    this.total = data.total;
-    this.name = data.name;
-    this.thumbImg = data.thumbImg;
-    this.options = data.options;
-    this._thumbImgUrl = (data.thumbImg._url ?? data.thumbImg._url) as string;
+  constructor(itm: GGStockProductOrder | GGStockProductOrderImpl) {
+    this.instructions = itm.instructions;
+    this._qty = itm.qty;
+    this.choice = itm.choice;
+    this.id = itm.id;
+    this.productId = itm.productId;
+    this.total = itm.total;
+    this.name = itm.name;
+   MyLogger.large('reader')(itm.thumbImg)
+    this.thumbImg = ThumbImageReader.createFromUrl(itm.thumbImg.url ?? itm.thumbImg._url)
+    this.options = itm.options;
+    // ****
+   //  this.thumbImg = itm.thumbImg as ThumbImageReader ?? ThumbImageReader.empty();
+
     this.reCompute(this as GGStockProductOrder);
   }
 
@@ -71,7 +66,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   get optionsDescList(): string | undefined {
     // return 'a spoon full of henley';
     return !this.options || this.options.length === 0 ? '' :
-            this.options.map(this. _GbpFmt).join(', ');
+      this.options.map(this._GbpFmt).join(', ');
   }
 
   choice: GGStockProductChoice;
@@ -79,11 +74,12 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   name: string;
   options: GGStockProductOption[];
   productId: string;
-  thumbImg: { url?: string, _url?: string };
+  thumbImg: ThumbImageReader;
   total: number;
   private _qty: number;
   instructions: string;
-  private _thumbImgUrl: string;
+  // private _thumbImgUrl: string;
+
   /**  */
   static totalOfOptions(options: GGStockProductOption[]): number {
     const total = options
@@ -93,12 +89,14 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   }
 
   static create(a: GGStockProductOrder): GGStockProductOrder {
+
     return new GGStockProductOrderImpl(a);
   }
 
-private _GbpFmt(it: GGStockProductOption): string {
-    return it.price <= 0 ? it.name : ` ${it.name} @ £${it.price.toString().padStart(2, '0')}`;
-}
+  private _GbpFmt(it: GGStockProductOption): string {
+    const value = (Math.round(it.price * 100) / 100).toFixed(2).padStart(2, '0');
+    return it.price <= 0 ? it.name : ` ${it.name} @ £${value}`;
+  }
 
   public reCompute(data: GGStockProductOrder): void {
     this.total = Math.round((this.choice.price * this._qty * 100) +
@@ -106,13 +104,13 @@ private _GbpFmt(it: GGStockProductOption): string {
   }
 
   get nameChoice(): string {
-    return `${this.name}/${this.choice.name === '[default]' ? '' : this.choice.name}`;
+    return `${this.name}${this.choice.name === '[default]' ? '' : '/' + this.choice.name}`;
   }
 
   public clone(): GGStockProductOrder {
     const choice = Object.assign({}, this.choice) as GGStockProductChoiceOrder;
     const options = this.options.map(a => Object.assign({}, a) as GGStockProductOptionOrder);
-    const cln =  new GGStockProductOrderImpl(this);
+    const cln = new GGStockProductOrderImpl(this);
     cln.qty = this.qty;
     return cln;
   }

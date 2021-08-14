@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "scully:scan": "npx scully -- --scan-routes",
@@ -13,8 +13,8 @@
     "cpy-static": "rm -rf ./test22/public && cp -a ./dist/static ./test22/public",
     "cpy-non-static": "rm -rf ./test22/public && cp -a ./dist/RosyLookLike1 ./test22/public",
     "rm": "rm -rf ./test22/public",
-    "build-deploy-scullied": "rm -rf ./dist && ng build --configuration production && npm run scully:scan && npm run cpy-static && cd ./test22 && b4a deploy > DEPLOYED.TXT && cd .. && echo `date` > UPLOAD_COMPLETE.TXT",
-    "build-deploy-scullied1": "npm run cpy-static && cd ./test22 && b4a deploy && cd .. && echo `date` > LAST_DEPLOYMENT_LOG.TXT",
+    "build-deploy-scullied": "rm -rf ./dist && ng build --configuration production --stats-json && npm run scully:scan && npm run cpy-static && cd ./test22 && b4a deploy > DEPLOYED.TXT && cd .. && echo `date` > UPLOAD_COMPLETE.TXT",
+    "nobuild-cpy-scullied-deploy": "npm run cpy-static && cd ./test22 && b4a deploy && cd .. && echo `date` > LAST_DEPLOYMENT_LOG.TXT",
     "build-nodeploy-scullied": "rm -rf ./dist && ng build --configuration production && npm run scully:scan && npm run cpy-static",
     "build-deploy-unscullied": "rm -rf ./dist && ng build --configuration production &&  npm run cpy-non-static && cd ./test22 && b4a deploy && cd ..",
     "complete": "echo done"
@@ -35,6 +35,7 @@
     "@scullyio/ng-lib": "^1.0.0",
     "@scullyio/scully": "^1.0.0",
     "hammerjs": "^2.0.8",
+    "http-server": "^13.0.0",
     "parse": "^2.19.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

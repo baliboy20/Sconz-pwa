@@ -78,9 +78,8 @@ export class RepoGGService implements OnDestroy {
     //  Parse.Object.unPinAllObjects();
     const query = new Parse.Query(STOCK_COLLECTION_NAME);
     MyLogger.log('+++')('querey from local datastore')
-    query.fromLocalDatastore();
+    query.fromNetwork();
     const res = await query.find();
-    Parse.Object.unPinAllObjects();
     return res;
     // }
   }

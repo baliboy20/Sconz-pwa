@@ -18,43 +18,45 @@ import {environment} from '../environments/environment';
 import {MatRippleModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {DropDownCartListModule} from './widgets/drop-down-cart-list/drop-down-cart-list.module';
-import * as Parse from 'parse';
+
 import {GGCartService} from './services/ggcart.service';
 import {ShopCartSideNavModule} from "./shop-cart/shop-cart-side-nav/shop-cart-side-nav.module";
 import {PortalModule} from "@angular/cdk/portal";
 import {ActiveOrderService} from "./service/active-order.service";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-
-Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
-
-// @ts-ignore
-Parse.serverURL = environment.ParseServerURL;
-
+import {MatTooltipModule} from "@angular/material/tooltip";
+// import * as Parse from 'parse';
+// Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
+//
+// // @ts-ignore
+// Parse.serverURL = environment.ParseServerURL;
+//hello
 @NgModule({
   declarations: [
     AppComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatDesModule,
-    MatListModule,
-    MatExpansionModule,
-    ScullyLibModule,
-    InformationModule,
-    HttpClientModule,
-    BasketIconModule,
-    MatRippleModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    HammerModule,
-    DropDownCartListModule,
-    ShopCartSideNavModule,
-    BasketIconModule,
-    PortalModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatDesModule,
+        MatListModule,
+        MatExpansionModule,
+        ScullyLibModule,
+        InformationModule,
+        HttpClientModule,
+        BasketIconModule,
+        MatRippleModule,
+        MatMenuModule,
+        MatSnackBarModule,
+        HammerModule,
+        DropDownCartListModule,
+        ShopCartSideNavModule,
+        BasketIconModule,
+        PortalModule,
+        MatTooltipModule,
+    ],
   providers: [
     GGCartService,
     ActiveOrderService,

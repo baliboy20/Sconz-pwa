@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
-import {ClickCollectComponent, CustomImageDirective} from './click-collect.component';
+import {ClickCollectComponent, CustomImageDirective, MouseOverMouseOutDirective} from './click-collect.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatButtonModule} from '@angular/material/button';
@@ -17,7 +17,12 @@ import {MatInputModule} from '@angular/material/input';
 import {NumericIncrementerModule} from '../../widgets/numeric-incrementer/numeric-incrementer.module';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import * as Parse from 'parse';
+import {environment} from "../../../environments/environment.prod";
+Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 
+// @ts-ignore
+Parse.serverURL = environment.ParseServerURL;
 
 const routes: Routes = [
   {path: '', component: ClickCollectComponent},
@@ -28,9 +33,11 @@ const routes: Routes = [
   declarations: [
     ClickCollectComponent,
     CustomImageDirective,
+    MouseOverMouseOutDirective,
     ClickCollectBottomSheetComponent],
   exports: [
     CustomImageDirective,
+    MouseOverMouseOutDirective,
   ],
     imports: [
         CommonModule,

@@ -1,9 +1,8 @@
 @use "_styles/components";
-
+@forward "_styles/components";
 //@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@90,900&display=swap');
-
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -94,25 +93,25 @@ $color: #323131;
 
   --font-larger-sub-heading: 400 28px/48px var(--font-family);
   // used like a caption
-  --font-caption-1 : 400 16px/26px var(--font-family);
+  --font-caption-1: 400 16px/26px var(--font-family);
 
   --toolbar-height: 140px;
   --toolbar-color: #fffcf3;
   --background-color1: #fffcf3; // #fffaf0; hsla(0,15,19%); hsl(39,100,97)
-  --component-background-color2: #323131; //hsla(0,15,19%);;
+  --component-background-color2: rgba(50, 49, 49, 1); //hsla(0,15,19%);;
   --caption-grey-1: #a5a2a2;
   --subdued-grey: var(--caption-grey-1);
   --divider-grey-1: rgba(201, 195, 195, 0.5);
 
-  --grey-100:  rgba(50, 49, 49, 1);
-  --grey-90:  rgba(50, 49, 49, 0.9);
-  --grey-80:  rgba(50, 49, 49, 0.8);
-  --grey-70:  rgba(50, 49, 49, 0.7);
-  --grey-60:  rgba(50, 49, 49, 0.6);
-  --grey-50:  rgba(50, 49, 49, 0.5);
-  --grey-40:  rgba(50, 49, 49, 0.4);
-  --grey-30:  rgba(50, 49, 49, 0.3);
-  --grey-10:  rgba(50, 49, 49, 0.1);
+  --grey-100: rgba(50, 49, 49, 1);
+  --grey-90: rgba(50, 49, 49, 0.9);
+  --grey-80: rgba(50, 49, 49, 0.8);
+  --grey-70: rgba(50, 49, 49, 0.7);
+  --grey-60: rgba(50, 49, 49, 0.6);
+  --grey-50: rgba(50, 49, 49, 0.5);
+  --grey-40: rgba(50, 49, 49, 0.4);
+  --grey-30: rgba(50, 49, 49, 0.3);
+  --grey-10: rgba(50, 49, 49, 0.1);
   --warning: red;
 
   //semantics colors
@@ -120,20 +119,20 @@ $color: #323131;
 }
 
 $font-colors: (
-"100" : var(--component-background-color2),
-//"200" : lighten(var(--component-background-color2, .9)),
+  "100" : var(--component-background-color2),
+  //"200" : lighten(var(--component-background-color2, .9)),
 );
 
 $custom-typography: mat-typography-config(
   $font-family: 'Special Elite' sans-serif,
-  //$font-family:'Quicksand, sans-serif',
-  //$font-family: 'Bitter',
+    //$font-family:'Quicksand, sans-serif',
+    //$font-family: 'Bitter',
   $headline: mat-typography-level(32px, 48px, 700), //h1
   $body-2: mat-typography-level(12px, 24px, 300),
   $body-1: mat-typography-level(.73rem, 19px, 300),
   $subheading-2: mat-typography-level(14px, 28px, 200), //h3
   $subheading-1: mat-typography-level(18px, 48px, 300), //h4
-  $title : mat-typography-level(18px, 48px, 300), // h2
+  $title: mat-typography-level(18px, 48px, 300), // h2
 );
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
@@ -158,6 +157,9 @@ $custom-typography: mat-typography-config(
 }
 
 
+html, body {
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+}

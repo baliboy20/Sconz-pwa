@@ -1,17 +1,20 @@
 <div class="csnv-container">
   <div class="csnv-header">
-    <button (click)="this.sideNav?.close()"
-            mat-icon-button>
-      <mat-icon>close</mat-icon>
-    </button>
 
-    <button mat-raised-button
+    <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
+      <mat-icon class="material-icons">close</mat-icon>
+    </button>
+    <button mat-stroked-button
+            *ngIf="!isEmptyBasket()"
+            color="primary"
             (click)="removeAllAction()">
-      CLEAR ALL</button>
-    <mat-divider></mat-divider>
+            Clear
+    </button>
   </div>
   <div class="csnv-scrollable">
-
+    <div class="emptyBasket" *ngIf="this.isEmptyBasket()">
+      Cart empty
+    </div>
     <ng-container *ngTemplateOutlet="ShopCartListTmpl"></ng-container>
   </div>
   <div class="csnv-footer">
@@ -20,7 +23,9 @@
             (click)="this.sideNav?.close()"
     >CONTINUE</button>
 
-    <button mat-raised-button color="accent"
+    <button mat-raised-button
+            *ngIf="!isEmptyBasket()"
+            color="accent"
             (click)="onCheckout()">
       CHECKOUT {{basket?.total | currency: 'GBP'}}
     </button>
@@ -39,13 +44,15 @@
 
 <!-- TEMPLATE:                                  Cart List -->
 <ng-template #ShopCartListTmpl>
+
   <ng-container *ngFor="let item of basket?.basketItems, let idx = index">
+
     <div class="cart-card">
       <div class="card-image">
-        <img width="100px" [src]="e(item).thumbImgUrl">
+        <img [src]="e(item).thumbImg.url">
       </div>
       <div class="card-name">
-        {{e(item).name}} - {{e(item).choice.name}}
+        {{e(item).nameChoice}}
       </div>
 
             <div class="card-choices-options">
@@ -59,8 +66,6 @@
               {{e(item).choice.price | currency:'GBP'}}
             </div>
             <div class="card-qty">
-<!--              Qty-->
-<!--              {{e(item).qty}}-->
               <app-numeric-incrementer
                 (ngModelChange)="onQtyChanged($event, idx)"
                 (removeItmClicked)="removeAction(idx)"

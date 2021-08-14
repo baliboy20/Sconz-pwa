@@ -14,12 +14,14 @@ display: flex;
 
   .numeric__input {
     width: 23px;
-    border: 1px dotted var(--grey-10);
     border-radius: 3px;
     padding: 3px;
+    margin: 10px;
     height: 18px;
     color: var(--subdued-grey);
-    background-color: transparent;
+    border: 1px solid orange!important;
+    outline: none;
+
   }
 
 
@@ -68,14 +70,14 @@ display: flex;
   align-content: center;
 
   .numeric__input {
+    outline: none;
     width: 10ch;
-    border: 1px dotted var(--grey-10);
     border-radius: 33px;
     padding: 3px;
     height:36px;
-    margin: 10px;
+    //margin: 38px;
     color: var(--subdued-grey);
-    background-color: transparent;
+    //background-color: transparent;
     font: var(--font-regular-sub-heading16-inconsalata);
 
   }

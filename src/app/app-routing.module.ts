@@ -31,10 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module')
       .then(m => m.AboutModule)
   },
-  {
-    path: 'product-item2/:id',
-    loadChildren: () => import('./pages/product-item2/product-item2.module').then(m => m.ProductItem2Module)
-  },
+  // {
+  //   path: 'product-item2/:id',
+  //   loadChildren: () => import('./pages/product-item2/product-item2.module').then(m => m.ProductItem2Module)
+  // },
   {
     path: 'shop-cart',
     loadChildren: () => import('./pages/shop-cart/shop-cart.module')
@@ -50,11 +50,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/shipping-information/shipping-information.module')
       .then(m => m.ShippingInformationModule)
   },
-  {
-    path: 'shop-cart2',
-    loadChildren: () => import('./pages/shop-cart2/shop-cart2.module')
-      .then(m => m.ShopCart2Module)
-  },
+  // {
+  //   path: 'shop-cart2',
+  //   loadChildren: () => import('./pages/shop-cart2/shop-cart2.module')
+  //     .then(m => m.ShopCart2Module)
+  // },
   {
     path: 'order-statement',
     loadChildren: () => import('./pages/order-statment/order-statment.module')
@@ -74,8 +74,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/ggcheckout/ggcheckout.module')
       .then(m => m.GGCheckoutModule)
   },
+  { path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module')
+      .then(m => m.SettingsModule) },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-
 ];
 
 @NgModule({

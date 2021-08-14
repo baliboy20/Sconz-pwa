@@ -8,4 +8,5 @@ export interface ShippingInfo {
   country: string;
   postCode: string;
   computedAddress: string;
+  mobileNo: string;
 }

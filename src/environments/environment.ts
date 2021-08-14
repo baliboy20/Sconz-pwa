@@ -20,10 +20,11 @@ export const environment = {
     success_route: '/#/orders-statement',
     cancel_route: '/#/orders-statement',
   },
-  build_version: '11.2b prod 17 Jun \'21',
+  build_version: '12.2d prod 02 Aug \'21',
   useDevCart: true,
   // dev flags
   enableNavToStripPayment: false,
+  noImageUrl:  `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`,
 };
 
 /*

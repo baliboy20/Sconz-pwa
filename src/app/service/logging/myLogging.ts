@@ -45,8 +45,7 @@ export class MyLogger {
     const fn = console.log;
     return fn ;
   }
-  static large(): any {
-    const {symbol, color, fontSize} = {symbol: '...', color: 'blue', fontSize: '36px'};
+  static large(symbol= '...', color= 'blue', fontSize= '36px'): any {
     console.log(`%c${symbol}`, `color: ${color}; font-size:${fontSize}`);
     const fn = console.log;
     return fn ;

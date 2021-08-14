@@ -1,7 +1,8 @@
 import * as Parse from 'parse';
 import {GGStockProduct, GGStockProductChoice, GGStockProductOption} from './GGStockProducts.infc';
-import {ParseFileFacade} from './ParseFileFacade.model';
 import {MyLogger} from "../../service/logging/myLogging";
+import {ThumbImageReader} from "../ThumbImageReader";
+import {ParseFileFacade} from "./ParseFileFacade.model";
 
 
 /**
@@ -16,12 +17,14 @@ export class GGStockProductFacade implements GGStockProduct {
 
   constructor(private item: Parse.Object) {
     const im = item.get('thumbImg');
-    if (im instanceof ParseFileFacade) {
-      this._thumbImgFacade = im as ParseFileFacade;
-    } else if (im) {
-      this._thumbImgFacade = ParseFileFacade.create(item.get('thumbImg'));
+  //  MyLogger.large('thumbImg')(item);
+    if ( !!im && '_url' in im) {
+
+      this._thumbImgReader = ThumbImageReader.createFromUrl(im._url);
+      MyLogger.log('- + -')(im);
     } else {
-      this._thumbImgFacade = ParseFileFacade.empty();
+      this._thumbImgReader = ThumbImageReader.createEmpty();
+      // MyLogger.large('- + -')(this._thumbImgReader);
     }
   }
 
@@ -55,12 +58,12 @@ export class GGStockProductFacade implements GGStockProduct {
     this.item.set('categories', value);
   }
 
-  get thumbImg(): ParseFileFacade {
-    return this._thumbImgFacade;
+  get imageParseFile(): ParseFileFacade {
+    return this._imageParseFile;
   }
 
-  set thumbImg(value: ParseFileFacade) {
-    this._thumbImgFacade = value;
+  set imageParseFile(value: ParseFileFacade) {
+    this._imageParseFile = value;
   }
 
   get mediumImg(): any {
@@ -105,7 +108,7 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   private _category: string = '';
-  private _thumbImgFacade: ParseFileFacade;
+  private _thumbImgReader: ThumbImageReader;
 
 
   /* ========================*/
@@ -141,14 +144,6 @@ export class GGStockProductFacade implements GGStockProduct {
     fad.choices = (rawValue.choices as GGStockProductChoice[]);
     fad.options = rawValue.options as GGStockProductOption[];
 
-    if (rawValue.thumbImg instanceof ParseFileFacade) {
-      fad.thumbImg = rawValue.thumbImg as ParseFileFacade;
-    } else if (rawValue.thumbImg) {
-      fad.thumbImg = ParseFileFacade.create(rawValue.thumbImg);
-    } else {
-      fad.thumbImg = ParseFileFacade.empty();
-    }
-    console.log('createFromJson', fad);
     return fad;
   }
 
@@ -163,15 +158,19 @@ export class GGStockProductFacade implements GGStockProduct {
    * @param value
    * @private
    */
-  async saveImgIfDirty(): Promise<void> {
-    const nwImg = this.thumbImg.upsertToDb();
+  async saveImgIfDirty(): Promise<any> {
+    try {
+      return  await this._imageParseFile.save();
+    } catch (e) {
+      console.log('%cError', e.message);
+    }
   }
 
   private _setThumbImg(value: any): void {
     this.item.set('thumbImg', value);
     if (value instanceof Parse.File) {
-      this._thumbImgFacade = ParseFileFacade.create(value);
-      console.log('thumbImgFacade', this._thumbImgFacade);
+      this._thumbImgReader = ThumbImageReader.createFromUrl(value._url);
+      console.log('thumbImgFacade', this._thumbImgReader);
     } else {
       console.log('thumbImgFacade', value instanceof Parse.File, value);
     }
@@ -179,8 +178,10 @@ export class GGStockProductFacade implements GGStockProduct {
   }
 
   getThumbImgUrl(): string {
-    return this.thumbImg.url;
+    return this._thumbImgReader.url;
   }
+
+  private _imageParseFile: Parse.File | any;
 
   /**
    * Adaptesr to {var:variant[]} from  variant[] for storage as a json object
@@ -198,7 +199,8 @@ export class GGStockProductFacade implements GGStockProduct {
 
   public async save(): Promise<void> {
     try {
-      const savedfile = await this.thumbImg.upsertToDb(this.id);
+      const ff: ParseFileFacade = ParseFileFacade.create(this._imageParseFile)
+      const savedfile = await ff.saveOnly();
       MyLogger.normal()('savedfile', savedfile);
       this.item.set('thumbImg', savedfile);
       await this.item.save({useMasterKey: true});
@@ -218,4 +220,8 @@ export class GGStockProductFacade implements GGStockProduct {
       MyLogger.normal()(e.message);
     }
   }
+
+ get thumbImg(): ThumbImageReader | undefined {
+    return this._thumbImgReader;
+ }
 }

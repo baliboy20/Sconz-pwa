@@ -89,7 +89,7 @@ export class CustomerOrderFacade implements CustomerOrder {
   }
 
   /**
-   * Create from an object shaped into a Customer order.
+   * Create from an object with Customer order attributes.
    * @param value
    */
   static createFrom(value: CustomerOrder): CustomerOrderFacade {

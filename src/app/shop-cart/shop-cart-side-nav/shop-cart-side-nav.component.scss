@@ -1,30 +1,38 @@
 
 //   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*        LAYOUT
 .csnv-container {
-  height: calc(100vh - 50px);
+
+  box-sizing: border-box;
+  height: calc(100% - 50px);
   width: 100%;
   display: grid;
-  grid-template-rows: 100px auto 50px;
+  grid-template-rows: 60px auto 120px;
 
   .csnv-header {
     margin-bottom:10px;
+    align-items: center;
   }
 
+  .csnv-footer {
+    align-items: flex-start;
+    padding-top: 15px;
+  }
   .csnv-footer,  .csnv-header {
     box-sizing: content-box;
-    background-color: yellowgreen;
     display: flex;
     flex-flow: nowrap row;
     justify-content: space-between;
+
     overflow-x: hidden;
-    align-items: center;
+
     //width: calc(100% - 100px);
-    padding-left:  10%;
-    padding-right:  10%;
+    padding-left:  3%;
+    padding-right:  3%;
 
   }
 
   .csnv-scrollable {
+    box-sizing: content-box;
     overflow-y: scroll;
     margin: 10px;
   }
@@ -38,11 +46,16 @@
 
   .card-image {
     grid-column: 1;
-    grid-row: 2 / span 3;
+    grid-row: 1 / span 3;
     width: auto;
+    padding: 0;
+    box-sizing: border-box;
+
     //background-color: orange;
     img {
-
+      box-sizing: border-box;
+      width: 100%;
+//object-fit: contain;
     }
   }
 
@@ -108,7 +121,7 @@
 }
 
 .csnv-footer {
-
+  background-color: rgba(yellowgreen, 0.5);
 }
 
 .csnv-scrollable {

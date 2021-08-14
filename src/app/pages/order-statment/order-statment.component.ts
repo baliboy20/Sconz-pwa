@@ -11,7 +11,11 @@ import {MyLogger} from "../../service/logging/myLogging";
 import {CustomerOrderFacade} from "../../model/shared/CustomerOrderFacade";
 import {OrderItems} from "../../model/shared/Order.infc.";
 
-
+/**
+ Summarises the order in the step before taking payment.
+ OrderStatementComponent
+ ============================================================================================
+ */
 @Component({
   selector: 'app-order-statment',
   templateUrl: './order-statment.component.html',

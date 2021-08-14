@@ -29,14 +29,11 @@ export class NumericIncrementerComponent implements OnInit, ControlValueAccessor
   }
 
   add(): void {
-    console.log('add', this.value);
-
     this.value++;
     this.changefn(this.value);
   }
 
   subtract(): void {
-    console.log('subtract', this.value);
     if (this.value <= 0) {
       return;
     }
@@ -62,12 +59,7 @@ export class NumericIncrementerComponent implements OnInit, ControlValueAccessor
     this.removeItmClicked.emit('remove this item');
   }
 
-  onInputConrolChanged(event: any): void {
-    // console.log('onInputConrolChanged', event);
-    if (event > 0) {
-      this.changefn(this.value);
-    } else {
-      // do nthing.
-    }
+  onInputConrolChanged(newVal: number): void {
+    newVal > 0 ? this.changefn(this.value) : 0;
   }
 }

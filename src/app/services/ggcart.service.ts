@@ -16,7 +16,6 @@ import {MyLogger} from "../service/logging/myLogging";
 })
 export class GGCartService implements GGBasketService {
   localStorageKey = environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY ?? 'ERROR_CLICK_COLLECT_CART_ITEMS';
-
   get basketItems(): GGStockProductOrder[] {
     return this._basketItems;
 
@@ -24,6 +23,7 @@ export class GGCartService implements GGBasketService {
 
   set basketItems(value: GGStockProductOrder[]) {
     this._basketItems = value;
+    this.reSync();
   }
 
   constructor() {
@@ -47,9 +47,11 @@ export class GGCartService implements GGBasketService {
     }
 
     const idx = ItemInBasketExistsHelper.isMatched(itm, this.basketItems);
+
+    // console.log('%c not inside', 'color: purple;  font-size: 20px', itm.qty, idx);
     if (idx !== -1) {
       this.basketItems[+idx].qty += itm.qty;
-      console.log('%c IS MATCHED', 'color: purple;  font-size: 20px', itm.qty, idx);
+      // console.log('%c IS MATCHED', 'color: purple;  font-size: 20px', itm.qty, idx);
     } else {
       // console.log('%c ITEM ADDED', 'color: purple; font-size: 20px', itm);
       this.basketItems.push(itm.clone());
@@ -65,7 +67,6 @@ export class GGCartService implements GGBasketService {
 
     this.basketItems
       .forEach(a => {
-        // console.log('%cClone', 'color:red', a.clone);
         arr.push(a.clone());
       })
     const bsk: GGBasket = {
@@ -78,7 +79,6 @@ export class GGCartService implements GGBasketService {
 
   clearout(): void {
      this.basketItems.splice(0, this.basketItems.length);
-    // MyLogger.alert()('Clear out must be reinstated');
     this.reSync();
   }
 
@@ -86,7 +86,7 @@ export class GGCartService implements GGBasketService {
     return this.basketItems.map(a => (a.qty + ' x ' + a.name)).join(', ');
   }
 
-  reSync(): void {
+  reSync(ignoreSaveToLocalStorage = false): void {
     //  console.log('resyncing...?')
     const fn = ToCurrencyStringFn;
     this._basketItems = [...this._basketItems];
@@ -94,7 +94,6 @@ export class GGCartService implements GGBasketService {
     const redResFn: any = (acc: BasketTotal, val: GGStockProductOrder) => {
       acc.qty += val.qty;
       acc.total += val.total;
-      //     console.log('computing total', acc.total, acc.qty);
       return acc;
     };
     const rs = this._basketItems.reduce(redResFn, initValue);
@@ -104,31 +103,28 @@ export class GGCartService implements GGBasketService {
       ...rs,
     };
     this.basket = b;
-    // console.log('inside basket', b)
     this.basketChanged.next(b);
-    this.toLocalStorage();
+    if ( !ignoreSaveToLocalStorage) {
+      this.toLocalStorage();
+    }
+
   }
 
   removeAt(idx: number): void {
     if (idx < 0 || this.basketItems.length <= idx) {
-      // console.log('failed to remove');
       return;
     }
     this.basketItems.splice(idx, 1);
-    // console.log('splicing for :', idx);
     this.reSync();
   }
 
 
   reset(): void {
-    // MyLogger.alert()('reset called but has been disabled')
      this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
   setQty(qty: number, idx: string | number): void {
-    // console.log('setting qty', idx, qty, this.basketItems[+idx].qty);
-
     const val = this.basketItems[+idx].qty;
     if (isNaN(val)) {
       this.basketItems[+idx].qty = 0;
@@ -139,8 +135,6 @@ export class GGCartService implements GGBasketService {
     }
 
     this.basketItems[+idx].qty = qty;
-    // @ts-ignore
-    // this.basketItems[+idx].updateTotal();
     this.reSync();
   }
 
@@ -149,10 +143,10 @@ export class GGCartService implements GGBasketService {
     if (!lsStr) {
       return;
     }
-    let arr: GGBasket = JSON.parse(lsStr ?? '') as GGBasket;
+    let arr: any = JSON.parse(lsStr ?? '') as GGBasket;
 
 
-    const bask: GGBasket = arr;
+    const bask: GGBasket = arr as GGBasket;
 
 
     if (Array.isArray(bask.basketItems) && bask.basketItems.length > 0) {
@@ -162,7 +156,7 @@ export class GGCartService implements GGBasketService {
       bask.basketItems = prodImpl;
       console.log('Redtriedved', prodImpl);
       this.basketItems.push(...prodImpl);
-      this.reSync();
+      this.reSync(true);
     } else {
       return;
     }
@@ -174,7 +168,7 @@ export class GGCartService implements GGBasketService {
       let str = JSON.stringify(this.basket ?? '');
       const reg = /_qty/g;
       str = str.replace(reg, 'qty');
-    //  console.log('to local storage', str, this.basketItems);
+   MyLogger.log('to local storage')(this.basketItems);
       window.localStorage.setItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY, str);
     } else {
       window.localStorage.removeItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY);

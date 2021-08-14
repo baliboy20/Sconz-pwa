@@ -1,4 +1,4 @@
-import {ParseFileFacade} from "./ParseFileFacade.model";
+import {ThumbImageReader} from "../ThumbImageReader";
 
 
 export const NoImgPath = '../../../assets/images/NO_Image_available.jpeg';
@@ -35,7 +35,7 @@ export interface GGStockProduct {
   name: string;
   description: string;
   id: string;
-  thumbImg: ParseFileFacade;
+  thumbImg: ThumbImageReader | undefined;
   choices: GGStockProductChoice[];
   options: GGStockProductOption[];
 }

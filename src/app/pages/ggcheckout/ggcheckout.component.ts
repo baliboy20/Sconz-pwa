@@ -38,6 +38,7 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
     email: new FormControl('william@happyplace.co.uk', Validators.required),
     firstName: new FormControl('Vill', Validators.required),
     lastName: new FormControl('Pills', Validators.required),
+    mobileNo: new FormControl('', Validators.required),
     saveDetails: new FormControl('', Validators.required),
   });
 
@@ -77,7 +78,6 @@ export class GGCheckoutComponent extends PageBase implements OnInit {
   }
   ngOnDestroy(): void {
     Parse.Object.unPinAllObjects();
-   // MyLogger.logCol({symbol: '±±±±', fontSize: '40px', color: 'orange'})('on destroy')
   }
   /*
    w@c.co

@@ -1,5 +1,5 @@
-//@use "src/_styles/components";
-@import "src/_styles/components";
+@use '../../../_styles/components';
+
 
 .picture {
   width: 300px;
@@ -10,8 +10,6 @@
   font-size: calc(var(--font-size-regular));
   display: flex;
   flex-flow: row wrap;
-  //background-color: red;
-  //width: 50%;
   justify-content: flex-start;
   padding-left: 20px;
 }
@@ -22,7 +20,6 @@
   flex: 1 1 100%;
   height: 30px;
   font-size: var(--font-size-larger);
-  //background-color: lightblue;
 }
 
 .left-col {
@@ -33,22 +30,17 @@
   flex: 1 1 47%;
   display: block;
   height: 100vh;
-  //background-color: red;
-  //overflow-x: hidden;
-  //overflow-y: visible;
 }
 
 .title {
   padding: 40px 0 0px 0;
   text-align: start;
-  // @include mat-typography-level-to-styles($custom-typography, title);
   font-weight: 300;
 }
 
 .price {
   color: var(--subdued-grey);
-  @include ContentStyles(sub-heading);
-  //@include components.ContentStyles(sub-heading);
+  @include components.ContentStyles(sub-heading);
 }
 
 .purchase-type {
@@ -71,9 +63,7 @@
 }
 
 mat-expansion-panel {
-  @include cappuMatExpansionPanel ;
-  //@include components.cappuMatExpansionPanel ;
-  //@include cappuMatExpansionPanel;
+  @include components.cappuMatExpansionPanel ;
 }
 
 mat-expansion-panel:not([class*=mat-elevation-z]) {
@@ -84,13 +74,11 @@ mat-expansion-panel:not([class*=mat-elevation-z]) {
   font-size: 13px;
 
   &:first-letter {
-    //color: red!important;
   }
 }
 
 .addToCartBtn {
-  @include cappuNativeButton;
-  //@include components.cappuNativeButton;
+  @include components.cappuNativeButton;
 }
 
 .quantity-component {

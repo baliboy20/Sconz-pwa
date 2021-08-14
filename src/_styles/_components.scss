@@ -34,16 +34,6 @@
   &:first-letter {
     letter-spacing: .04rem;
   }
-  //&:hover {
-  //  outline: 2px solid dodgerblue;
-  //  //outline: 2px solid var(--component-background-color2);
-  //  transition: outline-color 1500ms;
-  //}
-  //&.mouseDown {
-  //  outline: 1px solid #f60749;
-  //  //outline: 2px solid var(--component-background-color2);
-  //  transition: outline-color 500ms;
-  //}
 }
 
 @mixin cappuTextArea {
