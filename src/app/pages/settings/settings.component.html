@@ -1,0 +1,27 @@
+
+
+<mat-card [formGroup]="formGroup" style="margin: 10%; padding: 20px 30px">
+  <mat-card-header>
+    <mat-card-subtitle>
+      <mat-icon>settings</mat-icon>
+      Settings
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+     <mat-checkbox matInput formControlName="byPassStripePayment">
+       Bypass Stripe payment page
+     </mat-checkbox>
+
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button
+      [disabled]="!this.formGroup?.dirty"
+      mat-raised-button (click)="onStore()" color="accent">Save Settings</button>
+
+  </mat-card-actions>
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>

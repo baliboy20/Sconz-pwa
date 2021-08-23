@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {map, tap} from 'rxjs/operators';
 import {GGCartService} from '../../../../services/ggcart.service';
 import {GGStockProductOrderImpl} from '../../../../model/shared/GGOrderFacade.model';
@@ -16,13 +16,14 @@ import {Router} from "@angular/router";
 export class ClickCollectBottomSheetComponent implements OnInit {
 
   data: GGStockProductFacade;
-  formGroup = this.fb.group({
+  fgInit = () => this.fb.group({
     choice: [null, Validators.required],
     qty: 1,
     total: [0],
     options: [[]],
     instructions: [''],
   });
+  formGroup: FormGroup;
   total = 0;
 
   constructor(
@@ -32,12 +33,13 @@ export class ClickCollectBottomSheetComponent implements OnInit {
     private router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) public prod: any
   ) {
+    this.formGroup = this.fgInit();
     this.data = prod;
+
   }
 
   ngOnInit(): void {
     // @ts-ignore
-
     this.formGroup
       .valueChanges
       .pipe(
@@ -59,7 +61,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
 
 
   private _saveToCart() : Observable<any> {
-    return of(this.formGroup.getRawValue())
+    return of(this.formGroup?.getRawValue())
       .pipe(
         map(a => {
           a.name = this.data.name;

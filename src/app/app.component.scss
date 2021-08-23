@@ -106,17 +106,17 @@ span:nth-child(3) {
   margin: 0 0 0 auto;
   white-space: pre;
   letter-spacing: .1em;
-  font-size: 18px;
-  font-family: 'Rye', cursive;
+  font-size: 36px;
+  font-family: 'Special Elite', cursive;
 }
 
 .tx-div {
   margin-right: 13px;
   display: inline-block;
   color: var(--toolbar-color);
-
+//color: red;
   &:first-letter {
-    font-size: 24px;
+    font-size: 28px;
 
   }
 }

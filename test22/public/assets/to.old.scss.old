@@ -1,0 +1,19 @@
+//@import "./src/_styles/components";
+//
+//
+//.page-heading {
+//  width: 100%;
+//  text-align: center;
+// // color: red;
+//  @include ContentStyles('page-heading');
+//}
+//.sub-heading {
+//  @include ContentStyles('sub-heading');
+//  margin: 15px 0;
+//}
+//
+// //.content-page p:not(.sub-heading),
+// .content-page p:not(.page-heading):not(.sub-heading),
+//.content-page ul li{
+//@include ContentStyles('body');
+//}

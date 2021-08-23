@@ -1,0 +1,11 @@
+Uploading source files
+Uploading recent changes to hosting...
+The following files will be uploaded:
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/404.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/assets/gingham.svg
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/assets/gingham.svg.png
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/main.64a2c1055aaefa4a7285.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/stats.json
+Finished uploading files
+New release is named v507 (using Parse JavaScript SDK v2.2.25)

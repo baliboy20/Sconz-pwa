@@ -1,9 +1,0 @@
-Uploading source files
-Uploading recent changes to hosting...
-The following files will be uploaded:
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/299.89645a697a0943104661.js
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/404.html
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/index.html
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/runtime.edcad65e04c3597eb81b.js
-Finished uploading files
-New release is named v504 (using Parse JavaScript SDK v2.2.25)

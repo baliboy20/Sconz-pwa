@@ -1,14 +1,12 @@
-import {Component, ElementRef, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {environment} from '../environments/environment';
 import {Router, RouterOutlet} from '@angular/router';
-import {fadeInAnimation, slideInAnimation} from './features/animations/animations';
-import {HttpClient} from '@angular/common/http';
+import {fadeInAnimation} from './features/animations/animations';
 import {MatSidenav} from "@angular/material/sidenav";
-import {CdkPortalOutlet, ComponentPortal, Portal, PortalOutlet} from "@angular/cdk/portal";
+import {ComponentPortal} from "@angular/cdk/portal";
 import {ShopCartSideNavComponent} from "./shop-cart/shop-cart-side-nav/shop-cart-side-nav.component";
 import * as Parse from 'parse';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MyLogger} from "./service/logging/myLogging";
 
 @Component({
   selector: 'app-root',

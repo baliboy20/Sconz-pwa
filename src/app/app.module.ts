@@ -25,6 +25,10 @@ import {PortalModule} from "@angular/cdk/portal";
 import {ActiveOrderService} from "./service/active-order.service";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
 // import * as Parse from 'parse';
 // Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 //
@@ -36,27 +40,31 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     AppComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatDesModule,
-        MatListModule,
-        MatExpansionModule,
-        ScullyLibModule,
-        InformationModule,
-        HttpClientModule,
-        BasketIconModule,
-        MatRippleModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        HammerModule,
-        DropDownCartListModule,
-        ShopCartSideNavModule,
-        BasketIconModule,
-        PortalModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    // MatDesModule,
+    MatListModule,
+    MatExpansionModule,
+    // ScullyLibModule,
+    InformationModule,
+    HttpClientModule,
+    BasketIconModule,
+    MatRippleModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    // HammerModule,
+    DropDownCartListModule,
+    ShopCartSideNavModule,
+    BasketIconModule,
+    PortalModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+  ],
   providers: [
     GGCartService,
     ActiveOrderService,
