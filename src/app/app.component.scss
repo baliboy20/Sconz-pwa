@@ -6,8 +6,8 @@ $background-color1: red; //hsla(0,15,19%);
   //--toolbar-color: green; // #fffcf3;
 
   display: block;
-  height: 100%;
-  width: 100vw; //
+  //height: 100%;   //fix 1
+  width: 100vw;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -18,16 +18,18 @@ $background-color1: red; //hsla(0,15,19%);
 .app-scrollable {
   position: absolute;
   box-sizing: border-box;
-  height: calc(100vh - 50px);
+  height: calc(100% - 50px);
   width: 100%;
   overflow-y: scroll;
   margin-bottom: 50px;
-  border-bottom: double red 5px;
+  //border-bottom: double red 5px;
 }
 
-mat-toolbar {
+.top-mat-toolbar {
   height: $toolbar-height;
+  //background-color: purple;
   background-color: var(--component-background-color2);
+  //color: red;
   color: $toolbar-color;
 }
 
@@ -37,7 +39,7 @@ mat-sidenav-container {
   //height: calc(100vh - var(--toolbar-height));
   background-color: var(--background-color1);
 
-  mat-sidenav-content {
+ mat-sidenav-content {
     //height: calc(100vh + 100px);
     width: 100vw;
     //background-color: rebeccapurple;
@@ -47,7 +49,7 @@ mat-sidenav-container {
 .mat-drawer {
   background-color: var(--background-color1);
   min-width: 75%;
-  min-height: 600px;
+  //min-height: 600px;  //fix
 }
 
 .mat-expansion-panel {

@@ -1,50 +1,58 @@
 <!--  Toolbar-->
 <ng-container *ngTemplateOutlet="mainToolbarTmpl"></ng-container>
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
 
 <!-- SideNav container-->
 
-<mat-sidenav-container>
+<template>
+  <mat-sidenav-container>
 
 
-  <!--  Cart and Checkout drawer-->
+    <!--  Cart and Checkout drawer-->
+    <!--    todo comment out sidenav-->
+    <!--  <mat-sidenav position="end"-->
+    <!--               [opened]="checkoutSidenavOpened"-->
+    <!--               (openedStart)="openedStartCartDrawer()"-->
+    <!--               mode="over"-->
+    <!--               #CartDrawer-->
+    <!--  >-->
 
-  <mat-sidenav position="end"
-               [opened]="checkoutSidenavOpened"
-               (openedStart)="openedStartCartDrawer()"
-               mode="over"
-               #CartDrawer
-  >
+    <!--    todo put component inside template ot removeit from tree-->
+    <ng-template>
+      <!--    <v69-shopcart-drawer [cartSideNav]="CartDrawer">-->
+      <!--    </v69-shopcart-drawer>-->
+    </ng-template>
+    <!--  </mat-sidenav>-->
 
-    <v69-shopcart-drawer [cartSideNav]="CartDrawer">
-    </v69-shopcart-drawer>
-  </mat-sidenav>
-
-  <!--  Navigation drawer-->
-
-
-  <mat-sidenav opened="false"
-               mode="push"
-               (openedStart)="openedStartNavDrawer()"
-               #NavDrawer>
-    <div class="app-scrollable">
-      <ng-container *ngTemplateOutlet="NavDrawerTmpl"></ng-container>
-    </div>
-
-  </mat-sidenav>
+    <!--  Navigation drawer-->
 
 
-  <!--  SideNav Content area -->
+    <mat-sidenav opened="false"
+                 mode="push"
+                 (openedStart)="openedStartNavDrawer()"
+                 #NavDrawer>
+      <div class="app-scrollable">
+        <ng-container *ngTemplateOutlet="NavDrawerTmpl"></ng-container>
+      </div>
 
-  <mat-sidenav-content>
-
-    <div [@routeAnimations]="prepareRoute(outlet)">
-      <router-outlet #outlet="outlet"></router-outlet>
-    </div>
-
-  </mat-sidenav-content>
+    </mat-sidenav>
 
 
-</mat-sidenav-container>
+    <!--  SideNav Content area -->
+
+    <mat-sidenav-content>
+
+      <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+
+
+  </mat-sidenav-container>
+</template>
 
 
 <!--
@@ -85,8 +93,8 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                          Toolbar.
 -->
-<ng-template #mainToolbarTmpl>
-  <mat-toolbar>
+<ng-template  #mainToolbarTmpl>
+  <mat-toolbar class="top-mat-toolbar">
 
     <button (click)="this.navDrawer?.toggle()"
             mat-icon-button>
@@ -98,11 +106,13 @@
     <button class="home-title-bn"
             (click)="navDrawer?.close()"
             routerLink="home">
-      <div class="tx-div">its</div>
-      <div class="tx-div">Scones</div>
+      <div class="tx-div">Scone </div>
+      <div class="tx-div">Zone</div>
     </button>
     <span class="tx-div"></span>
-
+<button mat-icon-button routerLink="home">
+  <mat-icon>home</mat-icon>
+</button>
     <v69-basket-icon [cartSideNav]="this.cartDrawer"></v69-basket-icon>
   </mat-toolbar>
 
