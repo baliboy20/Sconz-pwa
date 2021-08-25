@@ -8,11 +8,11 @@ $background-color1: red; //hsla(0,15,19%);
   display: block;
   //height: 100%;   //fix 1
   width: 100vw;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  //position: fixed;
+  //top: 0;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
 }
 
 .app-scrollable {
@@ -28,6 +28,9 @@ $background-color1: red; //hsla(0,15,19%);
 .top-mat-toolbar {
   height: $toolbar-height;
   //background-color: purple;
+  position: fixed;
+  top: 0;
+  z-index: 100;
   background-color: var(--component-background-color2);
   //color: red;
   color: $toolbar-color;
@@ -154,7 +157,7 @@ span:nth-child(3) {
   }
 
   .tx-div {
-    margin-right: 6px;
+    margin-right: 1px;
     display: inline-block;
     color: var(--toolbar-color);
 

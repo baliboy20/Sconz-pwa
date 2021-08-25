@@ -1,36 +1,38 @@
 
-
+<div style="height: 150px; width: 100%"></div>
 <div class="cc-container">
 
-  <mat-progress-spinner
-    *ngIf="isLoading"
-    mode="indeterminate"
-    color="primary">
-  </mat-progress-spinner>
-  <div class="cc-list-wrapper" id="ccListWrapper">
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      mode="indeterminate"
+      color="primary">
+    </mat-progress-spinner>
+  <!-- Categories ribbon. -->
+  <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>
+    <div class="cc-list-wrapper" id="ccListWrapper">
 
-    <!-- Categories ribbon. -->
-    <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>
 
 
-    <ng-container *ngFor="let prod of prods$| async">
-      <div class="category-header"
 
-           style="text-transform: capitalize">
-        <div [id]="prod[0]"
-             style="position: relative;
+      <ng-container *ngFor="let prod of prods$| async">
+        <div class="category-header"
+
+             style="text-transform: capitalize">
+          <div [id]="prod[0]"
+               style="position: relative;
                       transform: translateY(-128px);
                       display: block;
                       "></div>
-        {{prod[0]}}
-      </div>
-      <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
+          {{prod[0]}}
+        </div>
+        <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
 
-    </ng-container>
-    <div class="spacer">
+      </ng-container>
+      <div class="spacer">
+      </div>
+
     </div>
 
-  </div>
 </div>
 
 <!--
@@ -47,10 +49,6 @@
 -->
 <ng-template #CategoriesRibbonTmpl let-prods=prods>
   <div class="horizontal-slidebar">
-    <!--    <mat-slide-toggle (toggleChange)="this.repo.cacheresults  = !this.repo.cacheresults">CACHE</mat-slide-toggle>-->
-    <!--    {{this.repo.cacheresults}}-->
-    <!--    {{this.repo.id}}-->
-    <!--    {{this.id}}-->
     <a
       (click)="scrollToId(prod[0])"
       class="span-item"

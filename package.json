@@ -18,16 +18,17 @@
     "nobuild-cpy-scullied-deploy": "npm run cpy-static && cd ./test22 && b4a deploy && cd .. && echo `date` > LAST_DEPLOYMENT_LOG.TXT",
     "build-nodeploy-scullied": "rm -rf ./dist && ng build --configuration production && npm run scully:scan && npm run cpy-static",
     "build-deploy-unscullied": "rm -rf ./dist && ng build --configuration production &&  npm run cpy-non-static && cd ./test22 && b4a deploy && cd ..",
-    "complete": "echo done"
+    "complete": "echo done",
+    "buildout": "npm run build-deploy-scullied"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.2.0",
+    "@angular/animations": "~12.2.o",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
     "@angular/forms": "~12.2.0",
-    "@angular/material": "^12.2.1",
+    "@angular/material": "^12.2.2",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
@@ -42,8 +43,8 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.2",
-    "@angular/cli": "~12.2.2",
+    "@angular-devkit/build-angular": "~12.2.0",
+    "@angular/cli": "~12.2.0",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",

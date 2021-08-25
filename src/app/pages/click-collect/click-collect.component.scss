@@ -3,10 +3,17 @@ html {
 }
 
 //                                            ==== LAYOUT
-
+:host {
+  background-color: orange;
+  position: relative;
+  height:600px;
+}
 // overall container
 .cc-container {
-  width: 100vw;
+
+ //top: 300px;
+ // width: 100vw;
+ // background-color: red;
 }
 
 // scrollable list wrapper
@@ -16,7 +23,7 @@ html {
   padding-top: 50px;
   flex-flow: wrap row;
   overflow-y: scroll;
-  height: calc(90vh);
+  //height: calc(90vh);
   width: 100vw;
   justify-content: center;
 }
@@ -24,11 +31,12 @@ html {
 
 // slidebar at the top
 .horizontal-slidebar {
-  position: fixed;
+  position: fixed ;
+  min-width: 100%;
   margin: 0;
   box-sizing: border-box;
   width: 100%;
-  top: 48px;
+  top: 49px;
   z-index: 1000;
   display: flex;
   flex-flow: nowrap row;

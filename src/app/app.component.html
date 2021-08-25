@@ -1,30 +1,25 @@
 <!--  Toolbar-->
 <ng-container *ngTemplateOutlet="mainToolbarTmpl"></ng-container>
-<div [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
 
 <!-- SideNav container-->
 
-<template>
+
   <mat-sidenav-container>
 
 
     <!--  Cart and Checkout drawer-->
-    <!--    todo comment out sidenav-->
-    <!--  <mat-sidenav position="end"-->
-    <!--               [opened]="checkoutSidenavOpened"-->
-    <!--               (openedStart)="openedStartCartDrawer()"-->
-    <!--               mode="over"-->
-    <!--               #CartDrawer-->
-    <!--  >-->
 
-    <!--    todo put component inside template ot removeit from tree-->
-    <ng-template>
-      <!--    <v69-shopcart-drawer [cartSideNav]="CartDrawer">-->
-      <!--    </v69-shopcart-drawer>-->
-    </ng-template>
-    <!--  </mat-sidenav>-->
+      <mat-sidenav position="end"
+                   [opened]="checkoutSidenavOpened"
+                   (openedStart)="openedStartCartDrawer()"
+                   mode="over"
+                   #CartDrawer
+      >
+
+          <v69-shopcart-drawer [cartSideNav]="CartDrawer">
+          </v69-shopcart-drawer>
+
+      </mat-sidenav>
 
     <!--  Navigation drawer-->
 
@@ -52,7 +47,7 @@
 
 
   </mat-sidenav-container>
-</template>
+
 
 
 <!--
@@ -106,8 +101,8 @@
     <button class="home-title-bn"
             (click)="navDrawer?.close()"
             routerLink="home">
-      <div class="tx-div">Scone </div>
-      <div class="tx-div">Zone</div>
+      <div class="tx-div">Sconz</div>
+      <div class="tx-div"></div>
     </button>
     <span class="tx-div"></span>
 <button mat-icon-button routerLink="home">

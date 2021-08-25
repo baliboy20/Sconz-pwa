@@ -1,11 +1,58 @@
 Uploading source files
 Uploading recent changes to hosting...
 The following files will be uploaded:
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/138.ed9d1daee289d8b0c76b.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/173.6dd3aa44a4990db22943.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/239.590bc2ea200869b605d6.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/295.701804f7d7280215e122.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/333.8b33c3615ad271828b3c.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/338.c3dccdef3aa99640ec1f.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/350.4b615f23a66eff4385ba.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/392.a6e8af10bba3bb2c1cdd.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/3rdpartylicenses.txt
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/40.c1c25c027e9730b94ce3.js
 /Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/404.html
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/assets/gingham.svg
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/assets/gingham.svg.png
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/408.e44130a1d4ce07eba51e.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/409.daca8aab24e510f12175.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/539.83e53f892361f539161a.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/644.7f5cfe5186ff47f942f0.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/738.a531e871a9d9e165de5f.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/832.186e6de41aea1beac3f3.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/885.1a0eb981faeb09b2625d.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/891.22d4384fc787d6af7f6a.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/929.ca7262b49f8506b90bba.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/955.e024b1f5e1894a4c51be.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/983.f888dadc41e624501666.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/990.1528b2c3aa7e9fa05d20.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/about/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/assets/scully-routes.json
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/brew-guides/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/click-collect/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/coffee-delivery-london/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/common.c5a489801c4cfff519f9.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/contact/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/gg-checkout/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/home/index.html
 /Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/index.html
-/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/main.64a2c1055aaefa4a7285.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/main.38a2951882168ed630e0.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/our-suppliers/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/polyfills.260b22ebd6fce3152aef.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/privacy-policy/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/refund-policy/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/runtime.2f74e96edbb9abb338c4.js
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/settings/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shipping-information/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shipping-policy/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop-cart/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop/coffee/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop/gift-subs/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop/training/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/shop/vouchers/index.html
 /Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/stats.json
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/styles.2d6acc8058b85bd16827.css
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/visit/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/wholesale/index.html
+/Users/will/WebstormProjects/Coffeeshop/zzTestMatHints/test22/public/work-with-us/index.html
 Finished uploading files
-New release is named v507 (using Parse JavaScript SDK v2.2.25)
+New release is named v508 (using Parse JavaScript SDK v2.2.25)
