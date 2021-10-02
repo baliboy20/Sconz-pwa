@@ -1,5 +1,10 @@
 <!--<mat-bottom-sheet-container>-->
 <div class="ccbs-container" [formGroup]="this.formGroup">
+  <div class="closeBtnTopRight">
+    <button mat-fab style="background-color: white" (click)="dismiss()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 
   <!--  Banner Image-->
 
@@ -14,7 +19,7 @@
 
   <!--  Product Selection-->
 
-  <ng-container *ngTemplateOutlet="productSelectionTmp"></ng-container>
+  <ng-container *ngTemplateOutlet="productChoiceTmp"></ng-container>
 
   <!--  Product Choices-->
 
@@ -23,11 +28,9 @@
     <ng-container *ngTemplateOutlet="ProductOptionsTmpl"></ng-container>
     <ng-container *ngTemplateOutlet="OrderInstructionsTmpl"></ng-container>
   </div>
-  <div class="list-spacer" style="width: 100px; height: 200px"></div>
-  <ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
-
 
 </div>
+<ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
 <!--
    *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
 
@@ -58,7 +61,7 @@
 
 
 <!-- TEMPLATE:      Product Choices  (variation of product size, flavour, color etc)-->
-<ng-template #productSelectionTmp>
+<ng-template #productChoiceTmp>
   <p class="ccbs-product-choose-label"><span>Choices </span></p>
 
   <div class="ccbs-product-choose"
@@ -81,9 +84,7 @@
 
   <div class="ccbs-action-bar" [formGroup]="formGroup">
     <ng-container *ngTemplateOutlet="SaveBtnTmpl"></ng-container>
-    <button mat-fab style="background-color: white" (click)="dismiss()">
-      <mat-icon>close</mat-icon>
-    </button>
+
   </div>
 
 
@@ -124,12 +125,17 @@
     </mat-form-field>
   </ng-container>
 </ng-template>
+
+
 <!-- TEMPLATE:     Add to Order button -->
+
 <ng-template #SaveBtnTmpl>
   <button (click)="dimissAndSave()"
           style="border-radius: 30px; padding: 8px 18px"
-          mat-raised-button>Add to order {{total | currency: "GBP" }} </button>
+          mat-raised-button>
+    <span class="material-icons">add_shopping_cart</span>
+    {{total | currency: "GBP" }} </button>
   <button (click)="payNow()"
           style="border-radius: 30px; padding: 8px 18px"
-          mat-raised-button>Pay now {{total | currency: "GBP" }} </button>
+          mat-raised-button>Checkout{{total | currency: "GBP" }} </button>
 </ng-template>

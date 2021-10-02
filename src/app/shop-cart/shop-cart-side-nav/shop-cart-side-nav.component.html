@@ -65,13 +65,16 @@
             <div class="card-price">
               {{e(item).choice.price | currency:'GBP'}}
             </div>
-            <div class="card-qty">
-              <app-numeric-incrementer
-                (ngModelChange)="onQtyChanged($event, idx)"
-                (removeItmClicked)="removeAction(idx)"
-                [(ngModel)]="item.qty"
-                [showRemoveButton]="true"></app-numeric-incrementer>
-            </div>
+
+             <div class="card-qty">
+
+               <app-numeric-incrementer
+                 (ngModelChange)="onQtyChanged($event, idx)"
+                 (removeItmClicked)="removeAction(idx)"
+                 [(ngModel)]="item.qty"
+                 [showRemoveButton]="true"></app-numeric-incrementer>
+
+           </div>
             <div class="card-total">
 
               {{e(item).total | currency:'GBP'}}

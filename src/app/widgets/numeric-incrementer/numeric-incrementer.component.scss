@@ -6,21 +6,18 @@ $radius: 24px;
 
 
 .incrementor-grid {
-display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
+  display: grid;
+  grid-template-columns:  40px 60px 40px ;
 
   .numeric__input {
-    width: 23px;
     border-radius: 3px;
     padding: 3px;
     margin: 10px;
     height: 18px;
     color: var(--subdued-grey);
-    border: 1px solid orange!important;
+    //border: 1px solid orange!important;
     outline: none;
+    width: 4ch;
 
   }
 
@@ -71,13 +68,13 @@ display: flex;
 
   .numeric__input {
     outline: none;
-    width: 10ch;
-    border-radius: 33px;
+    text-align: center;
+    border: none;
+    width: 4ch;
     padding: 3px;
+    padding-bottom: 5px;
     height:36px;
-    //margin: 38px;
     color: var(--subdued-grey);
-    //background-color: transparent;
     font: var(--font-regular-sub-heading16-inconsalata);
 
   }
@@ -99,7 +96,8 @@ display: flex;
     //grid-column: 2;
     //grid-row: 1;
     border: none;
-    color: maroon;
+    color: var(--grey-70);
+    // font: var(--font-regular-sub-heading);
     padding: 2px;
     //max-width: 25px;
     margin: 2px;

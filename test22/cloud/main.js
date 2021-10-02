@@ -1,3 +1,41 @@
+// v16:44
+Parse.Cloud.define("sendgridEmail", async(request) => {
+  const sgMail = require('@sendgrid/mail');
+
+  // Import SendGrid module and call with your SendGrid API Key
+  sgMail.setApiKey("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");
+console.log('REQUEST OBJECT', JSON.stringify(request.params));
+  const msg = {
+    to: request.params.to,
+    replyTo: 'williampaulton@park-bites.online',
+    from: 'williampaulton@park-bites.online',
+    subject: request.params.subject ,
+    text: request.params.text
+    // subject: request.params.subject,
+    // text: request.params.body
+  };
+  console.log('>Email Values: ', msg);
+  console.log('>Param Values: ',request.params);
+  try{
+    // await sgMail.send(msg);
+
+   const res =await sgMail.send(msg);
+   return request.params;
+  } catch (e){
+    console.log('error, e')
+    return `Error: ${e.message}`
+  }
+});
+
+
+Parse.Cloud.define('testFn', async (rq)=> {
+  const val = rq.params.val;
+  return `ok result with parm value of ${val}`;
+})
+
+
+
+
 //   Data in the request body
 //   =========================
 
@@ -23,6 +61,9 @@
 // },
 // basket: { cart: [ [Object], [Object] ], total: 31.11, qty: 3 }
 
+Parse.Cloud.define("handshake22", async (request) => {
+  return '22ok'
+});
 
 Parse.Cloud.define("ppitd", async (request) => {
    // console.log('Request:::', request);
@@ -164,5 +205,7 @@ Parse.Cloud.define('WhenlastCoffeeItemChanged', async (request) => {
     return e.message
   }
 })
+
+
 
 // 424242424242 4242 w@a.co

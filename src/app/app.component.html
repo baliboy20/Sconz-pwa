@@ -29,7 +29,7 @@
                  (openedStart)="openedStartNavDrawer()"
                  #NavDrawer>
       <div class="app-scrollable">
-        <ng-container *ngTemplateOutlet="NavDrawerTmpl"></ng-container>
+        <ng-container *ngTemplateOutlet="NavigationDrawerTmpl"></ng-container>
       </div>
 
     </mat-sidenav>
@@ -64,23 +64,27 @@
                          Click collect button.
 -->
 <ng-template #ClkCltBnTmpl>
-
-  <div style="background-color: transparent;
-              margin-bottom: 10px;
-              border:none;text-align: center">
-    <button mat-raised-button
-            color="accent"
-            style="color: white;
-                   font-family: Special Elite, sans-serif;
-                   font-size: 22px;
-                  padding: 16px"
-            routerLink="click-collect"
-            (click)="navDrawer?.close()">
-      <mat-icon style="color: #8b3500;">bolt</mat-icon>
-      CLICK AND COLLECT
-
-    </button>
+  <div class="click-collect-btn">
+<!--    <mat-icon style="color: #8b3500;">bolt</mat-icon>-->
+    <button routerLink="click-collect"
+            (click)="navDrawer?.close()">CLICK & COLLECT</button>
   </div>
+<!--  <div style="background-color: transparent;-->
+<!--              margin-bottom: 10px;-->
+<!--              border:none;text-align: center">-->
+<!--    <button mat-raised-button-->
+<!--            color="accent"-->
+<!--            style="color: white;-->
+<!--                   font-family: Special Elite, sans-serif;-->
+<!--                   font-size: 22px;-->
+<!--                  padding: 16px"-->
+<!--            routerLink="click-collect"-->
+<!--            (click)="navDrawer?.close()">-->
+<!--      <mat-icon style="color: #8b3500;">bolt</mat-icon>-->
+<!--      CLICK AND COLLECT-->
+
+<!--    </button>-->
+<!--  </div>-->
 </ng-template>
 
 
@@ -118,7 +122,7 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                         Navigation Draw Contents.
 -->
-<ng-template #NavDrawerTmpl>
+<ng-template #NavigationDrawerTmpl>
 
   <button (click)="navDrawer?.close()"
           mat-icon-button

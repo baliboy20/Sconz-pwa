@@ -1,4 +1,4 @@
-@import "./src/_styles/components";
+@use "./src/_styles/components";
 //
 .about-img-container {
 height: 50vh;
@@ -16,14 +16,14 @@ iframe {
 .content-page{
   padding: 0 10%;
 
-  @include ContentStyles(body);
+  @include components.ContentStyles(body);
  >.sub-heading {
 
-     @include ContentStyles(sub-heading);
+     @include components.ContentStyles(sub-heading);
   }
 
   >p {
-    @include ContentStyles(body);
+    @include components.ContentStyles(body);
   }
 
 }

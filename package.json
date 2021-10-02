@@ -19,7 +19,7 @@
     "build-nodeploy-scullied": "rm -rf ./dist && ng build --configuration production && npm run scully:scan && npm run cpy-static",
     "build-deploy-unscullied": "rm -rf ./dist && ng build --configuration production &&  npm run cpy-non-static && cd ./test22 && b4a deploy && cd ..",
     "complete": "echo done",
-    "buildout": "npm run build-deploy-scullied"
+    "stdBuild": "npm run build-deploy-scullied"
   },
   "private": true,
   "dependencies": {

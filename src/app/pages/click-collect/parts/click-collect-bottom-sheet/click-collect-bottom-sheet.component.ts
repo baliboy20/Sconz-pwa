@@ -7,6 +7,7 @@ import {GGStockProductOrderImpl} from '../../../../model/shared/GGOrderFacade.mo
 import {Observable, of} from 'rxjs';
 import {GGStockProductFacade} from "../../../../model/shared/GGStockProductFacade.model";
 import {Router} from "@angular/router";
+import {MyLogger} from "../../../../service/logging/myLogging";
 
 @Component({
   selector: 'app-click-collect-bottom-sheet',
@@ -88,6 +89,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
 
   dismiss(): void {
     this.ref.dismiss();
+    MyLogger.log('dismiss() | ref')(this.ref);
   }
 
   getSrcset(_url: string): string {

@@ -134,6 +134,24 @@ span:nth-child(3) {
   background-color: white;
 }
 
+.click-collect-btn{
+  background-color: var(--button-color);
+  button{
+    width: 100%;
+    min-width: 100%;
+    background-color: transparent;
+    border:none;
+    padding: 20px;
+    color: white;
+    font-family: Special Elite, sans-serif;
+    font-size: 22px;
+    &:hover{
+      color: #efefef;
+    }
+  }
+
+}
+
 @media screen and (max-width: 500px) {
   .mat-drawer {
     background-color: var(--background-color1);

@@ -66,6 +66,7 @@
     //background-color: red;
     text-align: center;
     max-height: 36px;
+    background-color: red;
   }
 
   .card-choices-options {
@@ -81,10 +82,11 @@
   }
 
   .card-qty {
-    grid-column: 2;
+    grid-column: 2 / span 1;
     grid-row: 3;
-    max-width: 200px;
-
+ div {
+   background-color: red;
+ }
   }
 
   .card-total {
