@@ -1,5 +1,5 @@
 
-<div style="height: 150px; width: 100%"></div>
+<!--<div style="height: 150px; width: 100%"></div>-->
 <div class="cc-container">
 
     <mat-progress-spinner
@@ -7,26 +7,27 @@
       mode="indeterminate"
       color="primary">
     </mat-progress-spinner>
+
   <!-- Categories ribbon. -->
-  <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>
+  <wdg-ribbon-selection
+    [items]="prods$| async"
+    (scrollToId)="this.scrollToId($event)">
+  </wdg-ribbon-selection>
+
+<!--  <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>-->
     <div class="cc-list-wrapper" id="ccListWrapper">
-
-
-
 
       <ng-container *ngFor="let prod of prods$| async">
         <div class="category-header"
-
              style="text-transform: capitalize">
-          <div [id]="prod[0]"
-               style="position: relative;
-                      transform: translateY(-128px);
-                      display: block;
-                      "></div>
-          {{prod[0]}}
-        </div>
-        <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
+          <div> {{prod[0]}}</div>
+          <div [id]="prod[0]">anchor</div>
 
+        </div>
+<div class="card-list">
+  <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
+
+</div>
       </ng-container>
       <div class="spacer">
       </div>
@@ -47,19 +48,6 @@
  *
 -->
 
-
-<!--
-~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-                         Horizontal Slider bar.
--->
-<ng-template #CategoriesRibbonTmpl let-prods=prods>
-  <div class="horizontal-slidebar">
-    <a
-      (click)="scrollToId(prod[0])"
-      class="span-item"
-      *ngFor="let prod of prods">{{prod[0] }}</a>
-  </div>
-</ng-template>
 
 
 <!--
@@ -89,3 +77,23 @@
 
   </div>
 </ng-template>
+
+<!--
+~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
+                         Horizontal Slider bar.
+-->
+
+
+<!--<ng-template #CategoriesRibbonTmpl let-prods=prods>-->
+<!--  <wdg-ribbon-selection-->
+<!--  [items]="prods"-->
+<!--  (scrollToId)="this.scrollToId($event)"-->
+<!--  ></wdg-ribbon-selection>-->
+<!--&lt;!&ndash;  <div class="horizontal-slidebar">&ndash;&gt;-->
+<!--&lt;!&ndash;    <a&ndash;&gt;-->
+<!--&lt;!&ndash;      (click)="scrollToId(prod[0])"&ndash;&gt;-->
+<!--&lt;!&ndash;      class="span-item"&ndash;&gt;-->
+<!--&lt;!&ndash;      *ngFor="let prod of prods">{{prod[0] }}</a>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--</ng-template>-->
+

@@ -19,6 +19,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import * as Parse from 'parse';
 import {environment} from "../../../environments/environment.prod";
+import { RibbonSelectionComponent } from './parts/ribbon-selection/ribbon-selection.component';
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 
 // @ts-ignore
@@ -34,7 +35,8 @@ const routes: Routes = [
     ClickCollectComponent,
     CustomImageDirective,
     MouseOverMouseOutDirective,
-    ClickCollectBottomSheetComponent],
+    ClickCollectBottomSheetComponent,
+    RibbonSelectionComponent],
   exports: [
     CustomImageDirective,
     MouseOverMouseOutDirective,

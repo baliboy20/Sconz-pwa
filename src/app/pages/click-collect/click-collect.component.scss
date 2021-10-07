@@ -10,36 +10,35 @@ html {
  *    |_| \__,_| \__, | \___/  \__,_| \__|
  *               |___/
  */
-:host {
-  background-color: orange;
-  position: relative;
-  height:600px;
-}
+
 // overall container
 .cc-container {
-
- //top: 300px;
- // width: 100vw;
- // background-color: red;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
 }
 
-// scrollable list wrapper
+//<-- Scrollable card list wrapper.
 .cc-list-wrapper {
-
   box-sizing: border-box;
   display: flex;
-  padding-top: 50px;
+  padding-top: 99px;
   flex-flow: wrap row;
   overflow-y: scroll;
-  //height: calc(90vh);
+  overflow-x: hidden;
   width: 100vw;
-  justify-content: center;
 }
 
+.card-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-row-gap: 8px;
+  justify-items: center;
+}
 
-// slidebar at the top
+// <-- slidebar at the top of the screen.
 .horizontal-slidebar {
-  position: fixed ;
+  position: fixed;
   min-width: 100%;
   margin: 0;
   box-sizing: border-box;
@@ -67,27 +66,27 @@ html {
 }
 
 .category-header {
-  //position: sticky;
-  top: -8px;
-  flex: 0 0 auto;
-  width: 100%;
-  padding-left: 16px;
-  vertical-align: bottom;
-  height: 80px;
+  width: 100vw;
+  position: relative;
+
+  :first-child {
+    position: relative;
+    top: 30%;
+    left: 40%;
+  }
+
+  :nth-child(2) {
+    visibility: hidden;
+  }
+
+  height: 60px;
   font: var(--font-regular-sub-heading);
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-  border-bottom: double 5px whitesmoke;
   box-sizing: border-box;
 }
 
 .card-layout {
-  // own div prop
   flex: 1 1 28%;
-  max-width: 300px;
-  //min-width: 300px;
+  max-width: 400px;
   overflow-x: hidden;
 
   //descendeant props
@@ -152,13 +151,9 @@ html {
     flex: 1 0 90px;
     display: inline;
     padding: 8px 8px;
-    //text-align: center;
     font: var(--font-smaller-sub-heading);
     font-family: "Arial Black", monospace;
-    //vertical-align: center;
     color: var(--grey-80);
-    //border: 1px solid greenyellow;
-    //background-color: lightcyan;
     user-select: none;
 
   }
@@ -176,11 +171,9 @@ html {
   overflow-y: hidden;
 
   &:hover {
-    //outline: 2px solid dodgerblue;
     transition: box-shadow 500ms;
-   box-shadow: 0px 2px 3px 2px darkgray;
+    box-shadow: 0px 2px 3px 2px darkgray;
   }
-
 
   .product-description {
     margin: 0 8px;
@@ -189,7 +182,6 @@ html {
     color: var(--grey-80);
     overflow-y: hidden;
     max-height: 200px;
-    //background-color: palegoldenrod;
   }
 
   .product-price {
@@ -210,10 +202,7 @@ html {
     overflow-x: hidden;
     display: block;
     width: 100%;
-    // border: 1px solid crimson;
-
     img {
-
       object-fit: fill;
     }
   }
@@ -226,10 +215,7 @@ html {
   height: 100vh;
   display: block;
   width: 100%
-
-
 }
-
 
 @media (hover: hover) and (pointer: coarse) {
   .mat-card:hover {
