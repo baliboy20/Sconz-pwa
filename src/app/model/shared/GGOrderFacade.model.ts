@@ -1,6 +1,7 @@
 import {GGStockProductChoice, GGStockProductOption} from './GGStockProducts.infc';
 import {MyLogger} from "../../service/logging/myLogging";
 import {ThumbImageReader} from "../ThumbImageReader";
+import {Pipe, PipeTransform} from "@angular/core";
 
 export interface GGStockProductChoiceOrder extends GGStockProductChoice {
   qty: number;
@@ -53,12 +54,9 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.productId = itm.productId;
     this.total = itm.total;
     this.name = itm.name;
-   MyLogger.large('reader')(itm.thumbImg)
+//   MyLogger.large('reader')(itm.thumbImg)
     this.thumbImg = ThumbImageReader.createFromUrl(itm.thumbImg.url ?? itm.thumbImg._url)
     this.options = itm.options;
-    // ****
-   //  this.thumbImg = itm.thumbImg as ThumbImageReader ?? ThumbImageReader.empty();
-
     this.reCompute(this as GGStockProductOrder);
   }
 
@@ -66,7 +64,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   get optionsDescList(): string | undefined {
     // return 'a spoon full of henley';
     return !this.options || this.options.length === 0 ? '' :
-      this.options.map(this._GbpFmt).join(', ');
+      this.options.map(this._GbpFmt).join(' ~ ');
   }
 
   choice: GGStockProductChoice;
@@ -83,7 +81,7 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
   /**  */
   static totalOfOptions(options: GGStockProductOption[]): number {
     const total = options
-      .map(a => (a.price))
+      .map(a => (+a.price))
       .reduce((agg: number, b) => (agg + b), 0);
     return total;
   }
@@ -119,3 +117,5 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
     this.reCompute(this);
   }
 }
+
+

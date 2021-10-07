@@ -4,7 +4,15 @@
 //  --badge-background-color: beige;
 //  --badge-fill-color: white;
 //}
+.basket-button {
+  color: whitesmoke;
+   margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: center;
+  border: 1px solid whitesmoke;
+  background-color: var(--component-background-color2);
 
+}
 .svg {
   --htnWd: 35px;
   background-color: var(--badge-background-color);

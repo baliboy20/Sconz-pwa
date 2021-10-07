@@ -19,7 +19,6 @@ export class AboutComponent implements OnInit {
   html: SafeHtml = '<span [class]="page-heading">argument</span>';
 
   constructor(
-
     private repo: RepoService,
     private ds: DomSanitizer,
     private http: HttpClient,
@@ -42,7 +41,7 @@ export class AboutComponent implements OnInit {
             const end = rs.indexOf('</body>');
             const html = rs.substring(begin, end);
             // this.html = this.ds.bypassSecurityTrustHtml(html);
-            console.log('html', html);
+//            console.log('html', html);
             const tx: HTMLSpanElement = this.rnd.createElement('div');
             this.rnd.setProperty(tx, 'innerHTML', html);
             // @ts-ignore

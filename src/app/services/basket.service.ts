@@ -85,6 +85,7 @@ export class BasketService {
   }
 
   recompute(): void {
+    console.log('recomputing')
     const fn = ToCurrencyStringFn;
     this._basketItems = [...this._basketItems];
     const initValue: BasketTotal = {total: 0, qty: 0};

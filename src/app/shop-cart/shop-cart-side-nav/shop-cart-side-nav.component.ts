@@ -9,7 +9,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {MyLogger} from "../../service/logging/myLogging";
 
 @Component({
-  selector: 'v69-shopcart-drawer',
+  selector: 'click-collect-cart',
   templateUrl: './shop-cart-side-nav.component.html',
   styleUrls: ['./shop-cart-side-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +38,6 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit {
 
       .subscribe(a => {
         this.basket = a;
-        this.basket.basketItems.forEach(a => MyLogger.log('basket')(a.thumbImg))
         this.ref.reattach();
         this.ref.markForCheck();
         this.ref.detectChanges();
@@ -50,14 +49,12 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit {
   }
 
   onCheckout(): void{
-    // this.router.navigate(['/gg-checkout']);
     this.sideNav?.close();
     this.router.navigate(['/gg-checkout']);
   }
 
 
   onQtyChanged(qty: number, idx: number) {
-   console.log('qty changed', qty, idx);
     this.cartService.setQty(qty,idx )
   }
 
@@ -80,15 +77,13 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit {
   }
 
   isEmptyBasket(): boolean {
-   // MyLogger.large()('is empty basket');
     const bsk = this.basket?.basketItems.length ?? -1;
-  //  console.log('bsk', bsk);
     return bsk < 1;
   }
 }
-/* ===================================================================================================
-                DeleteDialongComponent
-   ===================================================================================================
+/*  ===================================================================================================
+                                      DeleteDialongComponent
+    ===================================================================================================
  */
 @Component({
   selector: '',

@@ -41,10 +41,6 @@ export class RepoGGService implements OnDestroy {
 
 
   private _configLocalDatastore(): void {
-    // Parse.enableLocalDatastore();
-    // window.localStorage.clear();
-
-
   }
 
   async initWebhookListener(): Promise<any> {
@@ -55,29 +51,23 @@ export class RepoGGService implements OnDestroy {
     sub.on("enter", a => MyLogger.log('Enter ==>')('trigger Enter event', a));
     sub.on('delete', a => {
       a.unPin();
-     // MyLogger.log('DELETE ==>')('trigger update event', a);
     });
 
   }
 
   async _findProductItems(): Promise<any> {
-    MyLogger.log('')('calling _findProductItems');
     if (!this.cacheresults) {
-      // Parse.Object.unPinAllObjectsWithName(PIN_NAME);
 
       let query = new Parse.Query(STOCK_COLLECTION_NAME);
       query.fromNetwork();
-      MyLogger.log('sdf')('result not cached');
       const results = await query.find();
-    // await Parse.Object.pinAllWithName("LCUK", results);
-      // await Parse.Object.unPinAllWithName("LCUK", results);
 
       this.cacheresults = true;
       return results;
     }
     //  Parse.Object.unPinAllObjects();
     const query = new Parse.Query(STOCK_COLLECTION_NAME);
-    MyLogger.log('+++')('querey from local datastore')
+ //   MyLogger.log('+++')('querey from local datastore')
     query.fromNetwork();
     const res = await query.find();
     return res;
@@ -85,9 +75,6 @@ export class RepoGGService implements OnDestroy {
   }
 
   listProductItems(): Observable<GGStockProductFacade[]> {
-    // this._findProductItems()
-    //   .catch(a => console.log('EError', a.message))
-    //   .then(a => console.log('RESTults', a));
     return fromPromise(this._findProductItems())
       .pipe(
         take(1),
@@ -110,15 +97,13 @@ export class RepoGGService implements OnDestroy {
     Object.entries(catSet).forEach(([a, b]) => {
       arr.push([a, b]);
     });
-    // console.log('%c Collation result', 'color: orange', arr);
     return arr as [string, GGStockProductFacade[]];
   }
 
-  //
-  //   Coffee order Itemss
-  //
+
+
+
   private async _findCoffeeOrderItems(): Promise<any> {
-    // console.log('repo inited...');
     const query = new Parse.Query('CoffeeOrders');
     return await query.find();
   }
@@ -128,7 +113,6 @@ export class RepoGGService implements OnDestroy {
       .pipe(
         take(1),
         map((a: any) => a.map((b: any) => (GGStockProductOrderImpl.create(b)))),
-        // tap(a => console.log('items transformed', a)),
       );
   }
 
@@ -176,7 +160,6 @@ export class RepoGGService implements OnDestroy {
   }
 
   private async _listCategories(): Promise<any[]> {
-
     const query = new Parse.Query(STOCK_COLLECTION_NAME);
     try {
       const result = await query.find();
@@ -199,7 +182,6 @@ export class RepoGGService implements OnDestroy {
           return acc;
         }, new Set<any>()),
         map(a => Array.from(a)),
-        // tap(a => console.log('%cCATEGORES', 'color:green', a)),
       );
   }
 
@@ -210,9 +192,7 @@ export class RepoGGService implements OnDestroy {
   }
 
   async deletStockProductImage(thumb: string, id: string): Promise<any> {
-    // console.log('run i am cloud: id =>', {id});
     const fn = await Parse.Cloud.run('deletStockProductImage', {id});
-    // console.log('deletStockProductImage', fn);
     return fn;
   }
 
@@ -244,10 +224,7 @@ export class RepoGGService implements OnDestroy {
 
     try {
       const query = new Parse.Query('CoffeeOrders');
-
-      // query.equalTo('objectId', id);
       const result = await query.get(id);
-      // console.log('%c get coffee orders', 'color: brown', result);
       return result;
     } catch (e) {
       MyLogger.error()(e.message, 'orderId', id);
@@ -261,19 +238,11 @@ export class RepoGGService implements OnDestroy {
 
   public async getCartOfOrder(id: string): Promise<CustomerOrderFacade> {
     const rsul: Parse.Object = await this._getOrder(id);
-    console.log('%c order retrireved', 'color: orange', rsul);
-    // const a: OrderSent = {
-    //   basket: (rsul.get('order') as GGBasket),
-    //   payment: (rsul.get('payment') as StripePaymentDetails),
-    //   shippingInfo: rsul.get('shippingInfo')
-    // };
-
     return  CustomerOrderFacade.create(rsul);
   }
 
   ngOnDestroy(): void {
     Parse.Object.unPinAllObjects();
-    MyLogger.logCol({symbol: '±±±±', fontSize: '40px', color: 'orange'})('on destroy')
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {environment} from '../environments/environment';
 import {Router, RouterOutlet} from '@angular/router';
 import {fadeInAnimation} from './features/animations/animations';
@@ -14,8 +14,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./app.component.scss'],
   animations: [fadeInAnimation]
 })
-export class AppComponent {
-  // title = 'RosyLookLike1';
+export class AppComponent implements AfterViewInit{
+  isExpanded = true;
   version = environment.build_version;
   width = window.screen.width;
   componentPortal: ComponentPortal<ShopCartSideNavComponent> | undefined;
@@ -37,8 +37,8 @@ export class AppComponent {
     await this.liveQueryInit();
   }
   // listens for new orders.
+
   async liveQueryInit(): Promise<void> {
-    console.log('dows ths fire');
     const lq: Parse.Query = new Parse.Query('CoffeeOrders');
     lq.equalTo('objectId', 'FhLXKePQTx');
     const sub = this.sub = await lq.subscribe();
@@ -61,18 +61,6 @@ export class AppComponent {
     this.router.navigate(['shop-cart']);
   }
 
-  // closedStatCart() {
-  //   if(!this.componentPortal || !this.componentPortal.isAttached) {
-  //     return;
-  //   }
-  //   this.componentPortal?.detach();
-  // }
-  //
-  // onAttached(event: any) {
-  //   const sc: ShopCartSideNavComponent = event.instance;
-  //   sc.sideNav = this.cartDrawer;
-  //
-  // }
 
   openedStartNavDrawer() {
     this.cartDrawer?.close();
@@ -80,5 +68,9 @@ export class AppComponent {
 
   openedStartCartDrawer() {
     this.navDrawer?.close();
+  }
+
+  ngAfterViewInit(): void {
+    this.isExpanded = false;
   }
 }

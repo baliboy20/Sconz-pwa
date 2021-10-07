@@ -6,19 +6,20 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./ribbon-selection.component.scss']
 })
 export class RibbonSelectionComponent implements OnInit {
-   _items: string[] = (' ,').repeat(10).split(',');
-@Input()  set items( items: any) {
-  console.log('ribbon', items);
-  if(!items) {
-    return;
+
+  @Input()
+  set items(items: any) { if (!items) { return; } this._items = items.map((a: any) => a[0]);   };
+ _items: string[] = (' ,').repeat(10).split(',');
+private s = 'sdf';
+
+ @Output() scrollToId: EventEmitter<any> = new EventEmitter;
+
+  constructor() {
   }
- this._items = items.map((a:any )=> a[0]);
-};
-@Output() scrollToId: EventEmitter<any> = new EventEmitter;
-  constructor() { }
 
   ngOnInit(): void {
   }
+
   onClicked(event: string) {
     this.scrollToId.emit(event);
   }

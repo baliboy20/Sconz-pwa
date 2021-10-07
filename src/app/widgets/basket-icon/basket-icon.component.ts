@@ -17,11 +17,11 @@ import {tap} from 'rxjs/operators';
 import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
-  selector: 'v69-basket-icon',
+  selector: 'basket-icon-button',
   templateUrl: './basket-icon.component.html',
   styleUrls: ['./basket-icon.component.scss']
 })
-export class BasketIconComponent implements OnInit, AfterViewInit {
+export class BasketIconComponent implements OnInit {
 
   constructor(
     public cartService: CartService,
@@ -35,14 +35,7 @@ export class BasketIconComponent implements OnInit, AfterViewInit {
   }
 
   toggle(): void{
-    // console.log('toggle', this.sideNav);
     this.sideNav?.toggle();
-  }
-
-  ngAfterViewInit(): void {
-// this.rnd.setStyle(this.tmp.nativeElement, '--basket-icon-color', 'white');
-// document.documentElement.style.setProperty('--basket-icon-color', 'orange');
-
   }
 
 }

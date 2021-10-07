@@ -21,7 +21,7 @@ export class GGStockProductFacade implements GGStockProduct {
     if ( !!im && '_url' in im) {
 
       this._thumbImgReader = ThumbImageReader.createFromUrl(im._url);
-      MyLogger.log('- + -')(im);
+//      MyLogger.log('- + -')(im);
     } else {
       this._thumbImgReader = ThumbImageReader.createEmpty();
       // MyLogger.large('- + -')(this._thumbImgReader);
@@ -201,7 +201,7 @@ export class GGStockProductFacade implements GGStockProduct {
     try {
       const ff: ParseFileFacade = ParseFileFacade.create(this._imageParseFile)
       const savedfile = await ff.saveOnly();
-      MyLogger.normal()('savedfile', savedfile);
+     // MyLogger.normal()('savedfile', savedfile);
       this.item.set('thumbImg', savedfile);
       await this.item.save({useMasterKey: true});
     } catch (e) {
@@ -214,10 +214,10 @@ export class GGStockProductFacade implements GGStockProduct {
 
   async remove(): Promise<any> {
     try {
-      MyLogger.log('++')('prod', this.item);
+   //   MyLogger.log('++')('prod', this.item);
       return await this.item.destroy({});
     } catch (e) {
-      MyLogger.normal()(e.message);
+    //  MyLogger.normal()(e.message);
     }
   }
 

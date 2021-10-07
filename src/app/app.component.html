@@ -4,56 +4,54 @@
 <!-- SideNav container-->
 
 
-  <mat-sidenav-container>
+<mat-sidenav-container>
 
 
-    <!--  Cart and Checkout drawer-->
+  <!--  Cart and Checkout drawer-->
 
-      <mat-sidenav position="end"
-                   [opened]="checkoutSidenavOpened"
-                   (openedStart)="openedStartCartDrawer()"
-                   mode="over"
-                   #CartDrawer
-      >
+  <mat-sidenav position="end"
+               [opened]="checkoutSidenavOpened"
+               (openedStart)="openedStartCartDrawer()"
+               mode="over"
+               #CartDrawer>
 
-          <v69-shopcart-drawer [cartSideNav]="CartDrawer">
-          </v69-shopcart-drawer>
+    <click-collect-cart [cartSideNav]="CartDrawer">
+    </click-collect-cart>
 
-      </mat-sidenav>
+  </mat-sidenav>
 
-    <!--  Navigation drawer-->
-
-
-    <mat-sidenav opened="false"
-                 mode="push"
-                 (openedStart)="openedStartNavDrawer()"
-                 #NavDrawer>
-      <div class="app-scrollable">
-        <ng-container *ngTemplateOutlet="NavigationDrawerTmpl"></ng-container>
-      </div>
-
-    </mat-sidenav>
+  <!--  Navigation SideNav-->
 
 
-    <!--  SideNav Content area -->
+  <mat-sidenav opened="false"
+               mode="push"
+               (openedStart)="openedStartNavDrawer()"
+               #NavDrawer>
+    <div class="app-scrollable">
+      <ng-container *ngTemplateOutlet="NavigationDrawerTmpl"></ng-container>
+    </div>
 
-    <mat-sidenav-content>
-
-      <div [@routeAnimations]="prepareRoute(outlet)">
-        <router-outlet #outlet="outlet"></router-outlet>
-      </div>
-
-    </mat-sidenav-content>
+  </mat-sidenav>
 
 
-  </mat-sidenav-container>
+  <!--  SideNav Content area -->
 
+  <mat-sidenav-content>
+
+    <div [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+
+</mat-sidenav-container>
 
 
 <!--
 ==============================================================================
 
-                        TEMPLATES
+                        T E M P L A T E S
 
 ==============================================================================
 -->
@@ -65,26 +63,12 @@
 -->
 <ng-template #ClkCltBnTmpl>
   <div class="click-collect-btn">
-<!--    <mat-icon style="color: #8b3500;">bolt</mat-icon>-->
+    <!--    <mat-icon style="color: #8b3500;">bolt</mat-icon>-->
     <button routerLink="click-collect"
-            (click)="navDrawer?.close()">CLICK & COLLECT</button>
+            (click)="navDrawer?.close()">CLICK & COLLECT
+    </button>
   </div>
-<!--  <div style="background-color: transparent;-->
-<!--              margin-bottom: 10px;-->
-<!--              border:none;text-align: center">-->
-<!--    <button mat-raised-button-->
-<!--            color="accent"-->
-<!--            style="color: white;-->
-<!--                   font-family: Special Elite, sans-serif;-->
-<!--                   font-size: 22px;-->
-<!--                  padding: 16px"-->
-<!--            routerLink="click-collect"-->
-<!--            (click)="navDrawer?.close()">-->
-<!--      <mat-icon style="color: #8b3500;">bolt</mat-icon>-->
-<!--      CLICK AND COLLECT-->
 
-<!--    </button>-->
-<!--  </div>-->
 </ng-template>
 
 
@@ -92,7 +76,7 @@
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
                          Toolbar.
 -->
-<ng-template  #mainToolbarTmpl>
+<ng-template #mainToolbarTmpl>
   <mat-toolbar class="top-mat-toolbar">
 
     <button (click)="this.navDrawer?.toggle()"
@@ -109,10 +93,8 @@
       <div class="tx-div"></div>
     </button>
     <span class="tx-div"></span>
-<button mat-icon-button routerLink="home">
-  <mat-icon>home</mat-icon>
-</button>
-    <v69-basket-icon [cartSideNav]="this.cartDrawer"></v69-basket-icon>
+
+    <basket-icon-button [cartSideNav]="this.cartDrawer"></basket-icon-button>
   </mat-toolbar>
 
 </ng-template>
@@ -132,30 +114,36 @@
   </button>
 
 
-  <!--     click and collect-->
+  <!--     Click and collect Button. -->
   <ng-container *ngTemplateOutlet="ClkCltBnTmpl"></ng-container>
-
-  <mat-expansion-panel expanded="false">
+<mat-accordion displayMode="flat">
+  <mat-expansion-panel  [expanded]="isExpanded">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Shop
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-selection-list [multiple]="false" class="expandable">
-      <mat-list-option (click)="navDrawer?.close()"
-                       [routerLink]="[route[0]]"
-                       *ngFor="let route of [
-                       ['shop/coffee','Coffee'],
-                       ['shop/training', 'Training'],
-                       ['shop/vouchers','Vouchers'],
-                       ['shop/gift=subs', 'Subscriptions'],
-                       ]">  {{route[1]}}
+        <mat-selection-list [multiple]="false" class="expandable">
+          <mat-list-option (click)="navDrawer?.close()"
+                           [routerLink]="[route[0]]"
+                           *ngFor="let route of [
+                           ['shop/coffee','Coffee'],
+                           ['shop/training', 'Training'],
+                           ['shop/vouchers','Vouchers'],
+                           ['shop/gift=subs', 'Subscriptions'],
+                           ]">  {{route[1]}}
 
-      </mat-list-option>
-    </mat-selection-list>
+          </mat-list-option>
+        </mat-selection-list>
   </mat-expansion-panel>
+</mat-accordion>
 
   <mat-selection-list class="sellist" [multiple]="false">
+    <mat-list-option (click)="navDrawer?.close()" routerLink="home">
+      <div mat-line>HOME</div>
+      <mat-icon mat-list-icon>home</mat-icon>
+    </mat-list-option>
+    <mat-divider></mat-divider>
     <mat-list-option (click)="navDrawer?.close()"
                      [routerLink]="[route[0]]"
                      *ngFor="let route of [
@@ -166,7 +154,7 @@
                      ['settings','Settings', 'Settings'],
                      ]">
 
-      <mat-icon  matTooltip="Dev settings" *ngIf="route[2]">settings</mat-icon>
+      <mat-icon matTooltip="Dev settings" *ngIf="route[2]">settings</mat-icon>
       <span *ngIf="!route[2]">{{route[1]}}</span>
 
       <mat-divider></mat-divider>

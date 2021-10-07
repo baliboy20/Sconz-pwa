@@ -20,20 +20,21 @@ export class ShopCartComponent extends PageBase implements OnInit {
   styleConfigLabel = {
     backgroundColor: 'var(--background-color1)',
     border: 'none 1px dotted var(--grey-50)',
-    color:  'var(--grey-50)',
+    color: 'var(--grey-50)',
     top: '-10px',
     margin: 0,
     padding: '0 1ch'
   };
   styleConfigWrapper = {
-  textAlign: 'justify',
-  padding: '0 14px 8px 14px',
-  color: 'var(--grey-30)'
-};
+    textAlign: 'justify',
+    padding: '0 14px 8px 14px',
+    color: 'var(--grey-30)'
+  };
   styleConfigLabelForNumtor = {...this.styleConfigLabel, top: '-23px'};
 
   public rightArrow = AppIcons.right_arrow;
   public basket: Basket | undefined;
+
   constructor(
     public router: Router,
     public baskService: BasketService) {
@@ -42,18 +43,19 @@ export class ShopCartComponent extends PageBase implements OnInit {
 
 
   ngOnInit(): void {
-    super.subscription  = this.baskService
+    super.subscription = this.baskService
       .basket
-      .pipe(tap(a => console.log('a',a)))
+      .pipe(tap(a => console.log('a', a)))
       .subscribe(bsk => this.basket = bsk);
   }
+
   getProductUrl(item: CartItemFacade): string[] {
     // const str1: string = (this.cart.cartItems[0] as any).productItemUrl
     return ['/', 'product-item2', item.productId];
   }
 
   doCheckout(): void {
-this.router.navigate(['shipping-information']);
+    this.router.navigate(['shipping-information']);
   }
 
   removeItm(idx: number): void {
@@ -66,7 +68,7 @@ this.router.navigate(['shipping-information']);
   }
 
   getGrindType(itm: CartItemFacade): string {
-    const retval =  itm.nonPriceOptions.forTypes.filter(a => a.typeName === 'grindType')[0].options[0];
+    const retval = itm.nonPriceOptions.forTypes.filter(a => a.typeName === 'grindType')[0].options[0];
     console.log('retval', retval);
     return retval;
   }

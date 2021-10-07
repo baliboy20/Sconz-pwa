@@ -29,12 +29,12 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
-// import * as Parse from 'parse';
-// Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
-//
+import * as Parse from 'parse';
+Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
+
 // // @ts-ignore
 // Parse.serverURL = environment.ParseServerURL;
-//hello
+
 @NgModule({
   declarations: [
     AppComponent,

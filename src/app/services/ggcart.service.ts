@@ -130,7 +130,7 @@ export class GGCartService implements GGBasketService {
       this.basketItems[+idx].qty = 0;
     }
     if (isNaN(val) || val === qty) {
-      console.log('is this the trap', !val, val, qty);
+      // console.log('is this the trap', !val, val, qty);
       return;
     }
 
@@ -154,7 +154,7 @@ export class GGCartService implements GGBasketService {
       //
       // const prodImpl = bask.basketItems.map(GGStockProductOrderImpl.create)
       bask.basketItems = prodImpl;
-      console.log('Redtriedved', prodImpl);
+      // console.log('Redtriedved', prodImpl);
       this.basketItems.push(...prodImpl);
       this.reSync(true);
     } else {
@@ -206,7 +206,7 @@ export class ItemInBasketExistsHelper {
 
     const longest = item.length >= choices.length ? item.map(a => a.vId).sort() : choices.map(a => a.vId).sort();
     const shortest = item.length < choices.length ? item.map(a => a.vId).sort() : choices.map(a => a.vId).sort();
-    console.log(shortest, longest);
+    // console.log(shortest, longest);
     for (const idx in longest) {
       if (shortest.length - 1 < +idx) {
         return false;

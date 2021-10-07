@@ -1,5 +1,13 @@
-
-//   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*        LAYOUT
+/***
+ *     _                              _
+ *    | |                            | |
+ *    | |  __ _  _   _   ___   _   _ | |_
+ *    | | / _` || | | | / _ \ | | | || __|
+ *    | || (_| || |_| || (_) || |_| || |_
+ *    |_| \__,_| \__, | \___/  \__,_| \__|
+ *                __/ |
+ *               |___/
+ */
 .csnv-container {
 
   box-sizing: border-box;
@@ -9,7 +17,7 @@
   grid-template-rows: 60px auto 120px;
 
   .csnv-header {
-    margin-bottom:10px;
+    margin-bottom: 10px;
     align-items: center;
   }
 
@@ -17,7 +25,8 @@
     align-items: flex-start;
     padding-top: 15px;
   }
-  .csnv-footer,  .csnv-header {
+
+  .csnv-footer, .csnv-header {
     box-sizing: content-box;
     display: flex;
     flex-flow: nowrap row;
@@ -26,8 +35,8 @@
     overflow-x: hidden;
 
     //width: calc(100% - 100px);
-    padding-left:  3%;
-    padding-right:  3%;
+    padding-left: 3%;
+    padding-right: 3%;
 
   }
 
@@ -42,7 +51,7 @@
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 3fr 3fr;
-  grid-template-rows: 36px 72px 1fr 1fr;
+  grid-template-rows: 36px 72px 1fr;
 
   .card-image {
     grid-column: 1;
@@ -55,7 +64,7 @@
     img {
       box-sizing: border-box;
       width: 100%;
-//object-fit: contain;
+      //object-fit: contain;
     }
   }
 
@@ -63,14 +72,12 @@
     //background-color: blueviolet;
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
-    //background-color: red;
     text-align: center;
     max-height: 36px;
-    background-color: red;
   }
 
   .card-choices-options {
-   max-height: 72px;
+    max-height: 72px;
     grid-column: 2 / span 2;
     grid-row: 2;
   }
@@ -84,15 +91,16 @@
   .card-qty {
     grid-column: 2 / span 1;
     grid-row: 3;
- div {
-   background-color: red;
- }
+    display: flex;
+    justify-content: center;
+    width: min-content;
+
   }
 
   .card-total {
 
-    grid-column: 1 / span 3;
-    grid-row: 4;
+    grid-column: 3 / span 1;
+    grid-row: 3;
 
     //layout of contents
     display: flex;
@@ -112,7 +120,16 @@
 }
 
 
-//   ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_* ~_*       STYLING
+/***
+ *     _____  _           _  _
+ *    /  ___|| |         | |(_)
+ *    \ `--. | |_  _   _ | | _  _ __    __ _
+ *     `--. \| __|| | | || || || '_ \  / _` |
+ *    /\__/ /| |_ | |_| || || || | | || (_| |
+ *    \____/  \__| \__, ||_||_||_| |_| \__, |
+ *                  __/ |               __/ |
+ *                 |___/               |___/
+ */
 .csnv-container {
 
 }
@@ -134,21 +151,29 @@
   background-color: white;
 
   .card-name {
-    //background-color: blueviolet;
+    color: var(--grey-40);
+    font: var(--font-regular-body);
+  //  background-color: var(--grey-40);
+    line-height: 36px;
   }
-.card-image {
- & img {
-   border: 1px solid rgba(128, 128, 128, 0.56);
-   padding: 2px;
-   border-radius: 2px;
- }
-}
+
+  .card-image {
+    & img {
+      border: 1px solid rgba(128, 128, 128, 0.56);
+      padding: 2px;
+      border-radius: 2px;
+    }
+  }
+
   .card-choices-options {
+    padding-left: 8px;
     //background-color: lightcyan;
     word-break: break-all;
-    span {
+
+    p {
       font-weight: bolder;
-      font: var(--font-smaller-sub-heading12-inconsolata)
+      font: var(--font-regular-body);
+      color: var(--grey-60);
     }
   }
 
@@ -157,7 +182,8 @@
   }
 
   .card-qty {
-    //background-color: black;
+
+    padding-left: 8px;
 
   }
 

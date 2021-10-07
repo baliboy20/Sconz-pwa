@@ -34,7 +34,7 @@ export class MouseOverMouseOutDirective {
 
   @HostListener('mouseout', ['$event.target']) onMouseOut(value: any) {
     MyLogger.log('mouseout')('its out', this.rf.nativeElement);
-    this.rnd.removeClass(this.rf.nativeElement,'mat-elevation-13')
+    this.rnd.removeClass(this.rf.nativeElement, 'mat-elevation-13')
   }
 
   constructor(private rf: ElementRef, private rnd: Renderer2) {
@@ -43,8 +43,8 @@ export class MouseOverMouseOutDirective {
 }
 
 /**
-  Directive: Manages the size of the Images.
-  ============================================================================================================
+ Directive: Manages the size of the Images.
+ ============================================================================================================
  */
 @Directive({
 
@@ -156,7 +156,7 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
         .pipe(
           map(a => this.repo._collateByCategory(a)),
         );
-    // bring up item page if there is a product id int the of the params
+    //<-- bring up item page if there is a product id int the of the params
     this.acr.params
       .pipe(
         map(a => a.id ?? new Error('wasteful')),
@@ -164,7 +164,10 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
         map(obs => obs ?? new Error('Product Id not found')),
         tap((fac: GGStockProductFacade) => this.onChooseProduct(fac))
       )
-      .subscribe(res => console.log('acr', res), error => console.log('Err', error.message ?? error.toString()));
+      .subscribe(
+        res => console.log('acr', res),
+        error => console.log('Err', error.message ?? error.toString())
+      );
   }
 
   isLoading = false;
