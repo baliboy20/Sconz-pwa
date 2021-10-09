@@ -1,7 +1,6 @@
 Uploading source files
 Uploading recent changes to hosting...
 The following files will be uploaded:
-/Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/220.f80da3642f68ed043fd9.js
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/404.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/about/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/brew-guides/index.html
@@ -11,11 +10,10 @@ The following files will be uploaded:
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/gg-checkout/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/home/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/index.html
-/Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/main.bf9770fb1100478e567d.js
+/Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/main.bb2cc843675aa732dd5e.js
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/our-suppliers/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/privacy-policy/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/refund-policy/index.html
-/Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/runtime.3385ca96890d36a2da37.js
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/settings/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/shipping-information/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/shipping-policy/index.html
@@ -30,4 +28,4 @@ The following files will be uploaded:
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/wholesale/index.html
 /Users/will/WebstormProjects/Coffeeshop/Sconz-pwa/test22/public/work-with-us/index.html
 Finished uploading files
-New release is named v544 (using Parse JavaScript SDK v2.2.25)
+New release is named v548 (using Parse JavaScript SDK v2.2.25)

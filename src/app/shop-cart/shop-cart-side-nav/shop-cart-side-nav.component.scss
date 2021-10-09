@@ -9,49 +9,64 @@
  *               |___/
  */
 .csnv-container {
-
+  position: absolute;
+  overflow-x: hidden;
   box-sizing: border-box;
-  height: calc(100% - 50px);
   width: 100%;
-  display: grid;
-  grid-template-rows: 60px auto 120px;
+  height: 300px;
+  //height: calc(100vh - 49px);
 
   .csnv-header {
     margin-bottom: 10px;
     align-items: center;
+    position: absolute;
+    top: 0;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: space-between;
+    width: calc(100%);
+    padding-left: 3%;
+    padding-right: 3%;
   }
 
   .csnv-footer {
     align-items: flex-start;
     padding-top: 15px;
-  }
-
-  .csnv-footer, .csnv-header {
-    box-sizing: content-box;
-    display: flex;
-    flex-flow: nowrap row;
-    justify-content: space-between;
-
-    overflow-x: hidden;
-
-    //width: calc(100% - 100px);
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    overflow-x: scroll;
+    width: calc(100%);
     padding-left: 3%;
     padding-right: 3%;
-
+    background-color: rgba(yellowgreen, 0.5);
   }
 
+
+
   .csnv-scrollable {
-    box-sizing: content-box;
+    border: 1px crimson solid;
+    overflow-x: hidden;
     overflow-y: scroll;
-    margin: 10px;
+    position: relative;
+    top: 70px;
+    height: 100%;
+    //todo undo to %.
+    width: 100%;
+    box-sizing: border-box;
+   // margin: 10px;
   }
 }
 
 .cart-card {
+  //> * { border: red solid 1px}
+  max-width: 100%;
   padding: 10px;
   display: grid;
-  grid-template-columns: 1fr 3fr 3fr;
-  grid-template-rows: 36px 72px 1fr;
+  grid-template-columns: 36px minmax(30ch, 30ch)  max-content 10ch;
+  grid-template-rows: 36px min-content 1fr;
 
   .card-image {
     grid-column: 1;
@@ -94,29 +109,24 @@
     display: flex;
     justify-content: center;
     width: min-content;
-
   }
 
   .card-total {
-
-    grid-column: 3 / span 1;
+    grid-column: 4;
     grid-row: 3;
 
     //layout of contents
     display: flex;
     flex: 1 1 auto;
-    //justify-content: flex-end;
     justify-content: flex-end;
     align-items: center;
     padding-right: 30%;
-
   }
 
   .card-divider {
     grid-column: 1 / span 3;
     grid-row: 1 / span 1;
   }
-
 }
 
 
@@ -131,29 +141,25 @@
  *                 |___/               |___/
  */
 .csnv-container {
-
+  //background-color: palevioletred;
 }
 
 .csnv-header {
-  //background-color: green;
-  //margin-bottom: 220px;
 }
 
 .csnv-footer {
-  background-color: rgba(yellowgreen, 0.5);
+
 }
 
 .csnv-scrollable {
-
 }
 
 .cart-card {
   background-color: white;
 
-  .card-name {
+  .card-name, .card-price {
     color: var(--grey-40);
     font: var(--font-regular-body);
-  //  background-color: var(--grey-40);
     line-height: 36px;
   }
 
@@ -167,13 +173,19 @@
 
   .card-choices-options {
     padding-left: 8px;
-    //background-color: lightcyan;
-    word-break: break-all;
 
     p {
-      font-weight: bolder;
-      font: var(--font-regular-body);
-      color: var(--grey-60);
+      max-width: 30ch;
+      word-break: break-all;
+    }
+
+    color: var(--grey-60);
+
+    .material-icons {
+      color: palevioletred;
+      font-size: 15px;
+      line-height: 22px;
+      padding-right: 8px;
     }
   }
 
@@ -182,19 +194,13 @@
   }
 
   .card-qty {
-
     padding-left: 8px;
-
   }
 
   .card-total {
-    //background-color: turquoise;
-    text-align: center;
-
-  }
-
-  .card-divider {
-
+    background-color: #bde5da;
+    text-align: end;
+    border-radius: 2px;
   }
 
 }

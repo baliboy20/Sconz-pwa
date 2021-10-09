@@ -1,6 +1,6 @@
 <div  [class]="this.styleClass === 'Std' ? 'incrementor-grid' : 'incrementor-grid-larger'"
      style="width: auto">
-  <button mat-mini-fab
+  <button mat-mini-fab class="incrementor-bn"
           (click)="subtract()">
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
@@ -17,7 +17,7 @@
     DELETE
   </button>
 
-  <button mat-mini-fab
+  <button mat-mini-fab class="incrementor-bn"
           (click)="add()">
     <mat-icon>keyboard_arrow_up</mat-icon>
   </button>

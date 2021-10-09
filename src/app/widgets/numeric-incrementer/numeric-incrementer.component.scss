@@ -7,7 +7,7 @@ $radius: 24px;
 
 .incrementor-grid {
   display: grid;
-  grid-template-columns:  40px 60px 40px ;
+  grid-template-columns:  40px 60px 40px;
 
   .numeric__input {
     border-radius: 3px;
@@ -21,7 +21,6 @@ $radius: 24px;
 
   }
 
-
   .minus__bn, .remove__bn {
 
     .mat-icon {
@@ -31,7 +30,6 @@ $radius: 24px;
     }
 
     text-align: center;
-    //border: 1px dotted red;
     font-family: var(--font-family);
     background-color: transparent;
 
@@ -41,8 +39,6 @@ $radius: 24px;
   }
 
   .remove__bn {
-    //grid-column: 2;
-    //grid-row: 1;
     border: none;
     color: maroon;
     padding: 2px;
@@ -50,14 +46,11 @@ $radius: 24px;
     margin: 2px;
     @media (max-width: 550px) {
       font-size: 10px;
-
-
     }
   }
-
-
 }
 
+// <-- Styles for Larger Class.
 .incrementor-grid-larger {
   display: flex;
 
@@ -73,44 +66,30 @@ $radius: 24px;
     width: 4ch;
     padding: 3px;
     padding-bottom: 5px;
-    height:36px;
+    height: 36px;
     color: var(--subdued-grey);
     font: var(--font-regular-sub-heading16-inconsalata);
 
   }
 
-  .minus__bn, .remove__bn {
-
-
-    text-align: center;
-    font-family: var(--font-family);
-    background-color: transparent;
-
-
-    :hover {
-      border: 1px dotted var(--subdued-grey)
-    }
+  .incrementor-bn {
+    border-radius: 4px;
+    border: none;
+    box-shadow: none;
+    background-color: rgba(250, 236, 218, 0.9);
   }
 
   .remove__bn {
-    //grid-column: 2;
-    //grid-row: 1;
     border: none;
     color: var(--grey-70);
-    // font: var(--font-regular-sub-heading);
+    font: var(--font-smaller-sub-heading12);
     padding: 2px;
-    //max-width: 25px;
     margin: 2px;
     @media (max-width: 550px) {
       font-size: 10px;
-
-
     }
   }
 
-  button[mat-fab] {
-    background-color: rgba(246, 206, 97, 0.76);
-  }
 
 }
 

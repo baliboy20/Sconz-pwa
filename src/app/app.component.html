@@ -10,6 +10,7 @@
   <!--  Cart and Checkout drawer-->
 
   <mat-sidenav position="end"
+
                [opened]="checkoutSidenavOpened"
                (openedStart)="openedStartCartDrawer()"
                mode="over"
@@ -20,11 +21,12 @@
 
   </mat-sidenav>
 
+
+
   <!--  Navigation SideNav-->
 
-
   <mat-sidenav opened="false"
-               mode="push"
+               mode="over"
                (openedStart)="openedStartNavDrawer()"
                #NavDrawer>
     <div class="app-scrollable">

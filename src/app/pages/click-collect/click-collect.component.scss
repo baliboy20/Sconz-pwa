@@ -75,8 +75,9 @@ html {
     left: 40%;
   }
 
-  :nth-child(2) {
+ .offset-anchor {
     visibility: hidden;
+    transform: translateY(-130px);
   }
 
   height: 60px;

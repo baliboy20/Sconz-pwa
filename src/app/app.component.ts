@@ -15,13 +15,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   animations: [fadeInAnimation]
 })
 export class AppComponent implements AfterViewInit{
-  isExpanded = true;
+  isExpanded = false;
   version = environment.build_version;
   width = window.screen.width;
   componentPortal: ComponentPortal<ShopCartSideNavComponent> | undefined;
   @ViewChild('CartDrawer', {read: MatSidenav}) public cartDrawer: MatSidenav | undefined;
   @ViewChild('NavDrawer', {read: MatSidenav}) public navDrawer: MatSidenav | undefined;
-  // @ViewChild('portal', {read: CdkPortalOutlet}) public portal: PortalOutlet | undefined;
   checkoutSidenavOpened = false;
   sub: any;
   constructor(
@@ -71,6 +70,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.isExpanded = false;
+    this.isExpanded = true;
+    this.checkoutSidenavOpened = true;
   }
 }

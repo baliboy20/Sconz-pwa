@@ -8,7 +8,7 @@
             *ngIf="!isEmptyBasket()"
             color="primary"
             (click)="removeAllAction()">
-            Clear
+      Clear
     </button>
   </div>
   <div class="csnv-scrollable">
@@ -20,8 +20,9 @@
   <div class="csnv-footer">
     <button mat-stroked-button
             style="color: white"
-            (click)="this.sideNav?.close()"
-    >CONTINUE</button>
+            (click)="this.sideNav?.close()">
+      CONTINUE
+    </button>
 
     <button mat-raised-button
             *ngIf="!isEmptyBasket()"
@@ -29,7 +30,7 @@
             (click)="onCheckout()">
       CHECKOUT {{basket?.total | currency: 'GBP'}}
     </button>
-</div>
+  </div>
 
 </div>
 
@@ -53,32 +54,33 @@
       </div>
       <div class="card-name">
         {{e(item).nameChoice}}
+        {{e(item).choice.price | currency:'GBP'}}
       </div>
 
-            <div class="card-choices-options">
-              <ng-container *ngIf="e(item).optionsDescList">
-                <p>Options:</p>
-                {{e(item).optionsDescList}} </ng-container>
+      <div class="card-price">
+<!--        {{e(item).choice.price | currency:'GBP'}}-->
+      </div>
 
-            </div>
+      <div class="card-choices-options">
+        <ng-container *ngIf="e(item).optionsDescList">
+          <p>{{e(item).optionsDescList}} </p></ng-container>
 
-            <div class="card-price">
-              {{e(item).choice.price | currency:'GBP'}}
-            </div>
+      </div>
 
-             <div class="card-qty">
+      <div class="card-qty">
 
-               <app-numeric-incrementer
-                 (ngModelChange)="onQtyChanged($event, idx)"
-                 (removeItmClicked)="removeAction(idx)"
-                 [(ngModel)]="item.qty"
-                 [showRemoveButton]="true"></app-numeric-incrementer>
+        <app-numeric-incrementer
+          (ngModelChange)="onQtyChanged($event, idx)"
+          (removeItmClicked)="removeAction(idx)"
+          [(ngModel)]="item.qty"
+          styleClass="Lrg"
+          [showRemoveButton]="true"></app-numeric-incrementer>
 
-           </div>
-            <div class="card-total">
+      </div>
+      <div class="card-total">
 
-              {{e(item).total | currency:'GBP'}}
-            </div>
+        {{e(item).total | currency:'GBP'}}
+      </div>
 
     </div>
     <mat-divider class="card-divider"></mat-divider>

@@ -21,8 +21,7 @@
         <div class="category-header"
              style="text-transform: capitalize">
           <div> {{prod[0]}}</div>
-          <div [id]="prod[0]">anchor</div>
-
+          <div [id]="prod[0]" class="offset-anchor"></div>
         </div>
 <div class="card-list">
   <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
