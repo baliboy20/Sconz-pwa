@@ -20,7 +20,7 @@ export const environment = {
     success_route: '/#/orders-statement',
     cancel_route: '/#/orders-statement',
   },
-  build_version: '14.0a prod 09 Oct\'21',
+  build_version: '14.b prod 12 Oct\'21',
   useDevCart: true,
   // dev flags
   enableNavToStripPayment: false,

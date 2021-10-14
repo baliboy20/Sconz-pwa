@@ -4,31 +4,34 @@
     <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
       <mat-icon class="material-icons">close</mat-icon>
     </button>
-    <button mat-stroked-button
+    <div style="background-color: red"></div>
+    <button mat-icon-button
+
             *ngIf="!isEmptyBasket()"
             color="primary"
             (click)="removeAllAction()">
-      Clear
+     <span class="material-icons">delete_sweep</span>
     </button>
   </div>
-  <div class="csnv-scrollable">
+
+  <div class="csnv-scrolling-area">
     <div class="emptyBasket" *ngIf="this.isEmptyBasket()">
       Cart empty
     </div>
     <ng-container *ngTemplateOutlet="ShopCartListTmpl"></ng-container>
   </div>
   <div class="csnv-footer">
-    <button mat-stroked-button
-            style="color: white"
+    <button mat-icon-button
+            style="color: var(--grey-80)"
             (click)="this.sideNav?.close()">
-      CONTINUE
+      <span class="material-icons">arrow_back_ios</span>
     </button>
 
-    <button mat-raised-button
+    <button mat-flat-button
             *ngIf="!isEmptyBasket()"
-            color="accent"
             (click)="onCheckout()">
-      CHECKOUT {{basket?.total | currency: 'GBP'}}
+      <span class="buy-label"> BUY &nbsp;</span>
+      <span>{{basket?.total | currency: 'GBP'}}</span>
     </button>
   </div>
 
@@ -46,15 +49,18 @@
 <!-- TEMPLATE:                                  Cart List -->
 <ng-template #ShopCartListTmpl>
 
-  <ng-container *ngFor="let item of basket?.basketItems, let idx = index">
+  <div class="csnv-scrollable" *ngFor="let item of basket?.basketItems, let idx = index">
 
     <div class="cart-card">
       <div class="card-image">
         <img [src]="e(item).thumbImg.url">
       </div>
       <div class="card-name">
-        {{e(item).nameChoice}}
-        {{e(item).choice.price | currency:'GBP'}}
+<!--       Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab distinctio ducimus error excepturi facilis harum iste, magni molestias nam natus numquam odio odit praesentium ratione sed tempore, velit! Ea!-->
+         {{e(item).nameChoice}}
+         @ {{e(item).choice.price | currency:'GBP'}}
+
+
       </div>
 
       <div class="card-price">
@@ -84,6 +90,6 @@
 
     </div>
     <mat-divider class="card-divider"></mat-divider>
-  </ng-container>
+  </div>
 
 </ng-template>

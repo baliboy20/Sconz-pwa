@@ -9,6 +9,7 @@ import {RouterModule} from "@angular/router";
 import {NumericIncrementerModule} from "../../widgets/numeric-incrementer/numeric-incrementer.module";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -20,16 +21,17 @@ import {MatDialogModule} from "@angular/material/dialog";
     ShopCartSideNavComponent,
 
   ],
-  imports: [
-    FormsModule,
-    NumericIncrementerModule,
-    CommonModule,
-    MatButtonModule,
-    BasketIconModule,
-    MatIconModule,
-    MatDividerModule,
-    MatDialogModule,
-    RouterModule.forChild([]),
-  ]
+    imports: [
+        FormsModule,
+        NumericIncrementerModule,
+        CommonModule,
+        MatButtonModule,
+        BasketIconModule,
+        MatIconModule,
+        MatDividerModule,
+        MatDialogModule,
+        RouterModule.forChild([]),
+        MatTooltipModule,
+    ]
 })
 export class ShopCartSideNavModule { }

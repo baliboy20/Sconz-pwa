@@ -110,6 +110,11 @@
 // ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
 //            STYLING
 // ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_= ~_=
+* {
+  font-family: var(--font-family-inconsolata);
+  letter-spacing: -.08em;
+  word-spacing: -0.05ch;
+}
 .mat-card {
   padding:  16px;
   border-radius: 5px;

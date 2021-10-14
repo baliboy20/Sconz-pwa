@@ -15,7 +15,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   animations: [fadeInAnimation]
 })
 export class AppComponent implements AfterViewInit{
-  isExpanded = false;
+  isExpansePanelExpaned = true;
   version = environment.build_version;
   width = window.screen.width;
   componentPortal: ComponentPortal<ShopCartSideNavComponent> | undefined;
@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.isExpanded = true;
-    this.checkoutSidenavOpened = true;
+    this.isExpansePanelExpaned = false;
+    this.checkoutSidenavOpened = false;
   }
 }

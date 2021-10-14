@@ -37,10 +37,11 @@ const routes: Routes = [
     MouseOverMouseOutDirective,
     ClickCollectBottomSheetComponent,
     RibbonSelectionComponent],
-  exports: [
-    CustomImageDirective,
-    MouseOverMouseOutDirective,
-  ],
+    exports: [
+        CustomImageDirective,
+        MouseOverMouseOutDirective,
+        RibbonSelectionComponent,
+    ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

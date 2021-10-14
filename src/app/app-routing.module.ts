@@ -72,6 +72,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/settings/settings.module')
       .then(m => m.SettingsModule) },
   {path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'ribbon-page', loadChildren: () => import('./dev/ribbonpage/ribbonpage.module').then(m => m.RibbonpageModule) },
 ];
 
 @NgModule({

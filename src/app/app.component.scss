@@ -19,7 +19,7 @@ $background-color1: red; //hsla(0,15,19%);
   position: absolute;
   box-sizing: border-box;
   height: calc(100% - 50px);
-  width: 100%;
+ width: 100%;
   overflow-y: scroll;
   margin-bottom: 50px;
   //border-bottom: double red 5px;
@@ -43,17 +43,55 @@ width: 100%;
 mat-sidenav-container {
   position: absolute;
   top: 49px;
-  height: calc(100vh - 49px);
+  height: calc(100% - 49px);
   background-color: var(--background-color1);
 
   mat-sidenav-content {
     width: 100vw;
   }
 }
-
+.mat-sidenav-routes{
+  min-width: 250px;
+  border: 4px solid lightgoldenrodyellow;
+  @media(max-width: 320px){
+    width: 250px;
+    border: 4px solid blue;
+  }
+  @media(min-width: 320px ) {
+    width: 300px;
+    border: 4px solid yellowgreen;
+  }
+  @media(min-width: 414px ) {
+    width: 400px;
+    border: 4px solid red;
+  }
+  @media(min-width: 800px ) {
+    width: 600px;
+    border: 4px solid orange;
+  }
+}
+.mat-sidenav-cart {
+  //min-width: 400px;
+  border: 1px solid green;
+  @media(max-width: 375px){
+    width: 300px;
+    border: 1px solid blue;
+  }
+  @media(min-width: 375px ) {
+    width: 300px;
+    border: 1px solid mediumpurple;
+  }
+  @media(min-width: 414px ) {
+    width: 400px;
+    border: 1px solid orange;
+  }
+  @media(min-width: 800px ) {
+    width: 600px;
+  }
+}
 .mat-drawer {
   background-color: var(--background-color1);
-  min-width: 75%;
+
 }
 
 .mat-expansion-panel {
@@ -161,7 +199,7 @@ span:nth-child(3) {
 @media screen and (max-width: 500px) {
   .mat-drawer {
     background-color: var(--background-color1);
-    min-width: 65%;
+    //min-width: 65%;
   }
 
   span:nth-child(3) {
@@ -175,9 +213,6 @@ span:nth-child(3) {
     white-space: pre;
     letter-spacing: .1em;
     font-size: 13px;
-    //&:first-letter {
-    //  font-size: 18px;
-    //}
   }
 
   .tx-div {
@@ -187,7 +222,6 @@ span:nth-child(3) {
 
     &:first-letter {
       font-size: 18px;
-
     }
   }
 }

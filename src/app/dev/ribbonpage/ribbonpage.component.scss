@@ -1,0 +1,29 @@
+.dev-container {
+  display: block;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+   //background-color: red
+   background-color: rgba(224, 224, 110, 0.18);
+}
+
+header {
+  display: block;
+  position: relative;
+  height: 50px;
+  width: 100%;
+  background-color: darkgray;
+}
+
+footer {
+  height: 150px;
+  width: 100%;
+  background-color: darkgray;
+}
+
+section {
+  position: relative;
+  height: calc(100% - 200px);
+  width: 100%;
+
+}

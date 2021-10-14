@@ -11,71 +11,69 @@
 .csnv-container {
   position: absolute;
   overflow-x: hidden;
+  overflow-y: scroll;
   box-sizing: border-box;
+  padding-top: 8px;
+  height: calc(100% - 0px);
+  display: grid;
   width: 100%;
-  height: 300px;
-  //height: calc(100vh - 49px);
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px fit-content(100%) 60px;
 
   .csnv-header {
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 80px;
+    align-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
-
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: nowrap row;
-    justify-content: space-between;
-    width: calc(100%);
-    padding-left: 3%;
-    padding-right: 3%;
   }
 
   .csnv-footer {
-    align-items: flex-start;
-    padding-top: 15px;
-    position: absolute;
-    bottom: 0;
-    box-sizing: border-box;
-    overflow-x: scroll;
-    width: calc(100%);
-    padding-left: 3%;
-    padding-right: 3%;
-    background-color: rgba(yellowgreen, 0.5);
+
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr  1fr;
+    grid-template-rows: minmax(60px, 120px);
+    padding: 5px 18px;
+
   }
 
-
-
+.csnv-scrolling-area {
+  height: 100%;
+  overflow-y: scroll;
+}
   .csnv-scrollable {
-    border: 1px crimson solid;
-    overflow-x: hidden;
+    //border: 1px crimson solid;
+    overflow-x: auto;
     overflow-y: scroll;
-    position: relative;
-    top: 70px;
-    height: 100%;
+
     //todo undo to %.
-    width: 100%;
+    //width: 100px;
     box-sizing: border-box;
-   // margin: 10px;
+    // margin: 10px;
   }
 }
 
 .cart-card {
   //> * { border: red solid 1px}
   max-width: 100%;
-  padding: 10px;
+  padding: 22px;
   display: grid;
-  grid-template-columns: 36px minmax(30ch, 30ch)  max-content 10ch;
-  grid-template-rows: 36px min-content 1fr;
+  grid-template-columns:  1fr  1fr 100px 10px;
+  //grid-template-columns: 50px minmax(10ch, 10ch)  1fr 10ch;
+  grid-template-rows: min-content min-content 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 8px;
+  margin-bottom: 10px;
 
   .card-image {
-    grid-column: 1;
-    grid-row: 1 / span 3;
+    grid-column: 3;
+    grid-row: 2 / span 2;
     width: auto;
     padding: 0;
     box-sizing: border-box;
-
     //background-color: orange;
+
     img {
       box-sizing: border-box;
       width: 100%;
@@ -84,27 +82,28 @@
   }
 
   .card-name {
-    //background-color: blueviolet;
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
-    text-align: center;
-    max-height: 36px;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    text-align: start;
+    word-break: break-word;
+    display: block;
+
   }
 
   .card-choices-options {
     max-height: 72px;
-    grid-column: 2 / span 2;
+    grid-column: 1 / span 2;
     grid-row: 2;
   }
 
   .card-price {
-
     grid-column: 3;
     grid-row: 1;
   }
 
   .card-qty {
-    grid-column: 2 / span 1;
+    //border: 1px solid crimson;
+    grid-column: 1 / span 1;
     grid-row: 3;
     display: flex;
     justify-content: center;
@@ -112,8 +111,8 @@
   }
 
   .card-total {
-    grid-column: 4;
-    grid-row: 3;
+    grid-column: 3;
+    grid-row: 4;
 
     //layout of contents
     display: flex;
@@ -141,26 +140,89 @@
  *                 |___/               |___/
  */
 .csnv-container {
-  //background-color: palevioletred;
+ // background-color: palevioletred;
+  //display: none;
+ &> * {
+    //border: 3px solid yellowgreen;
+  }
 }
 
 .csnv-header {
+  position: relative;
+  border-bottom: 1px solid var(--grey-10);
 }
 
-.csnv-footer {
+.csnv-header:after {
+  content: '';
+  position: absolute;;
+  width: 100%;
+  top: 100%;
+  height: 40px;
+  z-index: 1000;
+  //$gcol: blue;
+  $gcol: var(--warning);
+$f: var(--warning);
+  background:
+    linear-gradient(0deg,
+      rgba($f, .02) 5%,
+      rgba(orange,.82)  65%);
+  //background: linear-gradient(0deg, red 5%, rgba(var(--color-glow-sand), 95%) 95%);
+}
 
+
+.csnv-footer {
+  align-content: center;
+  align-items: center;
+  background-color: #f8f1e2;
+  //background-color: rgba(#77dc99, 0.55);
+  button:nth-child(2) {
+    //font: 100 15px/16px var(--font-family-inconsolata);
+    font-weight: 800;
+    align-self: center;
+    justify-self: end;
+    //justify-content: end;
+    max-height: 40px;
+    font-size: 12px;
+    width: max-content;
+    background-color: var(--color-pastel-bluegreen);
+    border: var(--color-glow-sand) 1px solid;
+    border-radius: 8px;
+    transition: box-shadow 500ms;
+
+    .buy-label {
+      //text-shadow:  .16em .16em  .1em #c2a93f ;
+      //color: orange;
+      color: #f1ce45;
+      letter-spacing: .15em;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #d9bc46;
+    }
+
+    &:hover {
+      text-shadow: .03em 0 var(--grey-30) ;
+      //border-bottom: var(--grey-30) 1px solid;
+      ////outline: 3px solid white;
+      transition: box-shadow 500ms;
+      box-shadow: 0px 1px 16px -3px var(--grey-40);
+    }
+  }
 }
 
 .csnv-scrollable {
 }
 
 .cart-card {
-  background-color: white;
-
+  * {
+    //border: 1px solid lightblue;
+  }
   .card-name, .card-price {
-    color: var(--grey-40);
-    font: var(--font-regular-body);
-    line-height: 36px;
+    color: var(--grey-80);
+    letter-spacing: -.02em;
+    word-spacing: .15em;
+    font: var(--font-head600-14px);
+    font-size: 15px;
+    //color:red;
+    padding-right: 5px;
   }
 
   .card-image {
@@ -172,14 +234,17 @@
   }
 
   .card-choices-options {
-    padding-left: 8px;
+    //padding-left: 8px;
+    font: var(--font-body-12px);
 
     p {
+      letter-spacing: -.15em;
+      word-spacing: -.15em;
       max-width: 30ch;
       word-break: break-all;
     }
 
-    color: var(--grey-60);
+    color: var(--grey-50);
 
     .material-icons {
       color: palevioletred;
@@ -191,16 +256,23 @@
 
   .card-price {
     text-align: center;
+
   }
 
   .card-qty {
-    padding-left: 8px;
+    padding-left: 0px;
   }
 
   .card-total {
+    // border: 1px solid crimson;
+
     background-color: #bde5da;
     text-align: end;
     border-radius: 2px;
+    font: var(--font-head4-12px);
+    max-height: 50px;
+    line-height: 36px;
+    align-self: end;
   }
 
 }

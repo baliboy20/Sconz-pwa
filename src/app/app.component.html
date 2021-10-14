@@ -10,7 +10,7 @@
   <!--  Cart and Checkout drawer-->
 
   <mat-sidenav position="end"
-
+class="mat-sidenav-cart"
                [opened]="checkoutSidenavOpened"
                (openedStart)="openedStartCartDrawer()"
                mode="over"
@@ -27,6 +27,7 @@
 
   <mat-sidenav opened="false"
                mode="over"
+               class="mat-sidenav-routes"
                (openedStart)="openedStartNavDrawer()"
                #NavDrawer>
     <div class="app-scrollable">
@@ -39,7 +40,6 @@
   <!--  SideNav Content area -->
 
   <mat-sidenav-content>
-
     <div [@routeAnimations]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
@@ -119,7 +119,7 @@
   <!--     Click and collect Button. -->
   <ng-container *ngTemplateOutlet="ClkCltBnTmpl"></ng-container>
 <mat-accordion displayMode="flat">
-  <mat-expansion-panel  [expanded]="isExpanded">
+  <mat-expansion-panel  [expanded]="isExpansePanelExpaned">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Shop
@@ -132,7 +132,8 @@
                            ['shop/coffee','Coffee'],
                            ['shop/training', 'Training'],
                            ['shop/vouchers','Vouchers'],
-                           ['shop/gift=subs', 'Subscriptions'],
+                           ['shop/gift-subs', 'Subscriptions'],
+                           ['ribbon-page', 'Develop Ribbon selector'],
                            ]">  {{route[1]}}
 
           </mat-list-option>

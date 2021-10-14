@@ -62,9 +62,9 @@ export class GGStockProductOrderImpl implements GGStockProductOrder {
 
 
   get optionsDescList(): string | undefined {
-    // return 'a spoon full of henley';
+    // return 'a spoon full of henley'; U+02606
     return !this.options || this.options.length === 0 ? '' :
-      this.options.map(this._GbpFmt).join(' ~ ');
+      this.options.map(this._GbpFmt).join(' \u2605 ');
   }
 
   choice: GGStockProductChoice;
