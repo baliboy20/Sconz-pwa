@@ -1,6 +1,6 @@
 
 <!--<div style="height: 150px; width: 100%"></div>-->
-<div class="cc-container">
+<div  class="cc-container"    (scroll)="wrapperScroll($event,'container')">
 
     <mat-progress-spinner
       *ngIf="isLoading"
@@ -15,7 +15,10 @@
   </wdg-ribbon-selection>
 
 <!--  <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>-->
-    <div class="cc-list-wrapper" id="ccListWrapper">
+    <div class="cc-list-wrapper"
+         (scroll)="wrapperScroll($event,'wrapper')"
+         #listWrapper
+         id="ccListWrapper">
 
       <ng-container *ngFor="let prod of prods$| async">
         <div class="category-header"

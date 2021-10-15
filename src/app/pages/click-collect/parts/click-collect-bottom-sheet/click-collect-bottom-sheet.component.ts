@@ -50,12 +50,16 @@ export class ClickCollectBottomSheetComponent implements OnInit {
           }
           let total = a.choice.price * a.qty;
           // @ts-inore
-          const choices = (a.options).map((b: { price: any; }) => b.price).reduce((sum: any, itm: any) => (sum += itm), 0);
+          const choices = (a.options).map((b: { price: any; }) => +b.price).reduce((sum: any, itm: any) => (sum += itm), 0);
+         console.log('recalc', choices, total);
           total = Math.round((total + choices) * 100) / 100;
           return total;
         })
       )
-      .subscribe(total => this.total = total,);
+      .subscribe(total => {
+        console.log('new total', total);
+        this.total = total;
+      });
 
     this.formGroup.get('choice')?.setValue(this.data.choices[0]);
   }

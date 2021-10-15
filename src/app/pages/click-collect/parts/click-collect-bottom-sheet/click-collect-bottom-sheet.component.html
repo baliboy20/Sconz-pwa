@@ -136,6 +136,7 @@
     <span class="material-icons">add_shopping_cart</span>
     {{total | currency: "GBP" }} </button>
   <button (click)="payNow()"
-          style="border-radius: 30px; padding: 8px 18px"
-          mat-raised-button>Checkout{{total | currency: "GBP" }} </button>
+          class="bn-buy-now"
+
+          mat-raised-button>BUY {{total | currency: "GBP" }} </button>
 </ng-template>

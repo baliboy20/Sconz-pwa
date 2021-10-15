@@ -7,7 +7,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  Renderer2,
+  Renderer2, ViewChild,
   ViewChildren, ViewContainerRef
 } from '@angular/core';
 // import {RepoGGService} from '../../services/repo-g-g.service';
@@ -139,6 +139,7 @@ export class CustomImageDirective implements AfterViewInit {
 })
 export class ClickCollectComponent implements OnInit, OnDestroy {
   @ViewChildren(CustomImageDirective, {read: ElementRef}) imgs: QueryList<any> | undefined;
+  @ViewChild('ccListWrapper',{read: ElementRef}) listWrapper!: ElementRef;
   public id = Math.round(Math.random() * 1000);
 
   constructor(
@@ -199,7 +200,15 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
     this.bss.openSheet(prod);
   }
 
+  /**
+   * Scorll to anchor.
+   * @param prod
+   */
   scrollToId(prod: string): void {
+    if (!this.listWrapper) {
+     // return;
+    }
+   // (this.listWrapper.nativeElement as HTMLDivElement).scrollTo({top:0});
     document.getElementById(prod)?.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
@@ -230,6 +239,10 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
 
   isPointerOver(productId: any) {
     return this.cardOvers.has(productId);
+  }
+
+  wrapperScroll($event: Event, src: string) {
+    console.log('wrapper scroll', src, $event);
   }
 }
 

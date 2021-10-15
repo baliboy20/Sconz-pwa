@@ -13,8 +13,10 @@ html {
 
 // overall container
 .cc-container {
+  position: relative;
   height: calc(100vh - 50px);
-  overflow-y: scroll;
+  overflow-y: hidden;
+
 }
 
 //<-- Scrollable card list wrapper.
@@ -26,6 +28,7 @@ html {
   overflow-y: scroll;
   overflow-x: hidden;
   width: 100vw;
+  height: 100%;
 }
 
 .card-list {
@@ -70,9 +73,13 @@ html {
   position: relative;
   display: grid;
   height: 80px;
-  font: var(--font-regular-sub-heading);
+  font: var(--font-regular-sub-heading20-inconsalata);
   line-height: 88px;
   box-sizing: border-box;
+  -webkit-text-stroke-width: .06em;
+  -webkit-text-stroke-color: #522b2b;
+  text-shadow: 0 .02em .03em  var(--grey-70);
+
 
   :first-child {
     position: relative;
@@ -85,6 +92,7 @@ html {
   .offset-anchor {
     visibility: hidden;
     transform: translateY(-130px);
+    transition: opacity 250ms,  visibility 250ms 250ms ;
   }
 }
 
@@ -144,6 +152,10 @@ html {
  *              |___/               |___/
  */
 
+//<-- Scrollable card list wrapper.
+.cc-list-wrapper {
+
+}
 .horizontal-slidebar {
   background-color: #fafafa;;
   box-shadow: -1px 1px 12px 3px var(--grey-40);
@@ -201,7 +213,7 @@ html {
     box-sizing: border-box;
     margin: 0 8px;
     font: var(--font-regular-sub-heading16-inconsalata);
-    text-shadow:  0 .01em  .03em ;
+    text-shadow: 0 .01em .03em;
     word-spacing: -3px;
   }
 
@@ -223,9 +235,10 @@ html {
   position: relative;
   box-sizing: border-box;
   //z-index: 1000;
-  height: 100vh;
+  height: 50vh;
   display: block;
-  width: 100%
+  width: 100%;
+
 }
 
 @media (hover: hover) and (pointer: coarse) {

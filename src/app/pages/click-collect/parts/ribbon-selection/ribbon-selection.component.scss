@@ -10,16 +10,31 @@
 // <-- slidebar at the top of the screen.
 .horizontal-slidebar {
   position: fixed;
-  min-width: 100%;
+  //min-width: 100%;
+  left: 0;
+  right: 0;
   margin: 0;
-  box-sizing: border-box;
-  width: 100%;
+  //width: 100%;
   top: 49px;
   z-index: 1000;
-  display: flex;
-  flex-flow: nowrap row;
-  overflow-x: scroll;
   height: 50px;
+  display: flex;
+
+  &:hover {
+
+    .arrow-left-bn, .arrow-right-bn {
+      visibility: visible;
+    }
+  }
+
+  .scrollable {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-flow: nowrap row;
+    overflow-x: scroll;
+
+  }
 
   .span-item {
     //padding: 8px 8px;
@@ -33,7 +48,62 @@
       border-bottom-color: var(--component-background-color2);
       transition: border-bottom-color 1750ms;
     }
+
+
   }
+}
+
+.arrow-left-bn, .arrow-right-bn {
+
+  //background-color: transparent;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  box-sizing: border-box;
+  //background: rgba( red, 1);
+  //width: 34px;
+  opacity: 1;
+  visibility: visible;
+
+  button {
+    background: rgba(red, .3);
+    backdrop-filter: blur(2px);
+    //background: rgba( var(--background-color1), 1);
+    box-sizing: border-box;
+    //width: 15px;
+    padding: 6px;
+    height: 100%;
+    margin: 0;
+    //    //background-color: transparent;
+    //       border:1px dotted crimson;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+    text-shadow: 1px 1px .04em whitesmoke;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: whitesmoke;
+    font-size: 18px;
+    z-index: 1301;
+    //
+  }
+
+  .arrow-left-bn {
+
+    top: 0;
+  }
+}
+
+.arrow-right-bn {
+  right: 0;
+}
+
+.hideout {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 550ms, visibility 1s 1s ;
 }
 
 
