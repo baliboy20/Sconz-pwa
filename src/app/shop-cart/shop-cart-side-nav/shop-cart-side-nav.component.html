@@ -1,10 +1,11 @@
 <div class="csnv-container">
-  <div class="csnv-header">
 
+<!--  Header-->
+  <div class="csnv-header">
     <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
       <mat-icon class="material-icons">close</mat-icon>
     </button>
-    <div style="background-color: red"></div>
+    <div data-note="spacing div"></div>
     <button mat-icon-button
 
             *ngIf="!isEmptyBasket()"
@@ -14,6 +15,7 @@
     </button>
   </div>
 
+<!-- Content scrolling area-->
   <div class="csnv-scrolling-area">
     <div class="emptyBasket" *ngIf="this.isEmptyBasket()">
       Cart empty
@@ -22,18 +24,27 @@
   </div>
   <div class="csnv-footer">
     <button mat-icon-button
-            style="color: var(--grey-80)"
+            style="color: var(--font-color-light)"
             (click)="this.sideNav?.close()">
       <span class="material-icons">arrow_back_ios</span>
     </button>
 
-    <button mat-flat-button
+<!--    <button mat-flat-button-->
+<!--            *ngIf="!isEmptyBasket()"-->
+<!--            (click)="onCheckout()">-->
+<!--      <span class="buy-label"> BUY &nbsp;</span>-->
+<!--      <span>{{basket?.total | currency: 'GBP'}}</span>-->
+<!--    </button>-->
+<!--  </div>-->
+    <button class="labelIconAmount"
+            mat-ripple [matRippleUnbounded]="true" [matRippleColor]="'charcoal'"
             *ngIf="!isEmptyBasket()"
             (click)="onCheckout()">
-      <span class="buy-label"> BUY &nbsp;</span>
       <span>{{basket?.total | currency: 'GBP'}}</span>
+      <span class="material-icons">point_of_sale</span>
+      <span >CheckOut</span>
     </button>
-  </div>
+
 
 </div>
 

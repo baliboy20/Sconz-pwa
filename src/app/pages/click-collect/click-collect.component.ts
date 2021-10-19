@@ -205,15 +205,11 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
    * @param prod
    */
   scrollToId(prod: string): void {
-    if (!this.listWrapper) {
-     // return;
-    }
-   // (this.listWrapper.nativeElement as HTMLDivElement).scrollTo({top:0});
     document.getElementById(prod)?.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
-  computeImgSize(container: string, ele: HTMLImageElement): any { //
-  }
+  // computeImgSize(container: string, ele: HTMLImageElement): any { //
+  // }
 
   asProdFileFacade(prod: GGStockProductFacade): GGStockProductFacade {
     return prod;
@@ -232,7 +228,6 @@ export class ClickCollectComponent implements OnInit, OnDestroy {
           this.cardOvers.delete(pid);
         }
       }
-
     }
     return false;
   }

@@ -1,3 +1,4 @@
+@use "../../../../../_styles/components";
 /***
  *     _                              _
  *    | |  __ _  _   _   ___   _   _ | |_
@@ -8,17 +9,93 @@
  */
 
 .closeBtnTopRight {
-  position: fixed;
+  position: relative;
+  display: inline-block;
   right: 18px;
   top: 18px;
+  color: whitesmoke;
 }
 
 
 .ccbs-container {
-  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: minmax(auto, 60px) 400px;
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  //padding-left: 5px;
-  //padding-right: 5px;
+}
+
+.ccbs-topbar {
+  border-radius: 8px;
+  z-index: 2000;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  //opacity: .5;
+  //filter : blur(.4);
+  background-color: rgba(50, 49, 49, .5);
+  width: 100%;
+  padding-bottom: 5px;
+  justify-content: stretch;
+  box-shadow: 1px 0 55px -8px rgba(50, 49, 49, 1);
+  //align-content: flex-end;
+  //align-items: flex-end;
+
+
+  div.topbar-name {
+    top: 8px;
+    text-align: center;
+    align-self: center;
+    flex: none;
+    width: calc(100% - 60px);
+    color: whitesmoke;
+    font-family: "Arial Black";
+    //letter-spacing: -1px;
+  }
+
+  button.closeBtn {
+    flex: 0 0 60px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: block;
+    float: right;
+
+    color: whitesmoke;
+  }
+}
+
+.ccbs-content-area {
+  padding-bottom: 100px;
+  width: 100%;
+  border-radius: 8px;
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  overflow-y: scroll;
+}
+
+.ccbs-img-container {
+  // background-image: url("last_one_2200x.jpg");
+  // position: relative;
+  box-sizing: border-box;
+  /* Set a specific height */
+  //height: 400px;
+  width: 100%;
+  /* Create the parallax scrolling effect */
+  //background-attachment: fixed;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  //background-size: cover;
+  //background-size: contain;
+}
+
+.ccbs-action-bar {
+  position: absolute;
+  bottom: 0;
+  z-index: 2000;
+  //grid-row: 3;
+
 }
 
 /***
@@ -60,7 +137,6 @@ p {
 }
 
 .ccbs-product-choose {
-
   display: block;
   margin: 0px 0px;
   padding: 16px 0;
@@ -69,7 +145,6 @@ p {
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
-
 }
 
 
@@ -77,38 +152,38 @@ p {
   display: flex;
   justify-content: center;
   padding: 0 24px;
-  margin: 0 -16px;
+  padding-top: 50px;
+  margin: 8px -16px;
   background-color: var(--background-color1);
-  height: 250px;
+  height: 260px;
+  box-shadow: 2px 0 15px -8px var(--button-color);
+
 
   img {
+    width: 100%;
     margin: 0 auto;
-    border: 24px solid var(--grey-30);
+
+    //border: 24px solid red;
+    //border: 24px solid var(--grey-30);
     object-fit: scale-down;
     //border: 24px solid var(--background-color1);
     clip-path: circle(100px at center);
+
   }
 }
 
 
-.ccbs-container {
-
-}
-
 .ccbs-action-bar {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content  min-content;
   //display: none;   //todo remove dbg
-  padding: 13px;
-  justify-content: space-around;
-
-  background-color: var(--button-color);
+  padding: 13px 20%;
+  justify-content: space-between;
+  background-color: var(--component-background-color2);
+  //background-color: var(--button-color);
   box-sizing: border-box;
   margin: 0;
-
-  position: sticky;
-  bottom: 0;
-  right: 10px;
-  z-index: 100;
   //transform: translateX(-16px);
   box-shadow: 0px -9px 18px -8px var(--grey-30);
 }
@@ -123,7 +198,52 @@ p {
   font-family: var(--font-family);
 }
 
+// formatting of the button inside the label.
 .bn-buy-now {
-  border-radius: 30px;
-  padding: 8px 18px
+  border: transparent 1px dotted;
+  padding: 8px 18px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  align-content: center;
+  background-color: transparent;
+  border-radius: 20%;
+
+  &:hover {
+    border: 1px dotted var(--grey-10);
+  }
+
+  .buy-label {
+    display: inline-block;
+    color: var(--color-medium-pink);
+    //color: green;
+    letter-spacing: .05em;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #c90303;
+    margin-right: 5px;
+    font-size: 8px;
+    width: 10ch;
+    font-family: var(--font-family-opensans);
+    font-weight: 300;
+
+  }
+
+  :nth-child(2) {
+    color: var(--color-plaster);
+    //color: var(--font-color-light);
+    font-size: 22px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+
+  :nth-child(1) {
+    //color: var(--color-plaster);
+    color: var(--font-color-light);
+    font-size: 12px;
+  }
+}
+
+button.labelIconAmount {
+  @include components.IconLabelButton;
+
 }

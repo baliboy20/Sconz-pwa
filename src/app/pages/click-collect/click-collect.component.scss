@@ -76,9 +76,9 @@ html {
   font: var(--font-regular-sub-heading20-inconsalata);
   line-height: 88px;
   box-sizing: border-box;
-  -webkit-text-stroke-width: .06em;
-  -webkit-text-stroke-color: #522b2b;
-  text-shadow: 0 .02em .03em  var(--grey-70);
+  -webkit-text-stroke-width: .02em;
+  -webkit-text-stroke-color: rgba(82, 43, 43, 0.04);
+  text-shadow: 0 .01em .03em  var(--grey-70);
 
 
   :first-child {
@@ -215,6 +215,7 @@ html {
     font: var(--font-regular-sub-heading16-inconsalata);
     text-shadow: 0 .01em .03em;
     word-spacing: -3px;
+    overflow: hidden;
   }
 
   .product-image {
@@ -227,6 +228,9 @@ html {
       border: 1px solid var(--grey-10);
       box-shadow: 0 .0em .33em -.05em var(--grey-70);
       object-fit: fill;
+      //shape-outside: circle(250px);
+      //  float: right;
+      clip-path: circle(40px at center);
     }
   }
 }

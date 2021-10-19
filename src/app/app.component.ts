@@ -71,6 +71,6 @@ export class AppComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.isExpansePanelExpaned = false;
-    this.checkoutSidenavOpened = true;
+    this.checkoutSidenavOpened = false;
   }
 }

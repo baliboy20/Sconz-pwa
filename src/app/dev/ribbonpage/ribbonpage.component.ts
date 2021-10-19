@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ribbonpage',
@@ -6,13 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ribbonpage.component.scss']
 })
 export class RibbonpageComponent implements OnInit {
-  items =  ('honey beef coffee milk sugar orange basil tea scones chevil curry rice dill').split(' ')
-    .map(a => [a, 'd']);
+  isLinear = false;
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private _formBuilder: FormBuilder) {
   }
 
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
+  }
 }

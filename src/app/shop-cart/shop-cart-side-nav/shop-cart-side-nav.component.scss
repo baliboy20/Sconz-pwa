@@ -1,3 +1,4 @@
+@use "../../../_styles/components";
 /***
  *     _                              _
  *    | |                            | |
@@ -16,40 +17,39 @@
   height: calc(100% - 0px);
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px fit-content(100%) 60px;
+  grid-template-rows: 60px fit-content(100%) 80px;
+ grid-auto-flow: column;
 
   .csnv-header {
+    position: relative;
+    grid-row: 1;
+   // max-height: 40px;
     display: grid;
-    grid-template-columns: 1fr 50% 1fr;
-    grid-template-rows: 40px;
-    align-content: center;
-    align-items: center;
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: min-content;
+
   }
 
   .csnv-footer {
-
+    width: 100%;
+    grid-row: 3/ span 1;
     position: relative;
+
     display: grid;
-    grid-template-columns: 1fr  1fr;
-    grid-template-rows: minmax(60px, 120px);
+    grid-template-columns: 60px  1fr 60px;
     padding: 5px 18px;
 
   }
 
 .csnv-scrolling-area {
+  grid-row: 2/ span 1;
   height: 100%;
   overflow-y: scroll;
 }
   .csnv-scrollable {
-    //border: 1px crimson solid;
     overflow-x: auto;
     overflow-y: scroll;
-
-    //todo undo to %.
-    //width: 100px;
     box-sizing: border-box;
-    // margin: 10px;
   }
 }
 
@@ -147,15 +147,11 @@
 }
 
 .csnv-header {
-  position: relative;
-  top: 0;
-  border-bottom: 1px solid var(--grey-10);
-  background-color :  transparent;
-  //background-color :  #f8f1e2;;
-  //background:;
-    //linear-gradient(to left top, #f8f1e2 5%, #e7ddcd  95%),
-  //linear-gradient(to top, #e7ddcd  5%, rgba(orange,.20) 95%);
-  //background-color: red;
+  align-content: center;
+  align-items: center;
+  box-shadow: 1px 0 4px 1px #c0b2a7;
+  background:
+    linear-gradient(to left top, #f8f1e2 30%, #f1e8da 70%);
 }
 
 
@@ -163,38 +159,11 @@
 .csnv-footer {
   align-content: center;
   align-items: center;
-  background-color: #f8f1e2;
-  //background-color: rgba(#77dc99, 0.55);
-  button:nth-child(2) {
-    //font: 100 15px/16px var(--font-family-inconsolata);
-    font-weight: 800;
-    align-self: center;
-    justify-self: end;
-    //justify-content: end;
-    max-height: 40px;
-    font-size: 12px;
-    width: max-content;
-    background-color: var(--color-pastel-bluegreen);
-    border: var(--color-glow-sand) 1px solid;
-    border-radius: 8px;
-    transition: box-shadow 500ms;
+  background-color: var(--component-background-color2);
+  box-shadow: -1px 0 22px -3px #c0b2a7;
+  button.labelIconAmount {
+    @include components.IconLabelButton;
 
-    .buy-label {
-      //text-shadow:  .16em .16em  .1em #c2a93f ;
-      //color: orange;
-      color: #f1ce45;
-      letter-spacing: .15em;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #d9bc46;
-    }
-
-    &:hover {
-      text-shadow: .03em 0 var(--grey-30) ;
-      //border-bottom: var(--grey-30) 1px solid;
-      ////outline: 3px solid white;
-      transition: box-shadow 500ms;
-      box-shadow: 0px 1px 16px -3px var(--grey-40);
-    }
   }
 }
 

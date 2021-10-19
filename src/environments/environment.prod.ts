@@ -14,7 +14,7 @@ export const environment = {
     success_route: '/#/order-statement',
     cancel_route: '/#/order-statement',
   },
-  build_version: '14.1a prod 15 Oct\'21',
+  build_version: '14.1c prod 18 Oct\'21',
   useDevCart: false,
   enableNavToStripPayment: false,
   noImageUrl:  `https://parsefiles.back4app.com/fZTnKcHmI10Bqv2avtNiRQzaxFotKVFMLTF9tR7i/22d775cdda6dbe865ba814d7900561ee_no_image-sm.jpg`,

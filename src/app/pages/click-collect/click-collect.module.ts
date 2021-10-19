@@ -20,6 +20,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import * as Parse from 'parse';
 import {environment} from "../../../environments/environment.prod";
 import { RibbonSelectionComponent } from './parts/ribbon-selection/ribbon-selection.component';
+import {MatRippleModule} from "@angular/material/core";
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, environment.PARSE_MASTER_KEY);
 
 // @ts-ignore
@@ -42,24 +43,25 @@ const routes: Routes = [
         MouseOverMouseOutDirective,
         RibbonSelectionComponent,
     ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatCardModule,
-        MatBottomSheetModule,
-        MatButtonModule,
-        MatListModule,
-        MatToolbarModule,
-        MatRadioModule,
-        MatIconModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatInputModule,
-        NumericIncrementerModule,
-        MatProgressSpinnerModule,
-        MatSlideToggleModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatCardModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatListModule,
+    MatToolbarModule,
+    MatRadioModule,
+    MatIconModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    NumericIncrementerModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatRippleModule,
+  ],
   providers: [BottomSheetService]
 })
 export class ClickCollectModule {

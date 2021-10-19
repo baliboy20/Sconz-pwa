@@ -4,6 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap');
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -61,10 +63,10 @@ $color: #323131;
   --font-size-sub-heading-larger-first-letter: 27px;
 
   // ** Font styles
-  //--font-family: 'Jost', sans-serif;
-  //--font-family-inconsolata: 'Syne Mono', monospace;
+
   --font-family-inconsolata: 'Inconsolata', monospace;
-  //--font-family: 'Syne Mono', cursive;
+  --font-family-syne: 'Syne Mono', cursive;
+  --font-family-opensans: 'Open sans', sans-serif;
   --font-family: 'Special Elite', cursive;
   --theme-font-family: var(--theme-font-family);
 
@@ -98,6 +100,7 @@ $color: #323131;
   --toolbar-height: 140px;
   --toolbar-color: #fffcf3;
   --background-color1: #fffcf3; // #fffaf0; hsla(0,15,19%); hsl(39,100,97)
+  --font-color-light: #e7d8ca; // #fffaf0; hsla(0,15,19%); hsl(39,100,97)
   --component-background-color2: rgba(50, 49, 49, 1); //hsla(0,15,19%);;
   --caption-grey-1: #a5a2a2;
   --subdued-grey: var(--caption-grey-1);
@@ -116,7 +119,9 @@ $color: #323131;
   --button-color: rgb(239,207,103);
   --color-glow-sand: rgb(239,207,103);
   --color-pastel-bluegreen: rgb(189,229,217);
-  --color-plaster: rgb(250,237,221);
+  --color-plaster: #e7d8ca;;
+  //--color-plaster: rgb(250,237,221);
+  --color-medium-pink: rgb(234, 78, 114);
 
 
 

@@ -1,43 +1,55 @@
 <!--<mat-bottom-sheet-container>-->
 <div class="ccbs-container" [formGroup]="this.formGroup">
-  <div class="closeBtnTopRight">
-    <button mat-fab style="background-color: white" (click)="dismiss()">
+
+
+  <!--  topbar-->
+  <div class="ccbs-topbar">
+    <div class="topbar-name">{{this.data.name}}</div>
+
+    <button class="closeBtn"
+            mat-ripple
+            (click)="dismiss()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
 
-  <!--  Banner Image-->
 
-  <div class="ccbs-img-container">
-    <img imgSize='medium' [appCustomImg]="prod.thumbImg.url">
+  <!--Content Area-->
+  <div class="ccbs-content-area">
+    <!--  Banner Image-->
+
+    <div class="ccbs-img-container" >
+   <img [src]="prod.thumbImg.url">
+    </div>
+
+    <!--  Name, Description, Increment template-->
+
+    <ng-container *ngTemplateOutlet="incrementTmpl"></ng-container>
+
+
+    <!--  Product Selection-->
+
+    <ng-container *ngTemplateOutlet="productChoiceTmp"></ng-container>
+
+    <!--  Product Choices-->
+
+    <div class="ccbs-choices">
+
+      <ng-container *ngTemplateOutlet="ProductOptionsTmpl"></ng-container>
+      <ng-container *ngTemplateOutlet="OrderInstructionsTmpl"></ng-container>
+    </div>
+
   </div>
 
-  <!--  Name, Description, Increment template-->
-
-  <ng-container *ngTemplateOutlet="incrementTmpl"></ng-container>
-
-
-  <!--  Product Selection-->
-
-  <ng-container *ngTemplateOutlet="productChoiceTmp"></ng-container>
-
-  <!--  Product Choices-->
-
-  <div class="ccbs-choices">
-
-    <ng-container *ngTemplateOutlet="ProductOptionsTmpl"></ng-container>
-    <ng-container *ngTemplateOutlet="OrderInstructionsTmpl"></ng-container>
-  </div>
-
+  <ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
 </div>
-<ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
 <!--
-   *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
 
-                           TEMPLATES
+                         TEMPLATES
 
-   *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
-   -->
+ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
+ -->
 
 
 <!-- TEMPLATE:      Product Options (ancillary soya etc.)-->
@@ -62,7 +74,7 @@
 
 <!-- TEMPLATE:      Product Choices  (variation of product size, flavour, color etc)-->
 <ng-template #productChoiceTmp>
-  <p class="ccbs-product-choose-label"><span>Choices </span></p>
+  <p class="ccbs-product-choose-label"><span>Available Choices </span></p>
 
   <div class="ccbs-product-choose"
        [formGroup]="formGroup">
@@ -93,21 +105,16 @@
 <!-- TEMPLATE:     Name description and Qty tmpl -->
 
 <ng-template #incrementTmpl>
-  <div [formGroup]="formGroup">
+  <div [formGroup]="formGroup" style="margin-top: 25px">
     <app-numeric-incrementer
       [showRemoveButton]="true"
       styleClass="Lrg"
       formControlName="qty">
     </app-numeric-incrementer>
-    <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input matInput readonly [value]="data.name">
-      <!--  <p>{{this.prod.description}}</p>-->
-    </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <textarea matInput [value]="data.description"></textarea>
-      <!--  <p>{{this.prod.description}}</p>-->
+      <textarea matInput readonly [value]="data.description"></textarea>
     </mat-form-field>
 
   </div>
@@ -131,12 +138,22 @@
 
 <ng-template #SaveBtnTmpl>
   <button (click)="dimissAndSave()"
-          style="border-radius: 30px; padding: 8px 18px"
-          mat-raised-button>
+          mat-ripple [matRippleUnbounded]="false"
+          class="labelIconAmount">
+    <span class="amount">{{total | currency: "GBP" }} </span>
     <span class="material-icons">add_shopping_cart</span>
-    {{total | currency: "GBP" }} </button>
-  <button (click)="payNow()"
-          class="bn-buy-now"
+    <span>Add to cart</span>
+  </button>
 
-          mat-raised-button>BUY {{total | currency: "GBP" }} </button>
+
+<!--  </button>-->
+
+  <button class="labelIconAmount"
+          mat-ripple [matRippleUnbounded]="true" [matRippleColor]="'charcoal'"
+          (click)="payNow()">
+    <span  >{{total | currency: "GBP" }}</span>
+    <span class="material-icons">point_of_sale</span>
+    <span >Pay now</span>
+  </button>
+
 </ng-template>

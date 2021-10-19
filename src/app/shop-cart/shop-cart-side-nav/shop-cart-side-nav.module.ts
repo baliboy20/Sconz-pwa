@@ -10,6 +10,7 @@ import {NumericIncrementerModule} from "../../widgets/numeric-incrementer/numeri
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatRippleModule} from "@angular/material/core";
 
 
 
@@ -32,6 +33,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatDialogModule,
         RouterModule.forChild([]),
         MatTooltipModule,
+        MatRippleModule,
     ]
 })
 export class ShopCartSideNavModule { }

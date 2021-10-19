@@ -55,35 +55,35 @@ mat-sidenav-container {
   border: 4px solid lightgoldenrodyellow;
   @media(max-width: 320px){
     width: 250px;
-    border: 4px solid blue;
+    //border: 4px solid blue;
   }
   @media(min-width: 320px ) {
     width: 300px;
-    border: 4px solid yellowgreen;
+    //border: 4px solid yellowgreen;
   }
   @media(min-width: 414px ) {
     width: 400px;
-    border: 4px solid red;
+    //border: 4px solid red;
   }
   @media(min-width: 800px ) {
     width: 600px;
-    border: 4px solid orange;
+    //border: 4px solid orange;
   }
 }
 .mat-sidenav-cart {
   //min-width: 400px;
-  border: 1px solid green;
+  //border: 1px solid green;
   @media(max-width: 375px){
     width: 300px;
-    border: 1px solid blue;
+    //border: 1px solid blue;
   }
   @media(min-width: 375px ) {
     width: 300px;
-    border: 1px solid mediumpurple;
+    //border: 1px solid mediumpurple;
   }
   @media(min-width: 414px ) {
     width: 400px;
-    border: 1px solid orange;
+    //border: 1px solid orange;
   }
   @media(min-width: 800px ) {
     width: 600px;

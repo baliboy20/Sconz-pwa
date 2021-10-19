@@ -23,7 +23,7 @@
       <ng-container *ngFor="let prod of prods$| async">
         <div class="category-header"
              style="text-transform: capitalize">
-          <div> {{prod[0]}}</div>
+          <div> &laquo; &nbsp;{{prod[0]}} &nbsp; &raquo;</div>
           <div [id]="prod[0]" class="offset-anchor"></div>
         </div>
 <div class="card-list">
@@ -68,7 +68,9 @@
 
 
     <div class="product-description">
-      {{prod.description}} </div>
+      {{prod.description}}
+
+    </div>
 
     <div class="product-price">
       <span>{{prod.lowestPrice() | currency: "GBP"}}</span>
@@ -80,23 +82,3 @@
 
   </div>
 </ng-template>
-
-<!--
-~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-                         Horizontal Slider bar.
--->
-
-
-<!--<ng-template #CategoriesRibbonTmpl let-prods=prods>-->
-<!--  <wdg-ribbon-selection-->
-<!--  [items]="prods"-->
-<!--  (scrollToId)="this.scrollToId($event)"-->
-<!--  ></wdg-ribbon-selection>-->
-<!--&lt;!&ndash;  <div class="horizontal-slidebar">&ndash;&gt;-->
-<!--&lt;!&ndash;    <a&ndash;&gt;-->
-<!--&lt;!&ndash;      (click)="scrollToId(prod[0])"&ndash;&gt;-->
-<!--&lt;!&ndash;      class="span-item"&ndash;&gt;-->
-<!--&lt;!&ndash;      *ngFor="let prod of prods">{{prod[0] }}</a>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--</ng-template>-->
-
