@@ -17,14 +17,11 @@ export class GGStockProductFacade implements GGStockProduct {
 
   constructor(private item: Parse.Object) {
     const im = item.get('thumbImg');
-  //  MyLogger.large('thumbImg')(item);
     if ( !!im && '_url' in im) {
 
       this._thumbImgReader = ThumbImageReader.createFromUrl(im._url);
-//      MyLogger.log('- + -')(im);
     } else {
       this._thumbImgReader = ThumbImageReader.createEmpty();
-      // MyLogger.large('- + -')(this._thumbImgReader);
     }
   }
 
@@ -122,11 +119,6 @@ export class GGStockProductFacade implements GGStockProduct {
     return (retval);
   }
 
-  // Todo remove this
-  // public static restrucVariantFormVals(value: { variants: any[] }): any {
-  //   return {...value, variants: {vars: value.variants}};
-  // }
-
   /**
    * Created from form data.
    * @param rawValue
@@ -174,7 +166,6 @@ export class GGStockProductFacade implements GGStockProduct {
     } else {
       console.log('thumbImgFacade', value instanceof Parse.File, value);
     }
-
   }
 
   getThumbImgUrl(): string {
@@ -186,9 +177,6 @@ export class GGStockProductFacade implements GGStockProduct {
   /**
    * Adaptesr to {var:variant[]} from  variant[] for storage as a json object
    */
-  // getFieldOfVariant(fieldName: string): any[] {
-  //   return this.choices.map(a => a[fieldName]);
-  // }
 
   lowestPrice(): number | string {
     const a = 10e7;
@@ -201,7 +189,6 @@ export class GGStockProductFacade implements GGStockProduct {
     try {
       const ff: ParseFileFacade = ParseFileFacade.create(this._imageParseFile)
       const savedfile = await ff.saveOnly();
-     // MyLogger.normal()('savedfile', savedfile);
       this.item.set('thumbImg', savedfile);
       await this.item.save({useMasterKey: true});
     } catch (e) {

@@ -63,22 +63,20 @@
        (click)="onChooseProduct(prod)"
        *ngFor="let prod of prods">
 
-    <p class="product-name">{{prod.name}}
-    </p>
-
-
+    <div class="product-image" id="product-image">
+      <img [src]="prod?.thumbImg?.url" width="100%">
+    </div>
+    <p class="product-name">{{prod.name}}</p>
     <div class="product-description">
       {{prod.description}}
-
     </div>
+
 
     <div class="product-price">
       <span>{{prod.lowestPrice() | currency: "GBP"}}</span>
     </div>
     <!--     [appCustomImg]-->
-    <div class="product-image" id="product-image">
-      <img [src]="prod?.thumbImg?.url" width="100%">
-    </div>
+
 
   </div>
 </ng-template>

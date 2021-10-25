@@ -41,6 +41,7 @@
 
   </div>
 
+  <!--  Bottom Actionbar-->
   <ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
 </div>
 <!--
@@ -96,7 +97,7 @@
 
   <div class="ccbs-action-bar" [formGroup]="formGroup">
     <ng-container *ngTemplateOutlet="SaveBtnTmpl"></ng-container>
-
+<!--<div>{{total}}</div>-->
   </div>
 
 
@@ -140,20 +141,21 @@
   <button (click)="dimissAndSave()"
           mat-ripple [matRippleUnbounded]="false"
           class="labelIconAmount">
-    <span class="amount">{{total | currency: "GBP" }} </span>
     <span class="material-icons">add_shopping_cart</span>
     <span>Add to cart</span>
   </button>
 
 
-<!--  </button>-->
+<!--  </button>
+  .amount-label .action-label .icon-style
+-->
 
   <button class="labelIconAmount"
           mat-ripple [matRippleUnbounded]="true" [matRippleColor]="'charcoal'"
           (click)="payNow()">
-    <span  >{{total | currency: "GBP" }}</span>
     <span class="material-icons">point_of_sale</span>
     <span >Pay now</span>
   </button>
 
+  <span style="color: var(--font-color-light)">{{total | currency: "GBP" }} </span>
 </ng-template>

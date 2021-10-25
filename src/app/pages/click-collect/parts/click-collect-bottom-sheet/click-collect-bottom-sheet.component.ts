@@ -51,7 +51,7 @@ export class ClickCollectBottomSheetComponent implements OnInit {
           let total = a.choice.price * a.qty;
           // @ts-inore
           const choices = (a.options).map((b: { price: any; }) => +b.price).reduce((sum: any, itm: any) => (sum += itm), 0);
-         console.log('recalc', choices, total);
+          console.log('recalc', choices, total);
           total = Math.round((total + choices) * 100) / 100;
           return total;
         })
@@ -64,8 +64,8 @@ export class ClickCollectBottomSheetComponent implements OnInit {
     this.formGroup.get('choice')?.setValue(this.data.choices[0]);
   }
 
-
-  private _saveToCart() : Observable<any> {
+  /** */
+  private _saveToCart(): Observable<any> {
     return of(this.formGroup?.getRawValue())
       .pipe(
         map(a => {
@@ -77,11 +77,13 @@ export class ClickCollectBottomSheetComponent implements OnInit {
         map(a => {
           return GGStockProductOrderImpl.create(a);
         }),
-      tap(a =>{
-        this.cart.add(a);
-      }),
+        tap(a => {
+          this.cart.add(a);
+        }),
       );
   }
+
+  /** */
   dimissAndSave(): void {
     this._saveToCart()
       .subscribe(a => {
@@ -91,16 +93,19 @@ export class ClickCollectBottomSheetComponent implements OnInit {
         error => console.log('error', error.message));
   }
 
+  /** */
   dismiss(): void {
     this.ref.dismiss();
     MyLogger.log('dismiss() | ref')(this.ref);
   }
 
+  /** */
   getSrcset(_url: string): string {
     // console.log('url', _url);
     return `${_url} 200w`;
   }
 
+  /** */
   payNow(): void {
     this._saveToCart()
       .subscribe(a => {

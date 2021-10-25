@@ -32,15 +32,11 @@
   grid-row: 1;
   display: flex;
   flex-flow: row nowrap;
-  //opacity: .5;
-  //filter : blur(.4);
   background-color: rgba(50, 49, 49, .5);
   width: 100%;
   padding-bottom: 5px;
   justify-content: stretch;
   box-shadow: 1px 0 55px -8px rgba(50, 49, 49, 1);
-  //align-content: flex-end;
-  //align-items: flex-end;
 
 
   div.topbar-name {
@@ -94,6 +90,7 @@
   position: absolute;
   bottom: 0;
   z-index: 2000;
+
   //grid-row: 3;
 
 }
@@ -244,6 +241,6 @@ p {
 }
 
 button.labelIconAmount {
-  @include components.IconLabelButton;
+  @include components.IconLabelButton1;
 
 }

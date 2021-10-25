@@ -45,6 +45,9 @@ $RosyLookLike1-theme: mat-light-theme((
 html, body {
   height: 100%;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
 }
 
 body {

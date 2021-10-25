@@ -1,7 +1,8 @@
 import {ThumbImageReader} from "../ThumbImageReader";
 
 
-export const NoImgPath = '../../../assets/images/NO_Image_available.jpeg';
+export const NoImgPath = '../../../assets/photos/default_coffee.png';
+// export const NoImgPath = '../../../assets/images/NO_Image_available.jpeg';
 
 /**
  * Priced related variants of a product that can be chosen by the customer. Is part of StockProduct
@@ -17,7 +18,6 @@ export interface GGStockProductChoice {
 export interface GGStockProductOption extends GGStockProductChoice {
   oId: string;
 }
-
 
 
 
