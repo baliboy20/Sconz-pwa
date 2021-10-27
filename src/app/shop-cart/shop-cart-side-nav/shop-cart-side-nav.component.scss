@@ -162,7 +162,7 @@
   background-color: var(--component-background-color2);
   box-shadow: -1px 0 22px -3px #c0b2a7;
   button.labelIconAmount {
-    @include components.IconLabelButton;
+    @include components.IconLabelButton1;
 
   }
 }

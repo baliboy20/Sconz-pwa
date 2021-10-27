@@ -153,47 +153,6 @@
   }
 }
 
-// <-- Icon button used for payments -->
-@mixin IconLabelButton(){
-
-    border: transparent 1px dotted;
-    padding: 8px 18px;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    align-content: center;
-    background-color: transparent;
-    border-radius: 20%;
-
-    &:hover {
-      border: 1px dotted var(--grey-10);
-    }
-    :first-child { // .amount-label .action-label .icon-style
-      color: var(--font-color-light);
-      font-size: 12px;
-      display: none;
-    }
-    :nth-child(2) {
-      color: var(--color-plaster);
-      //color: var(--font-color-light);
-      font-size: 22px;
-      margin-top: 1px;
-      margin-bottom: 1px;
-    }
-    :last-child {
-      display: inline-block;
-      color: var(--color-medium-pink);
-      //color: green;
-      letter-spacing: .05em;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #c90303;
-      margin-right: 5px;
-      font-size: 8px;
-      width: 10ch;
-      font-family: var(--font-family-opensans);
-      font-weight: 300;
-    }
-}
 
 // <-- Icon button used for payments -->
 @mixin IconLabelButton1(){
@@ -215,15 +174,14 @@
     //color: var(--font-color-light);
     font-size: 22px;
     margin-top: 1px;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
   }
   :last-child {
     display: inline-block;
     color: var(--color-medium-pink);
-    //color: green;
     letter-spacing: .05em;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #c90303;
+    -webkit-text-stroke-color: #a61d1d;
     margin-right: 5px;
     font-size: 8px;
     width: 10ch;

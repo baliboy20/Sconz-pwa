@@ -42,7 +42,7 @@
   </div>
 
   <!--  Bottom Actionbar-->
-  <ng-container *ngTemplateOutlet="BottomActionbarTmpl"></ng-container>
+  <ng-container *ngTemplateOutlet="BottomActionbarTmpl;context: {total: total}"></ng-container>
 </div>
 <!--
  *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
@@ -53,7 +53,11 @@
  -->
 
 
-<!-- TEMPLATE:      Product Options (ancillary soya etc.)-->
+<!--
+ ------------------------------------------------------------------------------------------
+ TEMPLATE:      Product Options (ancillary soya etc.)
+------------------------------------------------------------------------------------------
+ -->
 
 
 <ng-template #ProductOptionsTmpl>
@@ -73,7 +77,11 @@
 </ng-template>
 
 
-<!-- TEMPLATE:      Product Choices  (variation of product size, flavour, color etc)-->
+<!--
+-----------------------------------------------------------------------------------------
+TEMPLATE: Product Choices  (variation of product size, flavour, color etc)
+------------------------------------------------------------------------------------------
+-->
 <ng-template #productChoiceTmp>
   <p class="ccbs-product-choose-label"><span>Available Choices </span></p>
 
@@ -92,18 +100,40 @@
 
 </ng-template>
 
-<!-- TEMPLATE:     Bottom actionbar -->
-<ng-template #BottomActionbarTmpl let-total='total'>
+<!--
+------------------------------------------------------------------------------------------
+TEMPLATE:     Bottom actionbar
+-------------------------------------------------------------------------------------------->
 
-  <div class="ccbs-action-bar" [formGroup]="formGroup">
-    <ng-container *ngTemplateOutlet="SaveBtnTmpl"></ng-container>
+<ng-template #BottomActionbarTmpl let-total='total'>
+  <div class="ccbs-bottom-actionbar" [formGroup]="formGroup">
+<!--    <ng-container *ngTemplateOutlet="SaveBtnTmpl"></ng-container>-->
+    <button (click)="dimissAndSave()"
+            mat-ripple [matRippleUnbounded]="false"
+            class="labelIconAmount">
+      <span class="material-icons">add_shopping_cart</span>
+      <span>CART</span>
+    </button>
+
+    <button class="labelIconAmount"
+            mat-ripple [matRippleUnbounded]="true" [matRippleColor]="'charcoal'"
+            (click)="payNow()">
+      <span class="material-icons">point_of_sale</span>
+      <span >PAY</span>
+    </button>
+    <div class="total-box"><span>Total</span>
+    <span>  {{total | currency: "GBP" }}</span> </div>
 <!--<div>{{total}}</div>-->
   </div>
 
 
 </ng-template>
 
-<!-- TEMPLATE:     Name description and Qty tmpl -->
+<!--
+------------------------------------------------------------------------------------------
+TEMPLATE:     Name description and Qty tmpl
+------------------------------------------------------------------------------------------
+-->
 
 <ng-template #incrementTmpl>
   <div [formGroup]="formGroup" style="margin-top: 25px">
@@ -122,7 +152,11 @@
 </ng-template>
 
 
-<!-- TEMPLATE:     Special Instuctions tmpl -->
+<!--
+ ------------------------------------------------------------------------------------------
+ TEMPLATE:     Special Instuctions tmpl.
+ ------------------------------------------------------------------------------------------
+  -->
 
 <ng-template #OrderInstructionsTmpl>
   <ng-container [formGroup]="formGroup">
@@ -135,7 +169,11 @@
 </ng-template>
 
 
-<!-- TEMPLATE:     Add to Order button -->
+<!--
+------------------------------------------------------------------------------------------
+TEMPLATE:     Add to Order button
+------------------------------------------------------------------------------------------
+ -->
 
 <ng-template #SaveBtnTmpl>
   <button (click)="dimissAndSave()"
