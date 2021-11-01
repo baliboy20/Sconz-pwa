@@ -139,7 +139,7 @@ export class CustomImageDirective implements AfterViewInit {
 })
 export class ClickCollectComponent implements OnInit, OnDestroy {
   @ViewChildren(CustomImageDirective, {read: ElementRef}) imgs: QueryList<any> | undefined;
-  @ViewChild('ccListWrapper',{read: ElementRef}) listWrapper!: ElementRef;
+  // @ViewChild('ccListWrapper',{read: ElementRef}) listWrapper!: ElementRef;
   public id = Math.round(Math.random() * 1000);
 
   constructor(

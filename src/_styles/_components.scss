@@ -170,22 +170,33 @@
     border: 1px dotted var(--grey-10);
   }
   :first-child {
-    color: var(--color-plaster);
-    //color: var(--font-color-light);
+    //color: var(--color-plaster);
+    //-webkit-text-stroke: .02em var(--color-plaster);
+    color: whitesmoke;
+    text-shadow: 1px 1px 3px var(--grey-80);
     font-size: 22px;
     margin-top: 1px;
     margin-bottom: 2px;
   }
   :last-child {
     display: inline-block;
-    color: var(--color-medium-pink);
+    $col1: var(--grey-50);
+    $col2: #a61d1d;
+    //color: $col2;
     letter-spacing: .05em;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #a61d1d;
+    -webkit-text-stroke-color: $col1;
+    text-shadow: 0.06em 0.06rem 0.06rem var(--grey-40);
     margin-right: 5px;
-    font-size: 8px;
+    font-size: 10px;
     width: 10ch;
     font-family: var(--font-family-opensans);
     font-weight: 300;
   }
+}
+
+// <-- Card Shadow ->
+@mixin card-shadow(){
+  box-shadow: 0 1px 1px 0 var(--grey-50);
+  border: .03rem solid var(--grey-10);
 }

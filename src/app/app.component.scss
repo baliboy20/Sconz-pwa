@@ -73,21 +73,21 @@ mat-sidenav-container {
 .mat-sidenav-cart {
   //min-width: 400px;
   //border: 1px solid green;
-  @media(max-width: 375px){
-    width: 300px;
-    //border: 1px solid blue;
-  }
-  @media(min-width: 375px ) {
-    width: 300px;
-    //border: 1px solid mediumpurple;
-  }
-  @media(min-width: 414px ) {
-    width: 400px;
-    //border: 1px solid orange;
-  }
-  @media(min-width: 800px ) {
-    width: 600px;
-  }
+  //@media(max-width: 375px){
+  //  width: 300px;
+  //  //border: 1px solid blue;
+  //}
+  //@media(min-width: 375px ) {
+  //  width: 300px;
+  //  //border: 1px solid mediumpurple;
+  //}
+  //@media(min-width: 414px ) {
+  //  width: 400px;
+  //  //border: 1px solid orange;
+  //}
+  //@media(min-width: 800px ) {
+  //  width: 600px;
+  //}
 }
 .mat-drawer {
   background-color: var(--background-color1);

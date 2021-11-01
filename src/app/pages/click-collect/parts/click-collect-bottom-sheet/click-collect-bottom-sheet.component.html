@@ -112,7 +112,7 @@ TEMPLATE:     Bottom actionbar
             mat-ripple [matRippleUnbounded]="false"
             class="labelIconAmount">
       <span class="material-icons">add_shopping_cart</span>
-      <span>CART</span>
+      <span>ADD</span>
     </button>
 
     <button class="labelIconAmount"
@@ -121,7 +121,8 @@ TEMPLATE:     Bottom actionbar
       <span class="material-icons">point_of_sale</span>
       <span >PAY</span>
     </button>
-    <div class="total-box"><span>Total</span>
+    <div class="total-box">
+<!--      <span>Total</span>-->
     <span>  {{total | currency: "GBP" }}</span> </div>
 <!--<div>{{total}}</div>-->
   </div>

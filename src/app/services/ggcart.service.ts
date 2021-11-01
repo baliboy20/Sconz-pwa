@@ -1,6 +1,10 @@
 import {Injectable} from '@angular/core';
 import {GGBasket, GGBasketService} from '../model/shared/GGCart.model';
-import {GGStockProductOptionOrder, GGStockProductOrder, GGStockProductOrderImpl} from '../model/shared/GGOrderFacade.model';
+import {
+  GGStockProductOptionOrder,
+  GGStockProductOrder,
+  GGStockProductOrderImpl
+} from '../model/shared/GGOrderFacade.model';
 import {Basket, BasketTotal} from '../model/types';
 import {ReplaySubject} from 'rxjs';
 import {environment} from '../../environments/environment';
@@ -8,14 +12,15 @@ import {ToCurrencyStringFn} from '../features/utils/computes';
 import {GGStockProductChoice, GGStockProductOption} from "../model/shared/GGStockProducts.infc";
 import {MyLogger} from "../service/logging/myLogging";
 
-// export type GGBasketTotal = { total: number, qty: number };
 
+ const enum NoString{ empty = 'true', used = 'false'};
 
 @Injectable({
   providedIn: 'root'
 })
 export class GGCartService implements GGBasketService {
   localStorageKey = environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY ?? 'ERROR_CLICK_COLLECT_CART_ITEMS';
+
   get basketItems(): GGStockProductOrder[] {
     return this._basketItems;
 
@@ -27,7 +32,11 @@ export class GGCartService implements GGBasketService {
   }
 
   constructor() {
-    this.FromLocalStorage()
+    MyLogger.large('++')('cart service started');
+   const empty: NoString | undefined = this.FromLocalStorage()
+    if(empty === NoString.empty) {
+      this.reSync();
+    }
   }
 
   // readonly Items: GGStockProductOrder[] | undefined;
@@ -41,19 +50,16 @@ export class GGCartService implements GGBasketService {
     return undefined;
   }
 
-  add(itm: GGStockProductOrder ): void {
+  add(itm: GGStockProductOrder): void {
     if (Array.isArray(itm)) {
       throw new Error('Dev error tried to add array of StockProductOrders to GGservice basket');
     }
 
     const idx = ItemInBasketExistsHelper.isMatched(itm, this.basketItems);
 
-    // console.log('%c not inside', 'color: purple;  font-size: 20px', itm.qty, idx);
     if (idx !== -1) {
       this.basketItems[+idx].qty += itm.qty;
-      // console.log('%c IS MATCHED', 'color: purple;  font-size: 20px', itm.qty, idx);
     } else {
-      // console.log('%c ITEM ADDED', 'color: purple; font-size: 20px', itm);
       this.basketItems.push(itm.clone());
     }
     this.reSync();
@@ -78,7 +84,7 @@ export class GGCartService implements GGBasketService {
   }
 
   clearout(): void {
-     this.basketItems.splice(0, this.basketItems.length);
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
@@ -104,7 +110,7 @@ export class GGCartService implements GGBasketService {
     };
     this.basket = b;
     this.basketChanged.next(b);
-    if ( !ignoreSaveToLocalStorage) {
+    if (!ignoreSaveToLocalStorage) {
       this.toLocalStorage();
     }
 
@@ -120,7 +126,7 @@ export class GGCartService implements GGBasketService {
 
 
   reset(): void {
-     this.basketItems.splice(0, this.basketItems.length);
+    this.basketItems.splice(0, this.basketItems.length);
     this.reSync();
   }
 
@@ -130,7 +136,6 @@ export class GGCartService implements GGBasketService {
       this.basketItems[+idx].qty = 0;
     }
     if (isNaN(val) || val === qty) {
-      // console.log('is this the trap', !val, val, qty);
       return;
     }
 
@@ -138,19 +143,18 @@ export class GGCartService implements GGBasketService {
     this.reSync();
   }
 
-  FromLocalStorage(): void {
+  FromLocalStorage():  NoString | undefined {
     const lsStr = window.localStorage.getItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY);
     if (!lsStr) {
-      return;
+      return NoString.empty;
     }
     let arr: any = JSON.parse(lsStr ?? '') as GGBasket;
-
 
     const bask: GGBasket = arr as GGBasket;
 
 
     if (Array.isArray(bask.basketItems) && bask.basketItems.length > 0) {
-      const prodImpl = bask.basketItems.map(a =>  GGStockProductOrderImpl.create(a));
+      const prodImpl = bask.basketItems.map(a => GGStockProductOrderImpl.create(a));
       //
       // const prodImpl = bask.basketItems.map(GGStockProductOrderImpl.create)
       bask.basketItems = prodImpl;
@@ -158,7 +162,8 @@ export class GGCartService implements GGBasketService {
       this.basketItems.push(...prodImpl);
       this.reSync(true);
     } else {
-      return;
+
+      return NoString.used;
     }
 
   }
@@ -168,7 +173,7 @@ export class GGCartService implements GGBasketService {
       let str = JSON.stringify(this.basket ?? '');
       const reg = /_qty/g;
       str = str.replace(reg, 'qty');
-   MyLogger.log('to local storage')(this.basketItems);
+      MyLogger.log('to local storage')(this.basketItems);
       window.localStorage.setItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY, str);
     } else {
       window.localStorage.removeItem(environment.LOCAL_STORAGE_CLICK_COLLECT_ITEMS_KEY);
@@ -185,14 +190,14 @@ export class ItemInBasketExistsHelper {
   static isMatched(item: GGStockProductOrder, basketItems: GGStockProductOrder[]): number {
     const hlp = ItemInBasketExistsHelper;
     const isEqual = hlp.selectionsAreEqual;
-  for (const idx in basketItems)
-    if (basketItems[idx].productId === item.productId
-      && basketItems[idx].choice.vId === item.choice.vId) {
-      if ( isEqual(item.options, basketItems[idx].options)){
-        return +idx;
+    for (const idx in basketItems)
+      if (basketItems[idx].productId === item.productId
+        && basketItems[idx].choice.vId === item.choice.vId) {
+        if (isEqual(item.options, basketItems[idx].options)) {
+          return +idx;
+        }
       }
-    }
-  return -1;
+    return -1;
   }
 
   static selectionsAreEqual(item: SelectionsType[], choices: SelectionsType[]): boolean {

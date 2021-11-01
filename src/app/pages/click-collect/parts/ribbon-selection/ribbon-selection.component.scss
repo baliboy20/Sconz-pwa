@@ -16,7 +16,7 @@
   margin: 0;
   //width: 100%;
   top: 49px;
-  z-index: 1000;
+  z-index: 10000;
   height: 50px;
   display: flex;
 
@@ -28,19 +28,22 @@
   }
 
   .scrollable {
+    position: relative;
     box-sizing: border-box;
     width: 100%;
     display: flex;
     flex-flow: nowrap row;
     overflow-x: scroll;
-
   }
 
   .span-item {
-    //padding: 8px 8px;
-    white-space: nowrap;
+    position: relative;
+    top: 10%;
     text-align: center;
-    vertical-align: center;
+
+    //transform: translatey(-30%);
+    white-space: nowrap;
+    //border: solid 1px olive;
     border-bottom: solid 2px transparent;
     transition: border-bottom-color 250ms;
 
@@ -63,28 +66,21 @@
   align-items: center;
   align-content: center;
   box-sizing: border-box;
-  //background: rgba( red, 1);
-  //width: 34px;
   opacity: 1;
   visibility: visible;
 
   button {
-    background: rgba(red, .3);
-    backdrop-filter: blur(2px);
-    //background: rgba( var(--background-color1), 1);
+
+    background: var(--color-orange-70);
     box-sizing: border-box;
     //width: 15px;
     padding: 6px;
     height: 100%;
     margin: 0;
-    //    //background-color: transparent;
-    //       border:1px dotted crimson;
     border: none;
-    outline: none;
-    color: whitesmoke;
-    text-shadow: 1px 1px .04em whitesmoke;
+    color: white;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: whitesmoke;
+    -webkit-text-stroke-color: white;
     font-size: 18px;
     z-index: 1301;
     //

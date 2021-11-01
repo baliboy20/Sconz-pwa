@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import {CommonModule, CurrencyPipe} from '@angular/common';
-import {DeleteDialongComponent, ShopCartSideNavComponent} from "./shop-cart-side-nav.component";
+import {
+  DeleteDialongComponent,
+  EmptyTotalPipe,
+  ShopCartSideNavComponent
+} from "./shop-cart-side-nav.component";
 import {MatButtonModule} from "@angular/material/button";
 import {BasketIconModule} from "../../widgets/basket-icon/basket-icon.module";
 import {MatIconModule} from "@angular/material/icon";
@@ -17,9 +21,11 @@ import {MatRippleModule} from "@angular/material/core";
 @NgModule({
   declarations: [ShopCartSideNavComponent,
     DeleteDialongComponent,
+    EmptyTotalPipe,
   ],
   exports: [
     ShopCartSideNavComponent,
+    EmptyTotalPipe,
 
   ],
     imports: [

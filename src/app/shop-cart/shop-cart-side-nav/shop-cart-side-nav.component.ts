@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  Inject,
+  Input,
+  OnInit, Pipe, PipeTransform
+} from '@angular/core';
 import {GGCartService} from "../../services/ggcart.service";
 import {PageBase} from "../../framework/pages/page-base/page-base";
 import {GGBasket} from "../../model/shared/GGCart.model";
@@ -7,6 +15,20 @@ import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material/sidenav";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MyLogger} from "../../service/logging/myLogging";
+import {first} from "rxjs/operators";
+
+
+@Pipe({
+  name: 'emptyTotal'
+})
+export class EmptyTotalPipe implements PipeTransform{
+  transform(value: any, ...args: any[]): any {
+   if (!value) {
+     return 0;
+   }
+    return  10.00;
+  }
+}
 
 @Component({
   selector: 'click-collect-cart',
@@ -17,6 +39,8 @@ import {MyLogger} from "../../service/logging/myLogging";
 export class ShopCartSideNavComponent extends PageBase implements OnInit {
   @Input('cartSideNav') sideNav: MatSidenav | undefined;
  basket: GGBasket | undefined;
+
+
   constructor(
     public cartService: GGCartService,
     private router: Router,
@@ -25,6 +49,7 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit {
   ) {
     super();
     this.ref.detach()
+
   }
 
 
@@ -33,6 +58,7 @@ export class ShopCartSideNavComponent extends PageBase implements OnInit {
     return a as GGStockProductOrderImpl;
   }
   ngOnInit(): void {
+
    super.subscription = this.cartService.basketChanged
 
 

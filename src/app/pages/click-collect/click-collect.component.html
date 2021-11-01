@@ -1,12 +1,11 @@
-
 <!--<div style="height: 150px; width: 100%"></div>-->
-<div  class="cc-container"    (scroll)="wrapperScroll($event,'container')">
+<div class="cc-container" (scroll)="wrapperScroll($event,'container')">
 
-    <mat-progress-spinner
-      *ngIf="isLoading"
-      mode="indeterminate"
-      color="primary">
-    </mat-progress-spinner>
+  <mat-progress-spinner
+    *ngIf="isLoading"
+    mode="indeterminate"
+    color="primary">
+  </mat-progress-spinner>
 
   <!-- Categories ribbon. -->
   <wdg-ribbon-selection
@@ -14,27 +13,28 @@
     (scrollToId)="this.scrollToId($event)">
   </wdg-ribbon-selection>
 
-<!--  <ng-container *ngTemplateOutlet="CategoriesRibbonTmpl; context:{prods: prods$| async}"></ng-container>-->
-    <div class="cc-list-wrapper"
-         (scroll)="wrapperScroll($event,'wrapper')"
-         #listWrapper
-         id="ccListWrapper">
+  <!--  List of Categories with products sublist-->
+  <div class="cc-list-wrapper"
+       (scroll)="wrapperScroll($event,'wrapper')"
+       id="ccListWrapper">
 
-      <ng-container *ngFor="let prod of prods$| async">
-        <div class="category-header"
-             style="text-transform: capitalize">
-          <div> &laquo; &nbsp;{{prod[0]}} &nbsp; &raquo;</div>
-          <div [id]="prod[0]" class="offset-anchor"></div>
-        </div>
-<div class="card-list">
-  <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
+    <ng-container *ngFor="let prod of prods$| async">
 
-</div>
-      </ng-container>
-      <div class="spacer">
+      <!--      Category Header-->
+      <div class="category-header"
+           style="text-transform: capitalize">
+        <div> &laquo; &nbsp;{{prod[0]}} &nbsp; &raquo;</div>
+        <div [id]="prod[0]" class="offset-anchor"></div>
       </div>
+      <div class="cards-list">
+        <ng-container *ngTemplateOutlet="cardTmpl; context:{prods: prod[1]}"></ng-container>
 
+      </div>
+    </ng-container>
+    <div class="spacer">
     </div>
+
+  </div>
 
 </div>
 
@@ -51,22 +51,24 @@
 -->
 
 
-
 <!--
 ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_ ~~_
-                         Product Item Card.
+                        List Product Item Card.
 -->
 <ng-template #cardTmpl let-prods=prods let-idx=idx>
-  <ng-template> <div class="mat-elevation-z13">jlljj</div></ng-template>
+<!--  <ng-template>-->
+<!--    <div class="mat-elevation-z13">jlljj</div>-->
+<!--  </ng-template>-->
 
-  <div class="card-layout mat-elevation-z3"
+  <div class="card-layout"
        (click)="onChooseProduct(prod)"
        *ngFor="let prod of prods">
 
+    <p class="product-name">{{prod.name}}</p>
     <div class="product-image" id="product-image">
       <img [src]="prod?.thumbImg?.url" width="100%">
     </div>
-    <p class="product-name">{{prod.name}}</p>
+
     <div class="product-description">
       {{prod.description}}
     </div>

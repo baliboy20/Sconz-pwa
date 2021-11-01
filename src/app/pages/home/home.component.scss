@@ -4,3 +4,17 @@ img {
 
   height: auto;
 }
+:nth-child(2n + 3){
+  font-family: var(--font-family-inconsolata);
+  font-weight: 400;
+  color:red;
+  padding: 10%;
+}
+
+:nth-child(2n + 2){
+  font-family: var(--font-family-opensans);
+  font-weight: 400;
+  color:blue;
+  padding: 1% 5%;
+}
+

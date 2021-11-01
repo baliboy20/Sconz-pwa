@@ -1,4 +1,11 @@
 @use "../../../_styles/components";
+$plaster: #e7d8ca ;
+$plaster-200: darken($plaster, 50%) ;
+//$color1:  var(--color-plaster);
+$color2: mix(rgba(231,216,202, .85), $plaster-200, 99%);
+$color3: mix(rgba(231,216,202,1), #f6f0f2, 80%);
+
+$breakpoint2: 374px;
 /***
  *     _                              _
  *    | |                            | |
@@ -10,42 +17,64 @@
  *               |___/
  */
 .csnv-container {
-  position: absolute;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  box-sizing: border-box;
+  position: relative;
   height: calc(100% - 0px);
+  width: calc(100% - 0px);
+  overflow: hidden;
+  box-sizing: border-box;
+
   display: grid;
-  width: 100%;
-  grid-template-rows: 60px fit-content(100%) 80px;
- grid-auto-flow: column;
+  grid-template-rows: 50px 1fr 60px;
+  grid-template-columns: 1fr;
+  grid-auto-flow: column;
 
   .csnv-header {
     position: relative;
-    grid-row: 1;
-   // max-height: 40px;
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: min-content;
 
+    .closeBtn {
+color: var(--grey-60);
+      position: absolute;
+      // top: -2px;
+      right: 6px;
+    }
+    .deleteBtn {
+      position: relative;
+      left: 24px;
+     // color: whitesmoke;
+      //text-shadow: 1px 1px 3px var(--grey-80);
+      //-webkit-text-stroke-width: .03rem;
+      //-webkit-text-stroke-color: var(--grey-10);
+      //font-size: 22px;
+      margin-top: 1px;
+      margin-bottom: 2px;
+    }
   }
 
   .csnv-footer {
-    width: 100%;
-    grid-row: 3/ span 1;
-    position: relative;
-
+    grid-row: 2/ span 2;
+    grid-column: 1/ span 1;
+    width: calc(100%);
+    height: 50px;
+    //height: max-content;
+    align-self: end;
     display: grid;
-    grid-template-columns: 60px  1fr 60px;
-    padding: 5px 18px;
-
+    grid-template-columns: 60px repeat(2, 1fr);
+    z-index: 1000;
   }
 
-.csnv-scrolling-area {
-  grid-row: 2/ span 1;
-  height: 100%;
-  overflow-y: scroll;
-}
+  .csnv-scrolling-area {
+    grid-row: 2/ span 2;
+    grid-column: 1 / span 1;
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+  }
+
   .csnv-scrollable {
     overflow-x: auto;
     overflow-y: scroll;
@@ -55,7 +84,6 @@
 
 .cart-card {
   //> * { border: red solid 1px}
-  max-width: 100%;
   padding: 22px;
   display: grid;
   grid-template-columns:  1fr  1fr 100px 10px;
@@ -63,7 +91,6 @@
   grid-template-rows: min-content min-content 1fr;
   grid-column-gap: 16px;
   grid-row-gap: 8px;
-  margin-bottom: 10px;
 
   .card-image {
     grid-column: 3;
@@ -71,7 +98,10 @@
     width: auto;
     padding: 0;
     box-sizing: border-box;
-    //background-color: orange;
+    @media (max-width : $breakpoint2) {
+      grid-column: 1;
+      grid-row: 4 / span 1;
+    }
 
     img {
       box-sizing: border-box;
@@ -101,7 +131,6 @@
   }
 
   .card-qty {
-    //border: 1px solid crimson;
     grid-column: 1 / span 1;
     grid-row: 3;
     display: flex;
@@ -113,12 +142,16 @@
     grid-column: 3;
     grid-row: 4;
 
-    //layout of contents
     display: flex;
     flex: 1 1 auto;
     justify-content: flex-end;
     align-items: center;
     padding-right: 30%;
+    @media (max-width : $breakpoint2) {
+      outline: red 1px dashed;
+      grid-column: 1;
+      grid-row: 5 / span 1;
+    }
   }
 
   .card-divider {
@@ -139,41 +172,92 @@
  *                 |___/               |___/
  */
 .csnv-container {
- // background-color: palevioletred;
-  //display: none;
- &> * {
-    //border: 3px solid yellowgreen;
-  }
+  background-color: var(--background-color1);
 }
 
+.csnv-scrolling-area {
+  padding-left: 30px;
+  padding-right: 30px;
+ .spacer60px {
+   width: 100%;
+   height: 60px;
+   background: transparent;
+  }
+
+}
+.emptyBasket {
+  background: radial-gradient(transparent 10%, var(--grey-10) 90%);
+  position: relative;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
+  //align-content: center;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min-content;
+  font-size: 26px;
+  border: .3rem double var(--color-plaster);
+  border-radius: 50%;
+  padding: 20px 35px;
+  :first-child {
+   color: var(--color-deep-red);
+    font-size: 56px;
+  }
+  :nth-child(2) {
+    font-size: 16px;
+  }
+}
 .csnv-header {
   align-content: center;
   align-items: center;
+
+  background: linear-gradient(to  top, $color2 10%, $color3 90%);
   box-shadow: 1px 0 4px 1px #c0b2a7;
-  background:
-    linear-gradient(to left top, #f8f1e2 30%, #f1e8da 70%);
 }
-
-
 
 .csnv-footer {
+  box-sizing: border-box;
   align-content: center;
   align-items: center;
-  background-color: var(--component-background-color2);
-  box-shadow: -1px 0 22px -3px #c0b2a7;
-  button.labelIconAmount {
-    @include components.IconLabelButton1;
 
+  //background: linear-gradient(to  bottom, $color2 10%, $color3 90%);
+  background: linear-gradient(to  top, $color3 40%, $color2 90%);
+  box-shadow: 1px 0 4px 1px #c0b2a7;
+
+  .total-box {
+    font: var(--font-16px-light-open-sans);
+    height: calc(100% - 10px);
+    justify-self: end;
+    position: relative;
+    overflow: hidden;
+    //background-color: red;
+    background-color: var(--color-glow-sand);
+    -webkit-text-stroke-width: .03rem;
+    color: var(--grey-90);
+    //-webkit-text-stroke-color: #a61d1d;
+
+    :first-child {
+      display: inline-block;
+      position: relative;
+      padding: 0 28px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
-
-.csnv-scrollable {
+button.labelIconAmount {
+  @include components.IconLabelButton1;
 }
 
 .cart-card {
-  * {
-    //border: 1px solid lightblue;
-  }
+  max-width: 400px;
+  margin: 8px auto;
+  background-color: white;
+  @include components.card-shadow;
+
   .card-name, .card-price {
     color: var(--grey-80);
     letter-spacing: -.02em;
@@ -194,11 +278,12 @@
 
   .card-choices-options {
     //padding-left: 8px;
-    font: var(--font-body-12px);
+    font: var(--font-head4-12px);
+    //font: var(--font-regular-body);
 
     p {
-      letter-spacing: -.15em;
-      word-spacing: -.15em;
+      //letter-spacing: .05em;
+      word-spacing: -.05em;
       max-width: 30ch;
       word-break: break-all;
     }
@@ -225,10 +310,11 @@
   .card-total {
     // border: 1px solid crimson;
 
-    background-color: #bde5da;
+    background-color: rgba(#bde5da,.18);
     text-align: end;
+    border: .03rem dashed rgba(#bde5da,.18);
     border-radius: 2px;
-    font: var(--font-head4-12px);
+    font: var(--font-12px-light-open-sans);
     max-height: 50px;
     line-height: 36px;
     align-self: end;

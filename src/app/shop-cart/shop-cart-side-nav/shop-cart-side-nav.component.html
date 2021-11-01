@@ -1,53 +1,66 @@
 <div class="csnv-container">
 
-<!--  Header-->
+  <!--  Header-->
   <div class="csnv-header">
-    <button (click)="this.sideNav?.close()" mat-icon-button style="margin: 20px 0 20px 20px">
+    <button (click)="this.sideNav?.close()"
+            class="closeBtn"
+            mat-icon-button>
       <mat-icon class="material-icons">close</mat-icon>
     </button>
-    <div data-note="spacing div"></div>
-    <button mat-icon-button
 
+    <button mat-ripple
+            [matRippleUnbounded]="true"
+            [matRippleColor]="'charcoal'"
+            class="deleteBtn labelIconAmount"
             *ngIf="!isEmptyBasket()"
-            color="primary"
             (click)="removeAllAction()">
-     <span class="material-icons">delete_sweep</span>
+      <span class="material-icons">remove_shopping_cart</span>
+<!--      <span class="material-icons">delete_sweep</span>-->
+      <span style="word-spacing: -0.18em">Clear all</span>
     </button>
+
   </div>
 
-<!-- Content scrolling area-->
+  <!-- Scrolling content area-->
   <div class="csnv-scrolling-area">
     <div class="emptyBasket" *ngIf="this.isEmptyBasket()">
-      Cart empty
+
+      <span class="material-icons">production_quantity_limits</span>
+     <p>Empty</p>
     </div>
     <ng-container *ngTemplateOutlet="ShopCartListTmpl"></ng-container>
   </div>
+
+  <!--  Bottom action-toolbar -->
   <div class="csnv-footer">
     <button mat-icon-button
-            style="color: var(--font-color-light)"
+            style="color: var(--grey-60); margin-left: 16px"
             (click)="this.sideNav?.close()">
       <span class="material-icons">arrow_back_ios</span>
     </button>
 
-<!--    <button mat-flat-button-->
-<!--            *ngIf="!isEmptyBasket()"-->
-<!--            (click)="onCheckout()">-->
-<!--      <span class="buy-label"> BUY &nbsp;</span>-->
-<!--      <span>{{basket?.total | currency: 'GBP'}}</span>-->
-<!--    </button>-->
-<!--  </div>-->
     <button class="labelIconAmount"
-            mat-ripple [matRippleUnbounded]="true" [matRippleColor]="'charcoal'"
+            mat-ripple
+            [matRippleUnbounded]="true"
+            [matRippleColor]="'charcoal'"
             *ngIf="!isEmptyBasket()"
             (click)="onCheckout()">
-      <span>{{basket?.total | currency: 'GBP'}}</span>
+
       <span class="material-icons">point_of_sale</span>
-      <span >CheckOut</span>
+      <span style="word-spacing: -0.18em">Check out</span>
     </button>
 
+    <div class="total-box">
+   <span *ngIf="basket; else emptyTotalTmpl">
+     {{basket?.total| currency: 'GBP'}}
+ </span>
+    </div>
+    <ng-template #emptyTotalTmpl>
+      <span>£0.00</span>
+    </ng-template>
 
+  </div>
 </div>
-
 <!--
 *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~ *_~~
 
@@ -57,25 +70,25 @@
 -->
 
 
-<!-- TEMPLATE:                                  Cart List -->
+<!-- TEMPLATE: Cart List -->
 <ng-template #ShopCartListTmpl>
 
-  <div class="csnv-scrollable" *ngFor="let item of basket?.basketItems, let idx = index">
+  <ng-container *ngFor="let item of basket?.basketItems, let idx = index">
 
     <div class="cart-card">
       <div class="card-image">
         <img [src]="e(item).thumbImg.url">
       </div>
       <div class="card-name">
-<!--       Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab distinctio ducimus error excepturi facilis harum iste, magni molestias nam natus numquam odio odit praesentium ratione sed tempore, velit! Ea!-->
-         {{e(item).nameChoice}}
-         @ {{e(item).choice.price | currency:'GBP'}}
+        <!--       Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab distinctio ducimus error excepturi facilis harum iste, magni molestias nam natus numquam odio odit praesentium ratione sed tempore, velit! Ea!-->
+        {{e(item).nameChoice}}
+        @ {{e(item).choice.price | currency:'GBP'}}
 
 
       </div>
 
       <div class="card-price">
-<!--        {{e(item).choice.price | currency:'GBP'}}-->
+        <!--        {{e(item).choice.price | currency:'GBP'}}-->
       </div>
 
       <div class="card-choices-options">
@@ -100,7 +113,9 @@
       </div>
 
     </div>
-    <mat-divider class="card-divider"></mat-divider>
-  </div>
-
+    <!--    <mat-divider class="card-divider"></mat-divider>-->
+    <!--    <div>&nRightarrow;</div>-->
+  </ng-container>
+  <div class="spacer60px"></div>
 </ng-template>
+
